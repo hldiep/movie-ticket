@@ -29,6 +29,39 @@ const MovieDetailPage = () => {
         plot: "Câu chuyện xoay quanh Vân - cô gái bán bánh mì vô tình gặp hai chàng trai trong một tai nạn nhỏ...",
         trailer: "https://www.youtube.com/embed/wr6MeifZCUs",
     };
+    const theaters = [
+        {
+            name: "Cinestar Quốc Thanh",
+            address: "271 Nguyễn Trãi, Phường Nguyễn Cư Trinh, Quận 1, TP.HCM",
+            showtimes: ["10:30", "12:30", "14:30", "16:30", "18:30", "19:30", "20:30", "21:30", "22:30", "23:30"]
+        },
+        {
+            name: "Cinestar Hai Bà Trưng (TP.HCM)",
+            address: "135 Hai Bà Trưng, Phường Bến Nghé, Quận 1, TP.HCM",
+            showtimes: ["10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"]
+        }
+    ];
+
+    //chọn loại vé
+    const [adultTickets, setAdultTickets] = useState(0);
+    const [studentSeniorTickets, setStudentSeniorTickets] = useState(0);
+
+    const handleIncrease = (type) => {
+        if (type === 'adult') {
+            setAdultTickets(adultTickets + 1);
+        } else if (type === 'studentSenior') {
+            setStudentSeniorTickets(studentSeniorTickets + 1);
+        }
+    };
+
+    const handleDecrease = (type) => {
+        if (type === 'adult' && adultTickets > 0) {
+            setAdultTickets(adultTickets - 1);
+        } else if (type === 'studentSenior' && studentSeniorTickets > 0) {
+            setStudentSeniorTickets(studentSeniorTickets - 1);
+        }
+    };
+
     return (
         <div className='min-h-screen bg-gray-600 pt-20'>
             <Header />
@@ -72,15 +105,61 @@ const MovieDetailPage = () => {
 
                 </div>
             </div>
+            <div className='text-white text-center'>
+                <h1 className="text-3xl font-bold uppercase">lịch chiếu</h1>
+                <div className='flex justify-center mt-4 space-x-4'>
+                    <a href='' className='border border-white px-3 py-1 rounded-md text-white'>14/2</a>
+                    <a href='' className='border border-white px-3 py-1 rounded-md text-white'>15/2</a>
+                    <a href='' className='border border-white px-3 py-1 rounded-md text-white'>16/2</a>
+                </div>
+            </div>
+            <div className='text-white text-center mt-10'>
+                <h1 className='text-3xl font-bold uppercase'>Danh Sách Rạp</h1>
+                {theaters.map((theater, index) => (
+                    <div key={index} className=' p-6 rounded-lg mt-6'>
+                        <h2 className='text-xl font-bold text-yellow-300'>{theater.name}</h2>
+                        <p className='text-gray-200'>{theater.address}</p>
+                        <div className='flex flex-wrap justify-center mt-4 space-x-2'>
+                            {theater.showtimes.map((time, idx) => (
+                                <a href='' key={idx} className='border border-white px-3 py-1 rounded-md text-white'>{time}</a>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <div className="text-white text-center mt-10">
+                <h1 className="text-3xl font-bold uppercase">Chọn Loại Vé</h1>
+                <div className="flex justify-center mt-6 space-x-10">
+                    <div className="border p-6 rounded-md  w-1/4">
+                        <h2 className="text-lg font-semibold">Người Lớn</h2>
+                        <p className="text-yellow-400 font-bold">100,000 VNĐ</p>
+                        <div className="flex items-center justify-center mt-4">
+                            <button onClick={() => handleDecrease('adult')} className="bg-gray-500 px-4 py-2 rounded-l">-</button>
+                            <span className="px-4 text-lg">{adultTickets}</span>
+                            <button onClick={() => handleIncrease('adult')} className="bg-gray-500 px-4 py-2 rounded-r">+</button>
+                        </div>
+                    </div>
+                    <div className="border p-6 rounded-md w-1/4">
+                        <h2 className="text-lg font-semibold">HSSV - Người Cao Tuổi</h2>
+                        <p className="text-yellow-400 font-bold">55,000 VNĐ</p>
+                        <div className="flex items-center justify-center mt-4">
+                            <button onClick={() => handleDecrease('studentSenior')} className="bg-gray-500 px-4 py-2 rounded-l">-</button>
+                            <span className="px-4 text-lg">{studentSeniorTickets}</span>
+                            <button onClick={() => handleIncrease('studentSenior')} className="bg-gray-500 px-4 py-2 rounded-r">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                    <div className="bg-white p-6 rounded-lg relative max-w-lg w-full">
+                    <div className="bg-white p-6 relative max-w-lg w-full">
                         <button onClick={closeModal} className="absolute top-2 right-2 text-gray-700 text-xl hover:text-red-600">
-                            ❌
+                            X
                         </button>
                         <div className="aspect-w-16 aspect-h-9">
                             <iframe
-                                className="w-full h-64 rounded-lg"
+                                className="w-full h-64 rounded-sm"
                                 src={videoUrl}
                                 title="YouTube trailer"
                                 frameBorder="0"

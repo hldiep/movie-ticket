@@ -47,13 +47,13 @@ const HomePage = () => {
                     {promotions.map((promo) => (
                         <SwiperSlide key={promo.id}>
                             <a href={promo.link}>
-                                <img src={promo.image} alt={`Promotion ${promo.id}`} className="w-full h-auto rounded-lg object-cover" />
+                                <img src={promo.image} alt={`Promotion ${promo.id}`} className="w-full rounded-sm h-auto object-cover" />
                             </a>
                         </SwiperSlide>
                     ))}
                 </Swiper>
             </div>
-            <div className="bg-yellow-200 shadow-lg rounded-lg p-4 mr-[30px] ml-[30px]">
+            <div className="bg-yellow-200 shadow-lg rounded-sm p-4 mr-[30px] ml-[30px]">
                 <div className="flex justify-center items-center space-x-4">
                     <h2 className="text-xl font-semibold uppercase">Đặt vé nhanh</h2>
 
@@ -106,39 +106,35 @@ const HomePage = () => {
                         className="my-8">
                         {movies.map((movie) => (
                             <SwiperSlide key={movie.id}>
+                                <a href={"#"}>
+                                    <div className="bg-gradient-to-b  hover:text-yellow-500 rounded-lg p-4 min-h-[450px] flex flex-col justify-between text-white h-full" >
+                                        <div className="relative">
+                                            <img
+                                                src={movie.image}
+                                                alt={movie.title}
+                                                className="w-full h-[320px] object-cover  rounded-sm"
+                                            />
 
-                                <div className="bg-gradient-to-b  rounded-lg p-4 min-h-[450px] flex flex-col justify-between text-white h-full" >
-                                    <div className="relative">
-                                        <img
-                                            src={movie.image}
-                                            alt={movie.title}
-                                            className="w-full h-[320px] object-cover  "
-                                        />
-                                        {/* Hiển thị định dạng và độ tuổi */}
-                                        <div className="absolute top-2 left-2 bg-yellow-500 text-black font-bold px-2 py-1 rounded">
-                                            {movie.format}
                                         </div>
-                                        <div className="absolute top-2 right-2 bg-red-600 text-white font-bold px-2 py-1 rounded">
-                                            {movie.ageRating}
+
+                                        <h2 className="text-lg uppercase font-semibold text-center mt-3 h-16 overflow-hidden text-ellipsis">
+                                            {movie.title}
+                                        </h2>
+
+                                        <div className="flex justify-center space-x-4 mt-3">
+                                            <button
+                                                onClick={() => handleTrailerClick(movie.trailer)}
+                                                className="text-white border border-white px-4 py-1 rounded-md hover:bg-red-600 transition duration-300 text-sm"
+                                            >
+                                                🎬 Xem Trailer
+                                            </button>
+                                            <button className="bg-green-600 text-white px-4 py-1 rounded-md hover:bg-green-800 transition duration-300 text-sm">
+                                                🎟 Đặt Vé
+                                            </button>
                                         </div>
                                     </div>
+                                </a>
 
-                                    <h2 className="text-lg hover:text-yellow-500 uppercase font-semibold text-center mt-3 h-16 overflow-hidden text-ellipsis">
-                                        {movie.title}
-                                    </h2>
-                                    {/* Nút Xem Trailer và Đặt Vé */}
-                                    <div className="flex justify-center space-x-4 mt-3">
-                                        <button
-                                            onClick={() => handleTrailerClick(movie.trailer)}
-                                            className="text-white border border-white px-4 py-1 rounded-md hover:bg-red-600 transition duration-300 text-sm"
-                                        >
-                                            🎬 Xem Trailer
-                                        </button>
-                                        <button className="bg-green-600 text-white px-4 py-1 rounded-md hover:bg-green-800 transition duration-300 text-sm">
-                                            🎟 Đặt Vé
-                                        </button>
-                                    </div>
-                                </div>
                             </SwiperSlide>
                         ))}
                     </Swiper>
@@ -157,39 +153,35 @@ const HomePage = () => {
                         className="my-8">
                         {movies.map((movie) => (
                             <SwiperSlide key={movie.id}>
+                                <a href={"#"}>
+                                    <div className="bg-gradient-to-b  hover:text-yellow-500 rounded-lg p-4 min-h-[450px] flex flex-col justify-between text-white h-full" >
+                                        <div className="relative">
+                                            <img
+                                                src={movie.image}
+                                                alt={movie.title}
+                                                className="w-full h-[320px] object-cover  "
+                                            />
 
-                                <div className="bg-gradient-to-b  rounded-lg p-4 min-h-[450px] flex flex-col justify-between text-white h-full" >
-                                    <div className="relative">
-                                        <img
-                                            src={movie.image}
-                                            alt={movie.title}
-                                            className="w-full h-[320px] object-cover  "
-                                        />
-                                        {/* Hiển thị định dạng và độ tuổi */}
-                                        <div className="absolute top-2 left-2 bg-yellow-500 text-black font-bold px-2 py-1 rounded">
-                                            {movie.format}
                                         </div>
-                                        <div className="absolute top-2 right-2 bg-red-600 text-white font-bold px-2 py-1 rounded">
-                                            {movie.ageRating}
+
+                                        <h2 className="text-lg uppercase font-semibold text-center mt-3 h-16 overflow-hidden text-ellipsis">
+                                            {movie.title}
+                                        </h2>
+
+                                        <div className="flex justify-center space-x-4 mt-3">
+                                            <button
+                                                onClick={() => handleTrailerClick(movie.trailer)}
+                                                className="text-white border border-white px-4 py-1 rounded-md hover:bg-red-600 transition duration-300 text-sm"
+                                            >
+                                                🎬 Xem Trailer
+                                            </button>
+                                            <button className="bg-green-600 text-white px-4 py-1 rounded-md hover:bg-green-800 transition duration-300 text-sm">
+                                                🎟 Đặt Vé
+                                            </button>
                                         </div>
                                     </div>
+                                </a>
 
-                                    <h2 className="text-lg hover:text-yellow-500 uppercase font-semibold text-center mt-3 h-16 overflow-hidden text-ellipsis">
-                                        {movie.title}
-                                    </h2>
-                                    {/* Nút Xem Trailer và Đặt Vé */}
-                                    <div className="flex justify-center space-x-4 mt-3">
-                                        <button
-                                            onClick={() => handleTrailerClick(movie.trailer)}
-                                            className="text-white border border-white px-4 py-1 rounded-md hover:bg-red-600 transition duration-300 text-sm"
-                                        >
-                                            🎬 Xem Trailer
-                                        </button>
-                                        <button className="bg-green-600 text-white px-4 py-1 rounded-md hover:bg-green-800 transition duration-300 text-sm">
-                                            🎟 Đặt Vé
-                                        </button>
-                                    </div>
-                                </div>
                             </SwiperSlide>
                         ))}
                     </Swiper>
@@ -199,13 +191,13 @@ const HomePage = () => {
             </main>
             {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                    <div className="bg-white p-6 rounded-lg relative max-w-lg w-full">
+                    <div className="bg-white p-6 relative max-w-lg w-full">
                         <button onClick={closeModal} className="absolute top-2 right-2 text-gray-700 text-xl hover:text-red-600">
                             X
                         </button>
                         <div className="aspect-w-16 aspect-h-9">
                             <iframe
-                                className="w-full h-64 rounded-lg"
+                                className="w-full h-64 rounded-sm"
                                 src={videoUrl}
                                 title="YouTube trailer"
                                 frameBorder="0"

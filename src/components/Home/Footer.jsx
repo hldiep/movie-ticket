@@ -30,27 +30,27 @@ const Footer = () => {
                     </div>
                 </div>
                 <div>
-                    <h2 className="font-bold text-lg">TÀI KHOẢN</h2>
-                    <p>Đăng nhập</p>
-                    <p>Đăng ký</p>
+                    <h2 className="font-bold text-lg uppercase">TÀI KHOẢN</h2>
+                    <a href="" className='hover:text-orange-500'>Đăng nhập</a><br />
+                    <a href="" className='hover:text-orange-500'>Đăng ký</a>
                 </div>
                 <div>
-                    <h2 className="font-bold text-lg">XEM PHIM</h2>
-                    <p>Phim đang chiếu</p>
-                    <p>Phim sắp chiếu</p>
-                    <p>Suất chiếu đặc biệt</p>
+                    <h2 className="font-bold text-lg uppercase">XEM PHIM</h2>
+                    <a href="" className='hover:text-orange-500'>Phim đang chiếu</a><br />
+                    <a href="" className='hover:text-orange-500'>Phim sắp chiếu</a><br />
+                    <a href="" className='hover:text-orange-500'>Suất chiếu đặc biệt</a>
                 </div>
                 <div>
-                    <h2 className="font-bold text-lg">THÔNG TIN</h2>
-                    <p>Giới thiệu</p>
-                    <p>Liên hệ</p>
-                    <p>Tuyển dụng</p>
+                    <h2 className="font-bold text-lg uppercase">THÔNG TIN</h2>
+                    <a href="" className='hover:text-orange-500'>Giới thiệu</a><br />
+                    <a href="" className='hover:text-orange-500'>Liên hệ</a><br />
+                    <a href="" className='hover:text-orange-500'>Tuyển dụng</a>
                 </div>
                 <div>
-                    <h2 className="font-bold text-lg">HỆ THỐNG RẠP</h2>
-                    <p>Cinestar Quốc Thanh</p>
-                    <p>Cinestar Hai Bà Trưng (TP.HCM)</p>
-                    <p>Cinestar Sinh Viên (Bình Dương)</p>
+                    <h2 className="font-bold text-lg uppercase">HỆ THỐNG RẠP</h2>
+                    <a href="" className='hover:text-orange-500'>Cinestar Quốc Thanh</a><br />
+                    <a href="" className='hover:text-orange-500'>Cinestar Hai Bà Trưng (TP.HCM)</a><br />
+                    <a href="" className='hover:text-orange-500'>Cinestar Sinh Viên (Bình Dương)</a>
                 </div>
 
 
@@ -61,9 +61,9 @@ const Footer = () => {
             <div className="container mx-auto px-8 text-center">
                 <p className="text-sm">&copy; 2025 MoviesTicket. All rights reserved.</p>
                 <div className="flex justify-center space-x-8 mt-4">
-                    <a href="#" className=" hover:text-red-700 transition">Chính sách bảo mật</a>
-                    <a href="#" className=" hover:text-red-700 transition">Tin điện ảnh</a>
-                    <a href="#" className=" hover:text-red-700 transition">Hỏi và đáp</a>
+                    <a href="#" className=" hover:text-orange-500 transition">Chính sách bảo mật</a>
+                    <a href="#" className=" hover:text-orange-500 transition">Tin điện ảnh</a>
+                    <a href="#" className=" hover:text-orange-500 transition">Hỏi và đáp</a>
                 </div>
 
                 <div className="mt-6">
