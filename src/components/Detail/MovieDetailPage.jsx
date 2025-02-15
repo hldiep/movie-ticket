@@ -66,7 +66,7 @@ const MovieDetailPage = () => {
         <div className='min-h-screen bg-gray-600 pt-20'>
             <Header />
             <div className='flex mt-24 p-3 m-[20px] justify-center' >
-                <div className=" text-white ">
+                <div className="w-72 text-white ">
                     <div className="flex-shrink-0">
                         <img src={movie.image} alt={movie.title} className="rounded-sm shadow-lg" />
                     </div>
@@ -128,6 +128,10 @@ const MovieDetailPage = () => {
                 ))}
             </div>
             <div className="text-white text-center mt-10">
+                <h1 className="text-3xl font-bold uppercase">Chọn Ghế</h1>
+
+            </div>
+            <div className="text-white text-center mt-10">
                 <h1 className="text-3xl font-bold uppercase">Chọn Loại Vé</h1>
                 <div className="flex justify-center mt-6 space-x-10">
                     <div className="border p-6 rounded-md  w-1/4">
@@ -150,7 +154,129 @@ const MovieDetailPage = () => {
                     </div>
                 </div>
             </div>
-
+            <div className="text-white text-center mt-10">
+                <h1 className="text-3xl font-bold uppercase">Chọn Bắp Nước</h1>
+                <div className="text-center mt-3">
+                    <h2 className="text-lg text-yellow-400 font-semibold uppercase">Combo</h2>
+                    <div className='flex justify-center'>
+                        <div className='p-4 text-center w-60'>
+                            <img src="" alt="" className='h-40 mx-auto' />
+                            <h3 className='text-lg font-bold mt-2 uppercase'>nước cam teppy</h3>
+                            <p className='font-bold'>26.000VND</p>
+                            <div className='flex justify-center items-center mt-2'>
+                                <button className='bg-gray-300 px-3'>-</button>
+                                <span className='px-4'>0</span>
+                                <button className='bg-gray-300 px-3'>+</button>
+                            </div>
+                        </div>
+                        <div className='p-4 text-center w-60'>
+                            <img src="" alt="" className='h-40 mx-auto' />
+                            <h3 className='text-lg font-bold mt-2 uppercase'>nước cam teppy</h3>
+                            <p className='font-bold'>26.000VND</p>
+                            <div className='flex justify-center items-center mt-2'>
+                                <button className='bg-gray-300 px-3'>-</button>
+                                <span className='px-4'>0</span>
+                                <button className='bg-gray-300 px-3'>+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="text-center mt-3">
+                    <h2 className="text-lg text-yellow-400 font-semibold uppercase">Nước đóng chai</h2>
+                    <div className='flex justify-center'>
+                        <div className='p-4 text-center w-60'>
+                            <img src="" alt="" className='h-40 mx-auto' />
+                            <h3 className='text-lg font-bold mt-2 uppercase'>nước cam teppy</h3>
+                            <p className='font-bold'>26.000VND</p>
+                            <div className='flex justify-center items-center mt-2'>
+                                <button className='bg-gray-300 px-3'>-</button>
+                                <span className='px-4'>0</span>
+                                <button className='bg-gray-300 px-3'>+</button>
+                            </div>
+                        </div>
+                        <div className='p-4 text-center w-60'>
+                            <img src="" alt="" className='h-40 mx-auto' />
+                            <h3 className='text-lg font-bold mt-2 uppercase'>nước cam teppy</h3>
+                            <p className='font-bold'>26.000VND</p>
+                            <div className='flex justify-center items-center mt-2'>
+                                <button className='bg-gray-300 px-3'>-</button>
+                                <span className='px-4'>0</span>
+                                <button className='bg-gray-300 px-3'>+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="text-center mt-3">
+                    <h2 className="text-lg text-yellow-400 font-semibold uppercase">Nước ngọt</h2>
+                    <div className='flex justify-center'>
+                        <div className='p-4 text-center w-60'>
+                            <img src="" alt="" className='h-40 mx-auto' />
+                            <h3 className='text-lg font-bold mt-2 uppercase'>nước cam teppy</h3>
+                            <p className='font-bold'>26.000VND</p>
+                            <div className='flex justify-center items-center mt-2'>
+                                <button className='bg-gray-300 px-3'>-</button>
+                                <span className='px-4'>0</span>
+                                <button className='bg-gray-300 px-3'>+</button>
+                            </div>
+                        </div>
+                        <div className='p-4 text-center w-60'>
+                            <img src="" alt="" className='h-40 mx-auto' />
+                            <h3 className='text-lg font-bold mt-2 uppercase'>nước cam teppy</h3>
+                            <p className='font-bold'>26.000VND</p>
+                            <div className='flex justify-center items-center mt-2'>
+                                <button className='bg-gray-300 px-3'>-</button>
+                                <span className='px-4'>0</span>
+                                <button className='bg-gray-300 px-3'>+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="text-center mt-3">
+                    <h2 className="text-lg text-yellow-400 font-semibold uppercase">Snack - kẹo</h2>
+                    <div className='flex justify-center'>
+                        <div className='p-4 text-center w-60'>
+                            <img src="" alt="" className='h-40 mx-auto' />
+                            <h3 className='text-lg font-bold mt-2 uppercase'>nước cam teppy</h3>
+                            <p className='font-bold'>26.000VND</p>
+                            <div className='flex justify-center items-center mt-2'>
+                                <button className='bg-gray-300 px-3'>-</button>
+                                <span className='px-4'>0</span>
+                                <button className='bg-gray-300 px-3'>+</button>
+                            </div>
+                        </div>
+                        <div className='p-4 text-center w-60'>
+                            <img src="" alt="" className='h-40 mx-auto' />
+                            <h3 className='text-lg font-bold mt-2 uppercase'>nước cam teppy</h3>
+                            <p className='font-bold'>26.000VND</p>
+                            <div className='flex justify-center items-center mt-2'>
+                                <button className='bg-gray-300 px-3'>-</button>
+                                <span className='px-4'>0</span>
+                                <button className='bg-gray-300 px-3'>+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr className="border-white mt-5" />
+            <div className='p-4 text-white flex items-center justify-between'>
+                <div>
+                    <h2 className='text-xl font-bold uppercase'>Nụ hôn bạc tỷ</h2>
+                    <p className='font-bold'>Cinestar Hai Bà Trưng (TP.HCM) | 2 người lớn</p>
+                </div>
+                <div className='flex items-center space-x-4'>
+                    <div className='bg-yellow-400 p-2 rounded-md text-black text-center'>
+                        <p className='text-sm'>Thời gian giữ vé:</p>
+                        <p className='text-2xl font-bold'>5:00</p>
+                    </div>
+                    <div>
+                        <p className='text-gray-400 text-sm'>Tạm tính</p>
+                        <p className='text-xl font-bold'>90,000 VNĐ</p>
+                    </div>
+                    <button className='bg-green-600 px-6 py-2 rounded-md font-bold text-black uppercase'>
+                        Đặt vé
+                    </button>
+                </div>
+            </div>
             {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                     <div className="bg-white p-6 relative max-w-lg w-full">
