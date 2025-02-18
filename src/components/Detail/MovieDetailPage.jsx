@@ -160,7 +160,7 @@ const MovieDetailPage = () => {
                     <h2 className="text-lg text-yellow-400 font-semibold uppercase">Combo</h2>
                     <div className='flex justify-center'>
                         <div className='p-4 text-center w-60'>
-                            <img src="" alt="" className='h-40 mx-auto' />
+                            <img src="/images/TEPPY.png" alt="" className='h-40 mx-auto' />
                             <h3 className='text-lg font-bold mt-2 uppercase'>nước cam teppy</h3>
                             <p className='font-bold'>26.000VND</p>
                             <div className='flex justify-center items-center mt-2'>
@@ -170,7 +170,7 @@ const MovieDetailPage = () => {
                             </div>
                         </div>
                         <div className='p-4 text-center w-60'>
-                            <img src="" alt="" className='h-40 mx-auto' />
+                            <img src="/images/TEPPY.png" alt="" className='h-40 mx-auto' />
                             <h3 className='text-lg font-bold mt-2 uppercase'>nước cam teppy</h3>
                             <p className='font-bold'>26.000VND</p>
                             <div className='flex justify-center items-center mt-2'>
@@ -185,7 +185,7 @@ const MovieDetailPage = () => {
                     <h2 className="text-lg text-yellow-400 font-semibold uppercase">Nước đóng chai</h2>
                     <div className='flex justify-center'>
                         <div className='p-4 text-center w-60'>
-                            <img src="" alt="" className='h-40 mx-auto' />
+                            <img src="/images/TEPPY.png" alt="" className='h-40 mx-auto' />
                             <h3 className='text-lg font-bold mt-2 uppercase'>nước cam teppy</h3>
                             <p className='font-bold'>26.000VND</p>
                             <div className='flex justify-center items-center mt-2'>
@@ -195,7 +195,7 @@ const MovieDetailPage = () => {
                             </div>
                         </div>
                         <div className='p-4 text-center w-60'>
-                            <img src="" alt="" className='h-40 mx-auto' />
+                            <img src="/images/TEPPY.png" alt="" className='h-40 mx-auto' />
                             <h3 className='text-lg font-bold mt-2 uppercase'>nước cam teppy</h3>
                             <p className='font-bold'>26.000VND</p>
                             <div className='flex justify-center items-center mt-2'>
@@ -210,7 +210,7 @@ const MovieDetailPage = () => {
                     <h2 className="text-lg text-yellow-400 font-semibold uppercase">Nước ngọt</h2>
                     <div className='flex justify-center'>
                         <div className='p-4 text-center w-60'>
-                            <img src="" alt="" className='h-40 mx-auto' />
+                            <img src="/images/TEPPY.png" alt="" className='h-40 mx-auto' />
                             <h3 className='text-lg font-bold mt-2 uppercase'>nước cam teppy</h3>
                             <p className='font-bold'>26.000VND</p>
                             <div className='flex justify-center items-center mt-2'>
@@ -220,7 +220,7 @@ const MovieDetailPage = () => {
                             </div>
                         </div>
                         <div className='p-4 text-center w-60'>
-                            <img src="" alt="" className='h-40 mx-auto' />
+                            <img src="/images/TEPPY.png" alt="" className='h-40 mx-auto' />
                             <h3 className='text-lg font-bold mt-2 uppercase'>nước cam teppy</h3>
                             <p className='font-bold'>26.000VND</p>
                             <div className='flex justify-center items-center mt-2'>
@@ -235,7 +235,7 @@ const MovieDetailPage = () => {
                     <h2 className="text-lg text-yellow-400 font-semibold uppercase">Snack - kẹo</h2>
                     <div className='flex justify-center'>
                         <div className='p-4 text-center w-60'>
-                            <img src="" alt="" className='h-40 mx-auto' />
+                            <img src="/images/TEPPY.png" alt="" className='h-40 mx-auto' />
                             <h3 className='text-lg font-bold mt-2 uppercase'>nước cam teppy</h3>
                             <p className='font-bold'>26.000VND</p>
                             <div className='flex justify-center items-center mt-2'>
@@ -245,7 +245,7 @@ const MovieDetailPage = () => {
                             </div>
                         </div>
                         <div className='p-4 text-center w-60'>
-                            <img src="" alt="" className='h-40 mx-auto' />
+                            <img src="/images/TEPPY.png" alt="" className='h-40 mx-auto' />
                             <h3 className='text-lg font-bold mt-2 uppercase'>nước cam teppy</h3>
                             <p className='font-bold'>26.000VND</p>
                             <div className='flex justify-center items-center mt-2'>
