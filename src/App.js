@@ -1,11 +1,16 @@
 
-import MovieDetailPage from './components/Detail/MovieDetailPage';
 import HomePage from './components/Home/HomePage';
+import Header from "./components/Home/Header";
+import React from "react";
+import Footer from "./components/Home/Footer";
+// import "./App.css";
 
 function App() {
   return (
     <div>
-      <HomePage />
+        <Header />
+        <HomePage />
+        <Footer/>
     </div>
 
   );
