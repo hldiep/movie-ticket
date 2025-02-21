@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Menu, X } from "lucide-react";
 import { FaSearch } from 'react-icons/fa';
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     return (
@@ -9,7 +9,7 @@ const Header = () => {
             <div className={"container"}>
                 <div className="flex flex-col w-full">
                     <div className="flex items-center justify-between text-white py-5 px-8 w-full">
-                        <div className="text-3xl font-bold uppercase"><span className={"text-4xl text-black leading-10"}>MOVIE</span> <span className={"text-yellow-600"}>Ticket</span></div>
+                        <div className="text-3xl font-bold uppercase"><span className={"text-4xl text-white leading-10"}>MOVIE</span> <span className={"text-yellow-600"}>Ticket</span></div>
                         <div className="hidden md:flex items-center rounded-xl overflow-hidden w-1/3 bg-white">
                             <input
                                 type="text"
@@ -17,7 +17,7 @@ const Header = () => {
                                 className="p-2 text-gray-700 outline-none flex-1"
                             />
                             <button className="p-3">
-                                <FaSearch className="text-black"/>
+                                <FaSearch className="text-black" />
                             </button>
                         </div>
                         <div className="hidden md:flex md:flex-col md:space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0">
@@ -34,7 +34,7 @@ const Header = () => {
                             className="md:hidden text-white focus:outline-none"
                             onClick={() => setIsOpen(!isOpen)}
                         >
-                            {isOpen ? <X size={28}/> : <Menu size={28}/>}
+                            {isOpen ? <X size={28} /> : <Menu size={28} />}
                         </button>
                     </div>
 
@@ -42,14 +42,14 @@ const Header = () => {
                         <div className="hidden md:flex justify-start space-x-6">
                             <div className="text-white hover:text-yellow-500 group">
                                 <NavLink to={"/khuyen-mai"}
-                                         className={"mb-3 group-hover:text-yellow-300 transition-all duration-100"}>Khuyến
+                                    className={"mb-3 group-hover:text-yellow-300 transition-all duration-100"}>Khuyến
                                     mãi</NavLink>
                                 <div
                                     className={"w-0 h-[2px] bg-yellow-300 group-hover:w-full transition-all duration-300"}></div>
                             </div>
                             <div className="text-white hover:text-yellow-500 group">
                                 <NavLink to={"/khuyen-mai"}
-                                         className={"mb-3 group-hover:text-yellow-300 transition-all duration-100"}>Giới
+                                    className={"mb-3 group-hover:text-yellow-300 transition-all duration-100"}>Giới
                                     thiệu</NavLink>
                                 <div
                                     className={"w-0 h-[2px] bg-yellow-300 group-hover:w-full transition-all duration-300"}></div>
@@ -61,13 +61,13 @@ const Header = () => {
                             <div className="md:hidden flex flex-col mt-3 space-y-3 bg-gray-800 p-4 rounded-lg">
                                 <div className="text-white hover:text-yellow-500 group">
                                     <NavLink to={"/khuyen-mai"}
-                                             className={"mb-3 group-hover:text-yellow-300 transition-all duration-100"}>Khuyến mãi</NavLink>
+                                        className={"mb-3 group-hover:text-yellow-300 transition-all duration-100"}>Khuyến mãi</NavLink>
                                     <div
                                         className={"w-0 h-[2px] bg-yellow-300 group-hover:w-full transition-all duration-300"}></div>
                                 </div>
                                 <div className="text-white hover:text-yellow-500 group">
                                     <NavLink to={"/khuyen-mai"}
-                                             className={"mb-3 group-hover:text-yellow-300 transition-all duration-100"}>Giới thiệu</NavLink>
+                                        className={"mb-3 group-hover:text-yellow-300 transition-all duration-100"}>Giới thiệu</NavLink>
                                     <div
                                         className={"w-0 h-[2px] bg-yellow-300 group-hover:w-full transition-all duration-300"}></div>
                                 </div>

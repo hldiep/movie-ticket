@@ -30,11 +30,11 @@ const HomePage = () => {
     return (
         <div className="min-h-screen pt-20 bg-main flex justify-center">
             <div className={"container"}>
-                <Slider/>
-                <SelectorBar/>
+                <Slider />
+                <SelectorBar />
                 <main className="p-8 text-center">
                     <SectionFilming />
-                    <br/>
+                    <br />
                     {/*<div>*/}
                     {/*    <h1 className="text-4xl font-bold mb-4 text-white">PHIM SẮP CHIẾU</h1>*/}
                     {/*    <Swiper*/}
@@ -97,7 +97,7 @@ const HomePage = () => {
                     {/*</div>*/}
 
                 </main>
-                {isModalOpen && (
+                {/* {isModalOpen && (
                     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                         <div className="bg-white p-6 relative max-w-lg w-full">
                             <button onClick={closeModal}
@@ -116,7 +116,7 @@ const HomePage = () => {
                             </div>
                         </div>
                     </div>
-                )}
+                )} */}
                 <div className="min-h-screen flex items-center justify-center bg-gradient-to-r p-6">
                     <div className="flex flex-col md:flex-row w-full max-w-4xl bg-opacity-20 p-6 rounded-lg">
 
@@ -126,24 +126,24 @@ const HomePage = () => {
                                 Tôi</h2>
 
                             <button
-                                className="border flex items-center px-6 py-3 rounded-lg text-white font-semibold w-64 hover:bg-green-900 transition">
+                                className="font-bold border border-yellow-600 px-5 py-2 rounded-xl text-yellow-600 w-[150px] hover:bg-yellow-600 hover:text-white transition-all duration-300">
                                 FACEBOOK
                             </button>
                             <button
-                                className="border flex items-center px-6 py-3 rounded-lg text-white font-semibold w-64 hover:bg-green-900 transition">
+                                className="font-bold border border-yellow-600 px-5 py-2 rounded-xl text-yellow-600 w-[150px] hover:bg-yellow-600 hover:text-white transition-all duration-300">
                                 ZALO CHAT
                             </button>
                         </div>
 
 
-                        <div className="w-full md:w-1/2 border p-6 rounded-lg shadow-lg">
+                        <div className="w-full md:w-2/3 border border-yellow-600 p-6 rounded-lg shadow-lg">
                             <div className="space-y-4 text-white">
                                 <h2 className='uppercase font-bold'>Thông tin liên hệ</h2>
                                 <p className="flex items-center">
                                     <span className="mr-2">📞</span> 1900.0085
                                 </p>
                                 <p className="flex items-center">
-                                    <span className="mr-2">📍</span> 135 Hai Bà Trưng, phường Bến Nghé, Quận 1, TP.HCM
+                                    <span className="mr-2">📍</span> 97 Đường Man Thiện, Phường Hiệp Phú, Quận 9, TP.HCM
                                 </p>
                             </div>
 
@@ -151,20 +151,20 @@ const HomePage = () => {
                                 <input
                                     type="text"
                                     placeholder="Họ và tên"
-                                    className="w-full p-3 border rounded-md text-gray-900 outline-none"
+                                    className="w-full p-2 border rounded-md text-gray-900 outline-none"
                                 />
                                 <input
                                     type="email"
                                     placeholder="Điền email"
-                                    className="w-full p-3 border rounded-md text-gray-900 outline-none"
+                                    className="w-full p-2 border rounded-md text-gray-900 outline-none"
                                 />
                                 <textarea
                                     placeholder="Thông tin liên hệ hoặc phản ánh"
-                                    className="w-full p-3 border rounded-md text-gray-900 outline-none h-28"
+                                    className="w-full p-2 border rounded-md text-gray-900 outline-none h-20"
                                 ></textarea>
                                 <button
                                     type="submit"
-                                    className="w-5/12 bg-green-600 hover:bg-green-800 text-white font-bold py-3 rounded-md transition"
+                                    className="font-bold border border-yellow-600 px-5 py-2 rounded-xl text-yellow-600 w-[120px] hover:bg-yellow-600 hover:text-white transition-all duration-300"
                                 >
                                     GỬI NGAY
                                 </button>

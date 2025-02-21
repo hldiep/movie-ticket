@@ -1,5 +1,6 @@
-import {Swiper, SwiperSlide} from "swiper/react";
-import {Navigation} from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { FaClock, FaGlobeAmericas, FaFilm } from "react-icons/fa";
+import { Navigation } from "swiper/modules";
 import React from "react";
 
 const SectionFilming = () => {
@@ -31,11 +32,11 @@ const SectionFilming = () => {
                     modules={[Navigation]}
                     className="my-8"
                     breakpoints={{
-                        320: {slidesPerView: 1, slidesPerGroup: 1}, // Điện thoại nhỏ (1 phim)
-                        480: {slidesPerView: 1, slidesPerGroup: 1}, // Điện thoại lớn (1 phim)
-                        768: {slidesPerView: 2, slidesPerGroup: 2}, // Tablet (2 phim)
-                        1024: {slidesPerView: 3, slidesPerGroup: 3}, // Máy tính (3 phim)
-                        1280: {slidesPerView: 4, slidesPerGroup: 4}, // Màn hình lớn (4 phim)
+                        320: { slidesPerView: 1, slidesPerGroup: 1 }, // Điện thoại nhỏ (1 phim)
+                        480: { slidesPerView: 1, slidesPerGroup: 1 }, // Điện thoại lớn (1 phim)
+                        768: { slidesPerView: 2, slidesPerGroup: 2 }, // Tablet (2 phim)
+                        1024: { slidesPerView: 3, slidesPerGroup: 3 }, // Máy tính (3 phim)
+                        1280: { slidesPerView: 4, slidesPerGroup: 4 }, // Màn hình lớn (4 phim)
                     }}
                 >
                     {movies.map((movie) => (
@@ -49,11 +50,21 @@ const SectionFilming = () => {
                                             className="w-full h-[420px] object-cover rounded-sm"
                                         />
                                         <div
-                                            className="absolute inset-0 bg-black bg-opacity-80 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-sm p-4 text-center">
-                                            <h2 className="text-xl font-bold">{movie.title}</h2>
-                                            <p className="text-sm mt-2">{movie.category}</p>
-                                            <p className="text-sm mt-1">{movie.duration}</p>
-                                            <p className="text-sm mt-1">{movie.country}</p>
+                                            className="absolute inset-0 bg-black bg-opacity-80 flex flex-col justify-center items-start text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-sm p-4 text-center">
+                                            <h2 className="text-xl font-bold uppercase">{movie.title}</h2>
+                                            <p className="text-sm mt-2 flex items-center gap-2">
+                                                <FaFilm className="w-4 h-4 text-yellow-400" />
+                                                {movie.category}
+                                            </p>
+                                            <p className="text-sm mt-1 flex items-center gap-2">
+                                                <FaClock className="w-4 h-4 text-blue-400" />
+                                                {movie.duration}
+                                            </p>
+
+                                            <p className="text-sm mt-1 flex items-center gap-2">
+                                                <FaGlobeAmericas className="w-4 h-4 text-green-400" />
+                                                {movie.country}
+                                            </p>
                                         </div>
                                     </div>
                                     <h2 className="text-lg text-white hover:text-yellow-500 uppercase font-semibold text-center mt-3 h-16 overflow-hidden text-ellipsis">
@@ -62,12 +73,12 @@ const SectionFilming = () => {
                                     <div className="flex justify-center space-x-4">
                                         <button
                                             onClick={() => window.open(movie.trailer, "_blank")}
-                                            className="text-white border border-white px-4 py-1 rounded-md hover:bg-gray-900 transition duration-300 text-sm"
+                                            className="uppercase text-white border border-white rounded-xl px-5 py-2 hover:bg-gray-900 transition-all duration-300"
                                         >
                                             Xem Trailer
                                         </button>
                                         <button
-                                            className="bg-yellow-600 text-white px-6 py-2 rounded-xl min-w-[150px]">
+                                            className="uppercase border border-yellow-600 bg-yellow-600 text-white rounded-xl px-5 py-2 w-[120px] hover:bg-transparent hover:text-yellow-600 transition-all duration-300">
                                             Đặt Vé
                                         </button>
                                     </div>
@@ -77,8 +88,8 @@ const SectionFilming = () => {
                     ))}
                 </Swiper>
                 <button
-                    className='border border-white hover:bg-green-700 text-white uppercase px-6 py-2 rounded-lg font-semibold'>Xem
-                    thêm
+                    className="font-bold uppercase border border-yellow-600 px-5 py-2 rounded-xl text-yellow-600 w-[130px] hover:bg-yellow-600 hover:text-white transition-all duration-300">
+                    xem thêm
                 </button>
             </div>
         </>

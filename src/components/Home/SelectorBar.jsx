@@ -1,13 +1,12 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 const SelectorBar = () => {
 
-    const [selectedCinema, setSelectedCinema] = useState("" );
+    const [selectedCinema, setSelectedCinema] = useState("");
     const [selectedMovie, setSelectedMovie] = useState("");
     const [selectedDate, setSelectedDate] = useState("");
     const [selectShowTime, setSelectShowTime] = useState("");
     const [selectedShowtime, setSelectedShowtime] = useState("");
-    const showtimes = ["10:00 AM", "1:00 PM", "4:00 PM", "7:00 PM"];
 
     const movies = [
         { id: 1, title: "Bộ tứ báo thủ", image: "/images/bo-tu-bao-thu-official.webp", category: "Hài, tình cảm", duration: "120 phút", country: "Việt Nam", trailer: "https://www.youtube.com/embed/zKMOgOWn8lQ" },
@@ -18,7 +17,7 @@ const SelectorBar = () => {
         { id: 6, title: "Đại chiến người khổng lồ: Lần tấn công cuối cùng", image: "/images/AOT.webp", category: "Hoạt hình, anime", duration: "130 phút", country: "Nhật Bản", trailer: "https://www.youtube.com/embed/i1hiyahxa4Y" },
     ];
 
-    return(
+    return (
         <>
             <div className="rounded-sm p-4 bg-bar w-full">
                 <div className="grid grid-rows-4 grid-cols-2 gap-4 items-center justify-center w-full lg:grid-cols-4 lg:grid-rows-2 xl:grid-cols-6 xl:grid-rows-1">
@@ -32,7 +31,7 @@ const SelectorBar = () => {
                         value={selectedCinema}
                         onChange={(e) => setSelectedCinema(e.target.value)}
                     >
-                        <option value="">1. Chọn rạp</option>
+                        <option value="">Chọn Rạp</option>
                         <option value="Cinestar Quốc Thanh">Cinestar Quốc Thanh</option>
                         <option value="Cinestar Hai Bà Trưng">Cinestar Hai Bà Trưng (TP.HCM)</option>
                         <option value="Cinestar Sinh Viên">Cinestar Sinh Viên (Bình Dương)</option>
@@ -45,7 +44,7 @@ const SelectorBar = () => {
                         onChange={(e) => setSelectedMovie(e.target.value)}
                         disabled={!selectedCinema}
                     >
-                        <option value="">Chọn phim</option>
+                        <option value="">Chọn Phim</option>
                         {movies.map((movie) => (
                             <option key={movie.id} value={movie.title}>
                                 {movie.title}
@@ -76,11 +75,10 @@ const SelectorBar = () => {
                         disabled={!selectedCinema || !selectedMovie || !selectedDate}
                     >
                         <option value="">Chọn Suất Chiếu</option>
-                        {movies.map((movie) => (
-                            <option key={movie.id} value={movie.title}>
-                                {movie.title}
-                            </option>
-                        ))}
+                        <option value="">10:00 AM</option>
+                        <option value="">1:00 PM</option>
+                        <option value="">4:00 PM</option>
+                        <option value="">7:00 PM</option>
                     </select>
 
                     {/* Nút Đặt vé */}
