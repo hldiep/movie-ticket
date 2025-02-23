@@ -10,4 +10,9 @@
 - Hiển thị chi tiết phim ( bao gồm xem trailer)
 - Hiển thị ngày chiếu, rạp chiếu, suất chiếu bao gồm: 
 Chọn ngày, rạp, chọn loại vé → chọn bắp nước → khung thanh toán tạm
-![alt text](image.png)
+
+------------------------------------------
+
+Chỉnh sửa trang xem chi tiết phim
+Sơ đồ chọn ghế
+Hiển thị trang xem thêm

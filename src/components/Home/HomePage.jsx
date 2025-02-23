@@ -6,6 +6,8 @@ import { Navigation } from "swiper/modules";
 import Slider from "./Slider.";
 import SelectorBar from "./SelectorBar";
 import SectionFilming from "./SectionFilming";
+import Header from './Header';
+import Footer from './Footer';
 
 const HomePage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,6 +31,7 @@ const HomePage = () => {
     };
     return (
         <div className="min-h-screen pt-20 bg-main flex justify-center">
+
             <div className={"container"}>
                 <Slider />
                 <SelectorBar />
@@ -118,19 +121,19 @@ const HomePage = () => {
                     </div>
                 )} */}
                 <div className="min-h-screen flex items-center justify-center bg-gradient-to-r p-6">
-                    <div className="flex flex-col md:flex-row w-full max-w-4xl bg-opacity-20 p-6 rounded-lg">
+                    <div className="flex flex-col space-x-6 md:flex-row w-full max-w-4xl bg-opacity-20 p-6 rounded-lg">
 
                         <div
-                            className="flex flex-col items-center justify-center w-full md:w-1/2 space-y-6 mb-6 md:mb-0">
-                            <h2 className="mt-5 text-white text-2xl font-bold uppercase text-center">Liên Hệ Với Chúng
+                            className="text-3xl flex flex-col items-center justify-center w-full md:w-1/2 space-y-6 mb-6 md:mb-0">
+                            <h2 className="mt-5 text-white font-bold uppercase text-center">Liên Hệ Với Chúng
                                 Tôi</h2>
 
                             <button
-                                className="font-bold border border-yellow-600 px-5 py-2 rounded-xl text-yellow-600 w-[150px] hover:bg-yellow-600 hover:text-white transition-all duration-300">
+                                className="font-bold border border-yellow-600 px-5 py-2 rounded-xl text-yellow-600 w-[220px] hover:bg-yellow-600 hover:text-white transition-all duration-300">
                                 FACEBOOK
                             </button>
                             <button
-                                className="font-bold border border-yellow-600 px-5 py-2 rounded-xl text-yellow-600 w-[150px] hover:bg-yellow-600 hover:text-white transition-all duration-300">
+                                className="font-bold border border-yellow-600 px-5 py-2 rounded-xl text-yellow-600 w-[220px] hover:bg-yellow-600 hover:text-white transition-all duration-300">
                                 ZALO CHAT
                             </button>
                         </div>
