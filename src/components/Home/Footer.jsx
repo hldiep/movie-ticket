@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaYoutube, FaTiktok } from 'react-icons/fa';
 const Footer = () => {
     return (
-        <footer className="bg-gray-900 text-white p-6 mt-8">
+        <footer className="bg-gray-900 text-white p-6">
             <div className="container mx-auto grid grid-cols-5 gap-5">
                 <div>
                     <div className="text-3xl font-bold uppercase"><span className={"text-4xl text-white leading-10"}>MOVIE</span> <span className={"text-yellow-600"}>Ticket</span></div>

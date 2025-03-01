@@ -11,10 +11,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         transform: translateX(0) scale(1);
         @apply bg-main
     }
+
     50% {
         transform: translateX(300px) scale(1.5);
         @apply bg-yellow-600
     }
+
     100% {
         transform: translateX(0) scale(1);
         @apply bg-main

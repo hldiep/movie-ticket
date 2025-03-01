@@ -5,7 +5,15 @@ import SeeMore from "./components/Home/SeeMore";
 import MovieDetailPage from "./components/Detail/MovieDetailPage";
 import Header from "./components/Home/Header";
 import Footer from "./components/Home/Footer";
-import { Layout } from "lucide-react";
+import NavPromotion from "./components/Home/NavPromotion";
+import Login from "./components/UserLogin/Login";
+import Register from "./components/UserLogin/Register";
+import ForgetPwd from "./components/UserLogin/ForgetPwd";
+import Payment from "./components/Payment/Payment";
+import PaymentMethod from "./components/Payment/PaymentMethod";
+import PaymentSuccess from "./components/Payment/PaymentSuccess";
+import InfoTicketSuccess from "./components/Payment/InfoTicketSuccess";
+import NavIntro from "./components/Home/NavIntro";
 
 function App() {
   return (
@@ -15,6 +23,15 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/see-more" element={<SeeMore />} />
         <Route path="/movie/:id" element={<MovieDetailPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgetPwd" element={<ForgetPwd />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/continue-payment" element={<PaymentMethod />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
+        <Route path="/payment-success-viewticket" element={<InfoTicketSuccess />} />
+        <Route path="/khuyen-mai" element={<NavPromotion />} />
+        <Route path="/gioi-thieu" element={<NavIntro />} />
       </Routes>
       <Footer />
     </div>

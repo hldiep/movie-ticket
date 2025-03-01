@@ -5,7 +5,7 @@ const SelectorBar = () => {
     const [selectedCinema, setSelectedCinema] = useState("");
     const [selectedMovie, setSelectedMovie] = useState("");
     const [selectedDate, setSelectedDate] = useState("");
-    const [selectShowTime, setSelectShowTime] = useState("");
+    const [selectShowTime] = useState("");
     const [selectedShowtime, setSelectedShowtime] = useState("");
 
     const movies = [
@@ -16,7 +16,6 @@ const SelectorBar = () => {
         { id: 5, title: "Yêu nhầm bạn thân", image: "/images/yeu-nham-ban-than-poster.webp", category: "Tình cảm, tâm lý", duration: "125 phút", country: "Hàn Quốc", trailer: "https://www.youtube.com/embed/Z7AbUpnfcW8" },
         { id: 6, title: "Đại chiến người khổng lồ: Lần tấn công cuối cùng", image: "/images/AOT.webp", category: "Hoạt hình, anime", duration: "130 phút", country: "Nhật Bản", trailer: "https://www.youtube.com/embed/i1hiyahxa4Y" },
     ];
-
     return (
         <>
             <div className="rounded-sm p-4 bg-bar w-full">
@@ -25,7 +24,6 @@ const SelectorBar = () => {
                         Đặt vé nhanh
                     </h2>
 
-                    {/* Chọn rạp */}
                     <select
                         className="py-2 border border-yellow-700 font-[500] text-xl rounded-lg text-yellow-600 outline-none px-2 bg-bar col-span-1"
                         value={selectedCinema}

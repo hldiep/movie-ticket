@@ -13,6 +13,13 @@ Chọn ngày, rạp, chọn loại vé → chọn bắp nước → khung thanh 
 
 ------------------------------------------
 
-Chỉnh sửa trang xem chi tiết phim
-Sơ đồ chọn ghế
-Hiển thị trang xem thêm
+- Chỉnh sửa trang xem chi tiết phim
+- Sơ đồ chọn ghế
+- Hiển thị trang xem thêm
+
+------------------------------------------
+
+- Thêm trang đăng nhập, quên mật khẩu, đăng ký
+- Thêm trang nhập thông tin khách hàng thanh toán, chọn phương thức thanh toán
+- Thêm trang khuyến mãi, giới thiệu
+- Sửa khung hiện trailer

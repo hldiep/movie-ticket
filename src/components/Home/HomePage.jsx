@@ -1,34 +1,13 @@
 import React, { useState } from 'react'
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
 import Slider from "./Slider.";
 import SelectorBar from "./SelectorBar";
 import SectionFilming from "./SectionFilming";
-import Header from './Header';
-import Footer from './Footer';
+import Contact from './Contact';
 
 const HomePage = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [videoUrl, setVideoUrl] = useState("");
 
-
-    const movies = [
-        { id: 1, title: "Bộ tứ báo thủ", image: "/images/bo-tu-bao-thu-official.webp", category: "Hài, tình cảm", duration: "120 phút", country: "Việt Nam", trailer: "https://www.youtube.com/embed/zKMOgOWn8lQ" },
-        { id: 2, title: "Nụ hôn bạc tỷ", image: "/images/nu-hon-bac-ty-poster.webp", category: "Hài, tình cảm", duration: "110 phút", country: "Việt Nam", trailer: "https://www.youtube.com/embed/wr6MeifZCUs" },
-        { id: 3, title: "Đèn âm hồn", image: "/images/den-am-hon-poster.webp", category: "Hồi hộp, kinh dị", duration: "98 phút", country: "Mỹ", trailer: "https://www.youtube.com/embed/t62Rifc9OXI" },
-        { id: 4, title: "Nhóc quậy", image: "/images/nhoc-quay-va-khu-rung-ky-dieu.webp", category: "Hoạt hình", duration: "95 phút", country: "Nhật Bản", trailer: "https://www.youtube.com/embed/kkRPcZfF7cQ" },
-        { id: 5, title: "Yêu nhầm bạn thân", image: "/images/yeu-nham-ban-than-poster.webp", category: "Tình cảm, tâm lý", duration: "125 phút", country: "Hàn Quốc", trailer: "https://www.youtube.com/embed/Z7AbUpnfcW8" },
-        { id: 6, title: "Đại chiến người khổng lồ: Lần tấn công cuối cùng", image: "/images/AOT.webp", category: "Hoạt hình, anime", duration: "130 phút", country: "Nhật Bản", trailer: "https://www.youtube.com/embed/i1hiyahxa4Y" },
-    ];
-
-
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-        setVideoUrl("");
-    };
     return (
         <div className="min-h-screen pt-20 bg-main flex justify-center">
 
@@ -100,81 +79,7 @@ const HomePage = () => {
                     {/*</div>*/}
 
                 </main>
-                {/* {isModalOpen && (
-                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                        <div className="bg-white p-6 relative max-w-lg w-full">
-                            <button onClick={closeModal}
-                                    className="absolute top-2 right-2 text-gray-700 text-xl hover:text-red-600">
-                                X
-                            </button>
-                            <div className="aspect-w-16 aspect-h-9">
-                                <iframe
-                                    className="w-full h-64 rounded-sm"
-                                    src={videoUrl}
-                                    title="YouTube trailer"
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                ></iframe>
-                            </div>
-                        </div>
-                    </div>
-                )} */}
-                <div className="min-h-screen flex items-center justify-center bg-gradient-to-r p-6">
-                    <div className="flex flex-col space-x-6 md:flex-row w-full max-w-4xl bg-opacity-20 p-6 rounded-lg">
-
-                        <div
-                            className="text-3xl flex flex-col items-center justify-center w-full md:w-1/2 space-y-6 mb-6 md:mb-0">
-                            <h2 className="mt-5 text-white font-bold uppercase text-center">Liên Hệ Với Chúng
-                                Tôi</h2>
-
-                            <button
-                                className="font-bold border border-yellow-600 px-5 py-2 rounded-xl text-yellow-600 w-[220px] hover:bg-yellow-600 hover:text-white transition-all duration-300">
-                                FACEBOOK
-                            </button>
-                            <button
-                                className="font-bold border border-yellow-600 px-5 py-2 rounded-xl text-yellow-600 w-[220px] hover:bg-yellow-600 hover:text-white transition-all duration-300">
-                                ZALO CHAT
-                            </button>
-                        </div>
-
-
-                        <div className="w-full md:w-2/3 border border-yellow-600 p-6 rounded-lg shadow-lg">
-                            <div className="space-y-4 text-white">
-                                <h2 className='uppercase font-bold'>Thông tin liên hệ</h2>
-                                <p className="flex items-center">
-                                    <span className="mr-2">📞</span> 1900.0085
-                                </p>
-                                <p className="flex items-center">
-                                    <span className="mr-2">📍</span> 97 Đường Man Thiện, Phường Hiệp Phú, Quận 9, TP.HCM
-                                </p>
-                            </div>
-
-                            <form className="mt-4 space-y-4">
-                                <input
-                                    type="text"
-                                    placeholder="Họ và tên"
-                                    className="w-full p-2 border rounded-md text-gray-900 outline-none"
-                                />
-                                <input
-                                    type="email"
-                                    placeholder="Điền email"
-                                    className="w-full p-2 border rounded-md text-gray-900 outline-none"
-                                />
-                                <textarea
-                                    placeholder="Thông tin liên hệ hoặc phản ánh"
-                                    className="w-full p-2 border rounded-md text-gray-900 outline-none h-20"
-                                ></textarea>
-                                <button
-                                    type="submit"
-                                    className="font-bold border border-yellow-600 px-5 py-2 rounded-xl text-yellow-600 w-[120px] hover:bg-yellow-600 hover:text-white transition-all duration-300"
-                                >
-                                    GỬI NGAY
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                <Contact />
             </div>
         </div>
     )

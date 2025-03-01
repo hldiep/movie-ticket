@@ -1,8 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import Booking from './Booking';
 
 const MovieDetailPage = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [videoUrl, setVideoUrl] = useState("");
 
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setVideoUrl("");
+    };
     const movie = {
         title: "Nụ Hôn Bạc Tỷ",
         rating: "T13",
@@ -53,8 +60,11 @@ const MovieDetailPage = () => {
                         </div>
                         <div className="flex space-x-4 mt-3">
                             <button
-                                onClick={() => window.open(movie.trailer, "_blank")}
-                                className="uppercase border-yellow-600 bg-yellow-600 text-white hover:bg-transparent hover:text-yellow-600 border rounded-xl px-5 py-2 transition-all duration-300"
+                                onClick={() => {
+                                    setIsModalOpen(true);
+                                    setVideoUrl(movie.trailer);
+                                }}
+                                className="uppercase text-white border border-white rounded-xl px-5 py-2 hover:bg-gray-900 transition-all duration-300"
                             >
                                 Xem Trailer
                             </button>
@@ -63,8 +73,27 @@ const MovieDetailPage = () => {
                 </div>
                 <Booking />
             </div>
+            {isModalOpen && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                    <div className="bg-white p-6 relative max-w-lg w-full rounded-md shadow-lg">
+                        <button onClick={closeModal}
+                            className="absolute top-2 right-2 text-gray-700 text-xl hover:text-red-600">
+                            &times;
+                        </button>
+                        <div className="aspect-w-16 aspect-h-9">
+                            <iframe
+                                className="w-full h-64 rounded-sm"
+                                src={videoUrl}
+                                title="YouTube trailer"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            ></iframe>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div >
-
     )
 }
 
