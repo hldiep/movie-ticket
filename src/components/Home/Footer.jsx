@@ -1,12 +1,17 @@
 import React from 'react'
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaYoutube, FaTiktok } from 'react-icons/fa';
 const Footer = () => {
     return (
         <footer className="bg-gray-900 text-white p-6">
             <div className="container mx-auto grid grid-cols-5 gap-5">
                 <div>
-                    <div className="text-3xl font-bold uppercase"><span className={"text-4xl text-white leading-10"}>MOVIE</span> <span className={"text-yellow-600"}>Ticket</span></div>
+                    <div className="text-3xl font-bold uppercase">
+                        <Link to="/" className="flex items-center space-x-1">
+                            <span className="text-4xl text-white leading-10">MOVIE</span>
+                            <span className="text-yellow-600">Ticket</span>
+                        </Link>
+                    </div>
                     <div className="flex space-x-3 mt-3">
                         <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
                             className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-800 transition duration-300">
@@ -32,7 +37,7 @@ const Footer = () => {
                 <div className=''>
                     <h2 className="font-bold text-lg uppercase mb-2.5">TÀI KHOẢN</h2>
                     <div className="text-white hover:text-yellow-500 group inline-block">
-                        <NavLink to={"/dang-nhap"}
+                        <NavLink to={"/login"}
                             className="mb-1 group-hover:text-yellow-300 transition-all duration-100 inline-block">
                             Đăng nhập
                         </NavLink>
@@ -123,21 +128,14 @@ const Footer = () => {
                 <p className="text-sm">&copy; 2025 MoviesTicket. All rights reserved.</p>
                 <div className="flex justify-center space-x-8 mt-4">
                     <div className="text-white hover:text-yellow-500 group inline-block">
-                        <NavLink to={""}
+                        <NavLink to={"/chinh-sach-bao-mat"}
                             className="mb-1 group-hover:text-yellow-300 transition-all duration-100 inline-block">
                             Chính sách bảo mật
                         </NavLink>
                         <div className="w-0 h-[2px] bg-yellow-300 group-hover:w-full transition-all duration-300"></div>
                     </div>
                     <div className="text-white hover:text-yellow-500 group inline-block">
-                        <NavLink to={""}
-                            className="mb-1 group-hover:text-yellow-300 transition-all duration-100 inline-block">
-                            Tin điện ảnh
-                        </NavLink>
-                        <div className="w-0 h-[2px] bg-yellow-300 group-hover:w-full transition-all duration-300"></div>
-                    </div>
-                    <div className="text-white hover:text-yellow-500 group inline-block">
-                        <NavLink to={""}
+                        <NavLink to={"/cau-hoi"}
                             className="mb-1 group-hover:text-yellow-300 transition-all duration-100 inline-block">
                             Hỏi và đáp
                         </NavLink>
