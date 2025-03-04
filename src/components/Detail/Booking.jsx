@@ -54,8 +54,8 @@ const Booking = () => {
     };
 
     return (
-        <div>
-            <div className="text-white text-center p-5">
+        <div className=" bg-main justify-center pt-32">
+            <div className="text-white text-center p-5 mt-10">
 
                 <h1 className="text-3xl font-bold uppercase">Lịch Chiếu</h1>
                 <div className='flex justify-center mt-4 space-x-4'>

@@ -45,7 +45,7 @@ const Footer = () => {
                     </div>
                     <br />
                     <div className="text-white hover:text-yellow-500 group inline-block">
-                        <NavLink to={"/dang-ky"}
+                        <NavLink to={"/register"}
                             className="mb-1 group-hover:text-yellow-300 transition-all duration-100 inline-block">
                             Đăng ký
                         </NavLink>

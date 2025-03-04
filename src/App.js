@@ -18,6 +18,10 @@ import Contact from "./components/Home/Contact";
 import ScrollToTop from "./ScrollToTop";
 import PrivacyPolicy from "./components/Home/PrivacyPolicy";
 import AQs from "./components/Home/AQs";
+import VerifyCode from "./components/UserLogin/VerifyCode";
+import ResetPassword from "./components/UserLogin/ResetPassword";
+import Verification from "./components/UserLogin/Verification";
+import Booking from "./components/Detail/Booking";
 
 function App() {
   return (
@@ -28,9 +32,13 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/see-more" element={<SeeMore />} />
         <Route path="/movie/:id" element={<MovieDetailPage />} />
+        <Route path="/dat-ve" element={<Booking />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/xac-minh" element={<Verification />} />
         <Route path="/forgetPwd" element={<ForgetPwd />} />
+        <Route path="/ma-xac-minh" element={<VerifyCode />} />
+        <Route path="/doi-mat-khau" element={<ResetPassword />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/continue-payment" element={<PaymentMethod />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />

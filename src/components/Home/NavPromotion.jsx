@@ -28,7 +28,7 @@ const NavPromotion = () => {
                                 <div className="text-white ">
                                     <p className="text-lg font-semibold">{promo.title}</p>
                                     <p className="text-sm mt-2">{promo.description}</p>
-                                    <button onClick={() => navigate("/payment")}
+                                    <button onClick={() => navigate("/dat-ve")}
                                         className="mt-4 px-4 py-2 bg-yellow-600 hover:bg-yellow-300 text-black hover:text-black font-bold rounded">
                                         ĐẶT VÉ NGAY
                                     </button>

@@ -5,7 +5,6 @@ const SelectorBar = () => {
     const [selectedCinema, setSelectedCinema] = useState("");
     const [selectedMovie, setSelectedMovie] = useState("");
     const [selectedDate, setSelectedDate] = useState("");
-    const [selectShowTime] = useState("");
     const [selectedShowtime, setSelectedShowtime] = useState("");
 
     const movies = [
@@ -58,25 +57,24 @@ const SelectorBar = () => {
                         disabled={!selectedCinema || !selectedMovie}
                     >
                         <option value="">Chọn Ngày</option>
-                        {movies.map((movie) => (
-                            <option key={movie.id} value={movie.title}>
-                                {movie.title}
-                            </option>
-                        ))}
+                        <option value="2025-03-03">3/3</option>
+                        <option value="2025-03-04">4/3</option>
+                        <option value="2025-03-05">5/3</option>
+                        <option value="2025-03-06">6/3</option>
                     </select>
 
                     {/* Chọn suất */}
                     <select
                         className="py-2 border border-yellow-700 font-[500] text-xl rounded-lg text-yellow-600 outline-none px-2 bg-bar col-span-1"
-                        value={selectShowTime}
-                        onChange={(e) => setSelectedShowtime(e.target.value)}
+                        value={selectedShowtime} // Sử dụng đúng state
+                        onChange={(e) => setSelectedShowtime(e.target.value)} // Cập nhật giá trị state
                         disabled={!selectedCinema || !selectedMovie || !selectedDate}
                     >
                         <option value="">Chọn Suất Chiếu</option>
-                        <option value="">10:00 AM</option>
-                        <option value="">1:00 PM</option>
-                        <option value="">4:00 PM</option>
-                        <option value="">7:00 PM</option>
+                        <option value="10:00 AM">10:00 AM</option>
+                        <option value="1:00 PM">1:00 PM</option>
+                        <option value="4:00 PM">4:00 PM</option>
+                        <option value="7:00 PM">7:00 PM</option>
                     </select>
 
                     {/* Nút Đặt vé */}
