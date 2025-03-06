@@ -7,7 +7,7 @@ const Footer = () => {
             <div className="container mx-auto grid grid-cols-5 gap-5">
                 <div>
                     <div className="text-3xl font-bold uppercase">
-                        <Link to="/" className="flex items-center space-x-1">
+                        <Link to="/home" className="flex items-center space-x-1">
                             <span className="text-4xl text-white leading-10">MOVIE</span>
                             <span className="text-yellow-600">Ticket</span>
                         </Link>

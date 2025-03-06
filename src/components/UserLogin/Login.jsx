@@ -1,10 +1,13 @@
 import { Eye, EyeOff } from 'lucide-react';
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../AuthContext";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [credentials, setCredentials] = useState({ username: "", password: "" });
+    const navigate = useNavigate();
+    const { login } = useAuth();
 
     const handleChange = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -12,7 +15,8 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Logging in with:", credentials);
+        login(credentials.username);
+        navigate("/");
     };
 
     return (
@@ -65,14 +69,12 @@ const Login = () => {
                             <div className='text-right mt-4 italic'>
                                 <Link to="/forgetPwd" className="text-yellow-600 text-sm">Quên mật khẩu?</Link>
                             </div>
-
                             <button
                                 type="submit"
                                 className='mt-6 w-full border border-yellow-600 font-bold py-2 rounded-lg hover:bg-yellow-600'
                             >
                                 ĐĂNG NHẬP
                             </button>
-
                             <div className='flex justify-center mt-4 text-sm'>
                                 <p className='italic'>Bạn chưa có tài khoản? Đăng ký</p>
                                 <Link to="/register" className='ml-1 italic text-yellow-600'>tại đây</Link>

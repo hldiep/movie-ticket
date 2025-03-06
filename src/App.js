@@ -22,34 +22,61 @@ import VerifyCode from "./components/UserLogin/VerifyCode";
 import ResetPassword from "./components/UserLogin/ResetPassword";
 import Verification from "./components/UserLogin/Verification";
 import Booking from "./components/Detail/Booking";
+import Dashboard from "./components/ManageFilm/Dashboard";
+import HeaderManage from "./components/ManageFilm/HeaderManage";
+import MovieList from "./components/ManageFilm/MovieList";
+import FilmManage from "./components/ManageFilm/FilmManage";
+import TheaterManage from "./components/ManageTheater/TheaterManage";
+import ShowtimesManage from "./components/ManageShowtimes/ShowtimesManage";
+import EmployeesManage from "./components/ManageEmployees/EployeesManage";
+import CustomersManage from "./components/ManageCustomers/CustomersManage";
+import HeaderUser from "./components/UserLogin/HeaderUser";
+import { AuthProvider } from "./AuthContext";
 
 function App() {
   return (
     <div>
       <ScrollToTop />
-      <Header />
+
+      {/* User */}
+      <AuthProvider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/see-more" element={<SeeMore />} />
+          <Route path="/movie/:id" element={<MovieDetailPage />} />
+          <Route path="/dat-ve" element={<Booking />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/xac-minh" element={<Verification />} />
+          <Route path="/forgetPwd" element={<ForgetPwd />} />
+          <Route path="/ma-xac-minh" element={<VerifyCode />} />
+          <Route path="/doi-mat-khau" element={<ResetPassword />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/continue-payment" element={<PaymentMethod />} />
+          <Route path="/payment-success" element={<PaymentSuccess />} />
+          <Route path="/payment-success-viewticket" element={<InfoTicketSuccess />} />
+          <Route path="/khuyen-mai" element={<NavPromotion />} />
+          <Route path="/gioi-thieu" element={<NavIntro />} />
+          <Route path="/lien-he" element={<Contact />} />
+          <Route path="/chinh-sach-bao-mat" element={<PrivacyPolicy />} />
+          <Route path="/cau-hoi" element={<AQs />} />
+        </Routes>
+        <Footer />
+      </AuthProvider>
+
+
+      {/* Manager */}
+      {/* <HeaderManage />
+      <Dashboard />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/see-more" element={<SeeMore />} />
-        <Route path="/movie/:id" element={<MovieDetailPage />} />
-        <Route path="/dat-ve" element={<Booking />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/xac-minh" element={<Verification />} />
-        <Route path="/forgetPwd" element={<ForgetPwd />} />
-        <Route path="/ma-xac-minh" element={<VerifyCode />} />
-        <Route path="/doi-mat-khau" element={<ResetPassword />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/continue-payment" element={<PaymentMethod />} />
-        <Route path="/payment-success" element={<PaymentSuccess />} />
-        <Route path="/payment-success-viewticket" element={<InfoTicketSuccess />} />
-        <Route path="/khuyen-mai" element={<NavPromotion />} />
-        <Route path="/gioi-thieu" element={<NavIntro />} />
-        <Route path="/lien-he" element={<Contact />} />
-        <Route path="/chinh-sach-bao-mat" element={<PrivacyPolicy />} />
-        <Route path="/cau-hoi" element={<AQs />} />
-      </Routes>
-      <Footer />
+        <Route path="/quan-ly-phim" element={<FilmManage />} />
+        <Route path="/quan-ly-rap" element={<TheaterManage />} />
+        <Route path="/quan-ly-lich-chieu" element={<ShowtimesManage />} />
+        <Route path="/quan-ly-nv" element={<EmployeesManage />} />
+        <Route path="/quan-ly-kh" element={<CustomersManage />} />
+      </Routes> */}
+
     </div>
   );
 }
