@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import SectionFood from './SectionFood';
+import { useNavigate } from 'react-router-dom';
 const seats = [
     ["A01", "A02", "", "A03", "A04", "A05", "A06"],
     ["B01", "B02", "", "B03", "B04", "B05", "B06"],
@@ -11,6 +12,8 @@ const seats = [
 
 
 const Booking = () => {
+    const navigate = useNavigate();
+
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedTheater, setSelectedTheater] = useState(null);
     const [selectedShowtime, setSelectedShowtime] = useState(null);
@@ -19,7 +22,7 @@ const Booking = () => {
     const [selectedSeats, setSelectedSeats] = useState([]);
 
     const totalTickets = adultTickets + studentSeniorTickets;
-
+    const totalPrice = adultTickets * 100000 + studentSeniorTickets * 55000;
 
     const dates = ["14/2", "15/2", "16/2"];
     const theaters = [
@@ -54,8 +57,8 @@ const Booking = () => {
     };
 
     return (
-        <div className=" bg-main justify-center pt-32">
-            <div className="text-white text-center p-5 mt-10">
+        <div className=" bg-main justify-center ">
+            <div className="text-white text-center p-5">
 
                 <h1 className="text-3xl font-bold uppercase">Lịch Chiếu</h1>
                 <div className='flex justify-center mt-4 space-x-4'>
@@ -153,22 +156,25 @@ const Booking = () => {
                         </div>
                         <SectionFood />
                         <hr className="border-white mt-5" />
-                        <div className='p-4 text-white flex items-center justify-between'>
+
+                    </div>
+                )}
+                {selectedSeats.length > 0 && (
+                    <div className="sticky bottom-0 left-0 w-full bg-gray-900 p-4 shadow-lg z-50">
+                        <div className="flex items-center justify-between text-white max-w-4xl mx-auto">
                             <div>
                                 <h2 className='text-xl font-bold uppercase'>Nụ hôn bạc tỷ</h2>
-                                <p className='font-bold'>Cinestar Hai Bà Trưng (TP.HCM) | 1 người lớn</p>
+                                <p className='font-bold'>{selectedTheater} | {totalTickets} vé</p>
+                                <p className='font-bold'>Ghế: {selectedSeats.join(", ")}</p>
+                                <p className='font-bold'>Suất chiếu: {selectedShowtime}, {selectedDate}</p>
                             </div>
                             <div className='flex items-center space-x-4'>
-                                <div className='border p-2 rounded-md text-white text-left'>
-                                    <p className='text-sm'>Phòng chiếu: 02</p>
-                                    <p className='text-sm'>Thời gian: 7:00 PM</p>
-                                    <p className='text-sm'>Ghế: A04</p>
-                                </div>
                                 <div>
-                                    <p className='text-gray-400 text-sm'>Tạm tính</p>
-                                    <p className='text-xl font-bold'>40,000 VNĐ</p>
+                                    <p className='text-gray-400 text-sm'>Tổng tiền</p>
+                                    <p className='text-xl font-bold'>{totalPrice.toLocaleString()} VNĐ</p>
                                 </div>
                                 <button
+                                    onClick={() => navigate("/payment")}
                                     className="border border-yellow-600 bg-yellow-600 text-white rounded-xl px-5 py-2 w-[120px] hover:bg-transparent hover:text-yellow-600 transition-all duration-300">
                                     Đặt vé
                                 </button>

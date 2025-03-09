@@ -1,11 +1,14 @@
 import { Eye, EyeOff } from 'lucide-react';
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../AuthContext";
+import { useAuth } from '../../context/AuthContext';
+import { loginAccount, parseJwt } from '../../util/Helper';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [credentials, setCredentials] = useState({ username: "", password: "" });
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState(""); // Thêm state cho thông báo thành công
     const navigate = useNavigate();
     const { login } = useAuth();
 
@@ -13,10 +16,26 @@ const Login = () => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        login(credentials.username);
-        navigate("/");
+        setError("");
+        setSuccess("");
+
+        if (credentials.username === "admin" && credentials.password === "123") {
+            // Lưu thông tin đăng nhập vào localStorage
+            const userData = { username: "admin" };
+            localStorage.setItem("user", JSON.stringify(userData));
+
+            // Cập nhật AuthContext
+            login(userData);
+
+            setSuccess("Đăng nhập thành công! Đang chuyển hướng...");
+            setTimeout(() => {
+                navigate("/");
+            }, 1500);
+        } else {
+            setError("Tài khoản hoặc mật khẩu không đúng!");
+        }
     };
 
     return (
@@ -25,6 +44,11 @@ const Login = () => {
                 <main className="p-8 text-center">
                     <div className='mt-20 text-white'>
                         <span className='uppercase font-bold text-3xl'>Đăng Nhập</span>
+
+                        {/* Hiển thị thông báo lỗi hoặc thành công */}
+                        {error && <p className="text-red-500 mt-4">{error}</p>}
+                        {success && <p className="text-green-500 mt-4">{success}</p>}
+
                         <form
                             className='border border-yellow-600 mt-8 p-6 rounded-lg shadow-lg'
                             onSubmit={handleSubmit}
@@ -38,8 +62,6 @@ const Login = () => {
                                     onChange={handleChange}
                                     className="mt-2 w-full p-2 border rounded-md text-gray-900 outline-none"
                                     required
-                                    onInvalid={(e) => e.target.setCustomValidity("Vui lòng không để trống ô này")}
-                                    onInput={(e) => e.target.setCustomValidity("")}
                                 />
                             </label>
 
@@ -53,8 +75,6 @@ const Login = () => {
                                         onChange={handleChange}
                                         className="mt-2 w-full p-2 border rounded-md text-gray-900 outline-none"
                                         required
-                                        onInvalid={(e) => e.target.setCustomValidity("Vui lòng không để trống ô này")}
-                                        onInput={(e) => e.target.setCustomValidity("")}
                                     />
                                     <button
                                         type="button"

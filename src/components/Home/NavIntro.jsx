@@ -1,5 +1,4 @@
 import React from 'react'
-import "./index.css";
 const NavIntro = () => {
     return (
         <div className="min-h-screen pt-20 bg-main flex justify-center">
@@ -8,7 +7,7 @@ const NavIntro = () => {
                     className="p-5 mt-28 relative bg-cover bg-center bg-no-repeat before:absolute before:inset-0 before:bg-black/50"
                     style={{ backgroundImage: "url('https://cdn.lawnet.vn/uploads/tintuc/2023/05/09/co-so-dien-anh-pho-bien-phim.jpg')" }}
                 >
-                    <h2 className="text-3xl font-bold text-center mt-28 blinking-text text-white relative z-10">
+                    <h2 className="text-3xl font-bold text-center mt-28 text-white relative z-10">
                         HỆ THỐNG ĐẶT VÉ TIỆN ÍCH
                     </h2>
                     <div className="text-center p-20 text-white mx-10 relative z-10">

@@ -87,7 +87,7 @@ const SectionFilming = () => {
                             >
                                 Xem Trailer
                             </button>
-                            <button onClick={() => navigate("/payment")}
+                            <button onClick={() => navigate("/movie/:id")}
                                 className="uppercase border border-yellow-600 bg-yellow-600 text-white rounded-xl px-5 py-2 w-[120px] hover:bg-transparent hover:text-yellow-600 transition-all duration-300">
                                 Đặt Vé
                             </button>

@@ -31,7 +31,9 @@ import ShowtimesManage from "./components/ManageShowtimes/ShowtimesManage";
 import EmployeesManage from "./components/ManageEmployees/EployeesManage";
 import CustomersManage from "./components/ManageCustomers/CustomersManage";
 import HeaderUser from "./components/UserLogin/HeaderUser";
-import { AuthProvider } from "./AuthContext";
+import { AuthProvider } from "./context/AuthContext";
+import Account from "./components/UserLogin/Account";
+import PurchaseHistory from "./components/Account/PurchaseHistory";
 
 function App() {
   return (
@@ -61,10 +63,11 @@ function App() {
           <Route path="/lien-he" element={<Contact />} />
           <Route path="/chinh-sach-bao-mat" element={<PrivacyPolicy />} />
           <Route path="/cau-hoi" element={<AQs />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/lich-su-mua-hang" element={<PurchaseHistory />} />
         </Routes>
-        <Footer />
+        {/* <Footer /> */}
       </AuthProvider>
-
 
       {/* Manager */}
       {/* <HeaderManage />

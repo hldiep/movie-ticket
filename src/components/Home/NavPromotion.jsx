@@ -1,5 +1,4 @@
 import React from 'react'
-import "./index.css";
 import { useNavigate } from 'react-router-dom';
 const promotions = [
     { id: 1, image: "/images/pro1.jpg", link: "/promo1", title: "Mua 1 Tặng 1", description: "Áp dụng cho tất cả các suất chiếu thứ 2 hàng tuần." },
@@ -13,7 +12,7 @@ const NavPromotion = () => {
     return (
         <div className="min-h-screen pt-20 bg-main flex justify-center">
             <div className="container px-4">
-                <h2 className="text-3xl uppercase font-bold text-center mt-28 blinking-text">
+                <h2 className="text-3xl uppercase font-bold text-center mt-28 text-white">
                     Khuyến Mãi Đặc Biệt
                 </h2>
                 <div className="">
@@ -28,7 +27,7 @@ const NavPromotion = () => {
                                 <div className="text-white ">
                                     <p className="text-lg font-semibold">{promo.title}</p>
                                     <p className="text-sm mt-2">{promo.description}</p>
-                                    <button onClick={() => navigate("/dat-ve")}
+                                    <button onClick={() => navigate("/movie/:id")}
                                         className="mt-4 px-4 py-2 bg-yellow-600 hover:bg-yellow-300 text-black hover:text-black font-bold rounded">
                                         ĐẶT VÉ NGAY
                                     </button>

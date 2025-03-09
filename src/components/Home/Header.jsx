@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { Menu, X } from "lucide-react";
 import { FaSearch, FaUser } from 'react-icons/fa';
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../../AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -33,31 +33,19 @@ const Header = () => {
                         </div>
 
                         {user ? (
-                            <div className="flex text-center items-cente">
-                                <div class="group relative">
-                                    <button
-                                        className="flex items-center gap-2 border border-yellow-600 text-yellow-600 p-3 rounded-full hover:bg-yellow-600 hover:text-white"
-                                    >
-                                        <FaUser /> <p>Dao Phan Quoc hoai</p>
+                            <div className="flex text-center items-center">
+                                <div className="group relative">
+                                    <button className="flex items-center gap-2 border border-yellow-600 text-yellow-600 p-3 rounded-full hover:bg-yellow-600 hover:text-white mr-10">
+                                        <FaUser /> <p>{user?.username || "Người dùng"}</p>
                                     </button>
-                                    <div className="hidden transition-all duration-500 group-hover:inline-block absolute left-0 w-48 bg-white border border-gray-200 rounded-lg shadow-lg">
+                                    <div className="hidden transition-all duration-500 group-hover:inline-block absolute left-0 w-32 bg-white border border-gray-200 rounded-lg shadow-lg">
                                         <div className="text-left">
-                                            <div>
-                                                <button onClick={() => navigate("/user")}
-                                                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-black hover:rounded-lg"
-                                                >
-                                                    Thông tin tài khoản
-                                                </button>
-
-                                            </div>
-                                            <div className="hover:bg-red-600 hover:rounded-lg">
-                                                <button
-                                                    onClick={logout}
-                                                    className="text-red-600 px-5 py-2 rounded-lg hover:text-white"
-                                                >
-                                                    Đăng xuất
-                                                </button>
-                                            </div>
+                                            <button onClick={() => navigate("/account")} className="w-full text-black px-5 py-2 rounded-lg hover:bg-yellow-600 hover:text-white">
+                                                Tài khoản
+                                            </button>
+                                            <button onClick={() => { logout(); navigate("/"); }} className="w-full text-red-600 px-5 py-2 rounded-lg hover:bg-red-600 hover:text-white">
+                                                Đăng xuất
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
