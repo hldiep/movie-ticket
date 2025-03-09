@@ -61,3 +61,12 @@ Chọn ngày, rạp, chọn loại vé → chọn bắp nước → khung thanh 
 
 - Lịch sử mua hàng
 ![image](https://github.com/user-attachments/assets/1f90027b-0179-487d-a96b-4f530c5b8090)
+
+- Trang quản lý
+![image](https://github.com/user-attachments/assets/51522fa1-80cb-4377-8de1-48c9fb4d6fce)
+![image](https://github.com/user-attachments/assets/65606f30-68c2-4869-83f5-a5c7f35b4bc9)
+![image](https://github.com/user-attachments/assets/b4913830-6da5-4809-bd1e-ccdaa0e25b28)
+![image](https://github.com/user-attachments/assets/6ce26df8-21b4-4b90-929b-1e12df692e1d)
+
+
+
