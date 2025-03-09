@@ -56,3 +56,8 @@ Chọn ngày, rạp, chọn loại vé → chọn bắp nước → khung thanh 
 - Sửa khung hiện trailer
 ![image](https://github.com/user-attachments/assets/315c45c7-6b6b-424b-b64e-1788b5fd886b)
 
+- Thông tin tài khoản
+![image](https://github.com/user-attachments/assets/243cc9e5-5d40-4784-bca2-68bd287e519c)
+
+- Lịch sử mua hàng
+![image](https://github.com/user-attachments/assets/1f90027b-0179-487d-a96b-4f530c5b8090)
