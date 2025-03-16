@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaCalendarAlt, FaChartBar, FaFilm, FaList, FaPlus, FaTheaterMasks, FaUser } from 'react-icons/fa';
+import { FaCalendarAlt, FaChartBar, FaFilm, FaHome, FaList, FaPlus, FaTheaterMasks, FaUser } from 'react-icons/fa';
 import { NavLink } from "react-router-dom";
 
 const Dashboard = () => {
@@ -10,44 +10,65 @@ const Dashboard = () => {
                 <div className='transition-opacity duration-500 ease-in-out '>
                     <nav>
                         <div>
+                            <NavLink to="/"
+                                className={({ isActive }) => `flex items-center w-full p-3 mt-1 rounded-md transition-transform duration-300 transform hover:scale-105 cursor-pointer ${isActive ? 'bg-blue-600' : 'bg-gray-800'}`
+                                }>
+                                <FaHome className="mr-3" /> Tổng quan
+                            </NavLink>
+                        </div>
+                        <div>
+                            <NavLink to="/doanh-thu-theo-phim"
+                                className={({ isActive }) => `flex items-center w-full p-3 mt-1 rounded-md transition-transform duration-300 transform hover:scale-105 cursor-pointer ${isActive ? 'bg-blue-600' : 'bg-gray-800'}`
+                                }>
+                                Doanh thu theo phim
+                            </NavLink>
+                        </div>
+                        <div>
+                            <NavLink to="/doanh-thu-theo-rap"
+                                className={({ isActive }) => `flex items-center w-full p-3 mt-1 rounded-md transition-transform duration-300 transform hover:scale-105 cursor-pointer ${isActive ? 'bg-blue-600' : 'bg-gray-800'}`
+                                }>
+                                Doanh thu theo rạp
+                            </NavLink>
+                        </div>
+                        <div>
                             <NavLink to="/quan-ly-phim"
-                                className="flex items-center w-full p-3 mt-1 bg-blue-600 rounded-md transition-transform duration-300 transform hover:scale-105 cursor-pointer">
+                                className={({ isActive }) => `flex items-center w-full p-3 mt-1 rounded-md transition-transform duration-300 transform hover:scale-105 cursor-pointer ${isActive ? 'bg-blue-600' : 'bg-gray-800'}`
+                                }>
                                 <FaFilm className="mr-3" /> Quản lý phim
                             </NavLink>
                         </div>
                         <div>
                             <NavLink to="/quan-ly-rap"
-                                className='flex items-center w-full p-3 mt-1 bg-blue-600 rounded-md transition-transform duration-300 transform hover:scale-105'>
+                                className={({ isActive }) => `flex items-center w-full p-3 mt-1 rounded-md transition-transform duration-300 transform hover:scale-105 cursor-pointer ${isActive ? 'bg-blue-600' : 'bg-gray-800'}`
+                                }>
                                 <FaTheaterMasks className='mr-3' />Quản lý rạp chiếu phim
                             </NavLink>
                         </div>
                         <div>
                             <NavLink to="/quan-ly-lich-chieu"
-                                className='flex items-center w-full p-3 mt-1 bg-blue-600 rounded-md transition-transform duration-300 transform hover:scale-105'>
+                                className={({ isActive }) => `flex items-center w-full p-3 mt-1 rounded-md transition-transform duration-300 transform hover:scale-105 cursor-pointer ${isActive ? 'bg-blue-600' : 'bg-gray-800'}`
+                                }>
                                 <FaCalendarAlt className='mr-3' />Quản lý lịch chiếu phim
                             </NavLink>
                         </div>
                         <div>
-                            <NavLink to="/bao-cao-chi-tiet"
-                                className='flex items-center w-full p-3 mt-1 bg-blue-600 rounded-md transition-transform duration-300 transform hover:scale-105'>
-                                <FaChartBar className="mr-3" /> Báo cáo chi tiết
-                            </NavLink>
-                        </div>
-                        <div>
                             <NavLink to="/bao-cao-so-luong-ve"
-                                className='flex items-center w-full p-3 mt-1 bg-blue-600 rounded-md transition-transform duration-300 transform hover:scale-105'>
+                                className={({ isActive }) => `flex items-center w-full p-3 mt-1 rounded-md transition-transform duration-300 transform hover:scale-105 cursor-pointer ${isActive ? 'bg-blue-600' : 'bg-gray-800'}`
+                                }>
                                 <FaChartBar className="mr-3" /> Báo cáo số lượng vé
                             </NavLink>
                         </div>
                         <div>
                             <NavLink to="/quan-ly-nv"
-                                className='flex items-center w-full p-3 mt-1 bg-blue-600 rounded-md transition-transform duration-300 transform hover:scale-105'>
+                                className={({ isActive }) => `flex items-center w-full p-3 mt-1 rounded-md transition-transform duration-300 transform hover:scale-105 cursor-pointer ${isActive ? 'bg-blue-600' : 'bg-gray-800'}`
+                                }>
                                 <FaUser className="mr-3" /> Quản lý nhân viên
                             </NavLink>
                         </div>
                         <div>
                             <NavLink to="/quan-ly-kh"
-                                className='flex items-center w-full p-3 mt-1 bg-blue-600 rounded-md transition-transform duration-300 transform hover:scale-105'>
+                                className={({ isActive }) => `flex items-center w-full p-3 mt-1 rounded-md transition-transform duration-300 transform hover:scale-105 cursor-pointer ${isActive ? 'bg-blue-600' : 'bg-gray-800'}`
+                                }>
                                 <FaUser className="mr-3" /> Quản lý khách hàng
                             </NavLink>
                         </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 const HeaderManage = () => {
     const navigate = useNavigate();
@@ -7,7 +7,9 @@ const HeaderManage = () => {
         <div>
             <header className="bg-gray-900 fixed top-0 left-0 w-full z-50 shadow-md font-sans">
                 <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-                    <p className="text-3xl font-semibold text-white">Dashboard</p>
+                    <NavLink to="/">
+                        <p className="text-3xl font-semibold text-white">Dashboard</p>
+                    </NavLink>
                     <div className="flex space-x-4">
                         <button
                             onClick={() => navigate("/")}

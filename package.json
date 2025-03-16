@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@shadcn/ui": "^0.0.4",
     "@tailwindcss/line-clamp": "^0.4.4",
     "axios": "^1.8.2",
     "cra-template": "1.2.0",
@@ -14,6 +15,8 @@
     "react-qr-code": "^2.0.15",
     "react-router-dom": "^6.29.0",
     "react-scripts": "5.0.1",
+    "react-table": "^7.8.0",
+    "recharts": "^2.15.1",
     "swiper": "^11.2.2",
     "web-vitals": "^4.2.4"
   },

@@ -30,10 +30,13 @@ import TheaterManage from "./components/ManageTheater/TheaterManage";
 import ShowtimesManage from "./components/ManageShowtimes/ShowtimesManage";
 import EmployeesManage from "./components/ManageEmployees/EployeesManage";
 import CustomersManage from "./components/ManageCustomers/CustomersManage";
-import HeaderUser from "./components/UserLogin/HeaderUser";
 import { AuthProvider } from "./context/AuthContext";
-import Account from "./components/UserLogin/Account";
+import InfoAccount from "./components/Account/InfoAccount";
 import PurchaseHistory from "./components/Account/PurchaseHistory";
+import Home from "./components/ManageFilm/Home";
+import TicketReportManage from "./components/ManageTicketReport/TicketReportManage";
+import RevenueByMovie from "./components/Revenue/RevenueByMovie";
+import AddMovie from "./components/ManageFilm/AddMovie";
 
 function App() {
   return (
@@ -41,7 +44,7 @@ function App() {
       <ScrollToTop />
 
       {/* User */}
-      <AuthProvider>
+      {/* <AuthProvider>
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -63,22 +66,26 @@ function App() {
           <Route path="/lien-he" element={<Contact />} />
           <Route path="/chinh-sach-bao-mat" element={<PrivacyPolicy />} />
           <Route path="/cau-hoi" element={<AQs />} />
-          <Route path="/account" element={<Account />} />
+          <Route path="/account" element={<InfoAccount />} />
           <Route path="/lich-su-mua-hang" element={<PurchaseHistory />} />
         </Routes>
-        {/* <Footer /> */}
-      </AuthProvider>
+        <Footer />
+      </AuthProvider> */}
 
       {/* Manager */}
-      {/* <HeaderManage />
+      <HeaderManage />
       <Dashboard />
       <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/doanh-thu-theo-phim" element={<RevenueByMovie />} />
         <Route path="/quan-ly-phim" element={<FilmManage />} />
+        <Route path="/them-phim" element={<AddMovie />} />
         <Route path="/quan-ly-rap" element={<TheaterManage />} />
         <Route path="/quan-ly-lich-chieu" element={<ShowtimesManage />} />
         <Route path="/quan-ly-nv" element={<EmployeesManage />} />
         <Route path="/quan-ly-kh" element={<CustomersManage />} />
-      </Routes> */}
+        <Route path="/bao-cao-so-luong-ve" element={<TicketReportManage />} />
+      </Routes>
 
     </div>
   );

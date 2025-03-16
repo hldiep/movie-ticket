@@ -1,57 +1,117 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-
+import { FaSearch } from "react-icons/fa";
+const initialCustomers = [
+    { id: 1, email: "john@example.com", name: "John Doe", phone_number: "0123456789", timestamp: "2025-03-12", account_user_name: "john_doe", status: "Active" },
+    { id: 2, email: "alice@example.com", name: "Alice Smith", phone_number: "0987654321", timestamp: "2025-03-10", account_user_name: "alice_smith", status: "Inactive" }
+];
 const CustomersManage = () => {
-    const { register, handleSubmit, reset } = useForm();
-    const [customers, setCustomers] = useState([
-        { id: 1, name: "Hoàng Văn D", email: "hoangvand@example.com", phone: "0987654321" },
-        { id: 2, name: "Phạm Thị E", email: "phamthie@example.com", phone: "0976543210" },
-        { id: 3, name: "Trịnh Văn F", email: "trinhvanf@example.com", phone: "0965432109" }
-    ]);
-
-    const onSubmit = (data) => {
-        setCustomers([...customers, { ...data, id: customers.length + 1 }]);
-        reset();
+    const [customers, setCustomers] = useState(initialCustomers);
+    const [showForm, setShowForm] = useState(false);
+    const [editing, setEditing] = useState(null);
+    const [message, setMessage] = useState("");
+    const [customerData, setCustomerData] = useState({
+        email: "", name: "", phone_number: "", timestamp: "", account_user_name: "", status: ""
+    });
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setCustomerData({ ...customerData, [name]: value });
     };
 
-    const handleDelete = (id) => {
-        setCustomers(customers.filter(customer => customer.id !== id));
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (editing) {
+            setCustomers(customers.map(customer => customer.id === editing ? { ...customerData, id: editing } : customer));
+            setMessage("Cập nhật thông tin thành công!");
+        } else {
+            setCustomers([...customers, { ...customerData, id: customers.length + 1 }]);
+            setMessage("Thêm khách hàng thành công!")
+        }
+        setCustomerData({ email: "", name: "", phone_number: "", timestamp: "", account_user_name: "", status: "" });
+        setEditing(null);
+        setShowForm(false);
+
+        setTimeout(() => setMessage(""), 3000);
     };
+
+    const handleEdit = (customer) => {
+        setCustomerData(customer);
+        setEditing(customer.id);
+        setShowForm(true);
+    };
+
+    const [searchPhone, setSearchPhone] = useState("");
+    const handleSearch = () => {
+        setCustomers(
+            initialCustomers.filter((customer) =>
+                customer.phone_number.includes(searchPhone)
+            )
+        );
+    }
 
     return (
-        <div className='min-h-screen bg-gray-100'>
+        <div className='min-h-screen bg-main text-white'>
             <div className='container'>
-                <div className='ml-[220px] flex flex-1 p-10'>
-                    <div className="p-6 font-sans">
-                        <h2 className="text-xl font-bold mb-4">Quản lý khách hàng</h2>
-                        <div className="border border-gray-300 p-6 rounded-lg shadow-md">
-                            <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-3 gap-4">
-                                <input placeholder="Tên khách hàng" {...register("name")} required className="p-2 border border-gray-300 rounded outline-none" />
-                                <input placeholder="Email" type="email" {...register("email")} required className="p-2 border border-gray-300 rounded outline-none" />
-                                <input placeholder="Số điện thoại" type="tel" {...register("phone")} required className="p-2 border border-gray-300 rounded outline-none" />
-                                <div className="col-span-2 flex justify-center">
-                                    <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Thêm khách hàng</button>
-                                </div>
-                            </form>
+                <div className='ml-[220px] flex-1 p-10'>
+                    <div className="p-6 font-sans ">
+                        <div className="flex justify-between items-center mb-4">
+                            <h1 className="text-2xl font-bold">Quản lý khách hàng</h1>
+                            <button onClick={() => { setShowForm(!showForm); setEditing(null); setCustomerData({ email: "", name: "", phone_number: "", timestamp: "", account_user_name: "", status: "" }) }}
+                                className='bg-blue-600 px-4 py-2 rounded text-white mb-4'>
+                                {showForm ? "Đóng" : "Thêm khách hàng"}
+                            </button>
                         </div>
-
-                        <table className="w-full mt-6 border-collapse border border-gray-300">
+                        {message && <div className="text-green-500 font-semibold mb-2">{message}</div>}
+                        {showForm && (
+                            <form onSubmit={handleSubmit} className='bg-gray-200 text-black p-4 rounded-md mb-4'>
+                                <h2 className='text-lg font-semibold mb-2'>{editing ? "Chỉnh sửa khách hàng" : "Nhập thông tin khách hàng"}</h2>
+                                <div className='grid grid-cols-2 gap-4'>
+                                    <input type='email' name='email' value={customerData.email} onChange={handleInputChange} placeholder='Email' className='p-2 border rounded border-blue-700 outline-none' required />
+                                    <input type='text' name='name' value={customerData.name} onChange={handleInputChange} placeholder='Tên' className='p-2 border rounded border-blue-700 outline-none' required />
+                                    <input type='text' name='phone_number' value={customerData.phone_number} onChange={handleInputChange} placeholder='Số điện thoại' className='p-2 border rounded border-blue-700 outline-none' required />
+                                    <input type='text' name='account_user_name' value={customerData.account_user_name} onChange={handleInputChange} placeholder='Tên tài khoản' className='p-2 border rounded border-blue-700 outline-none' required />
+                                    <select name='status' value={customerData.status} onChange={handleInputChange} className='p-2 border rounded border-blue-700 outline-none' required>
+                                        <option value=''>Chọn trạng thái</option>
+                                        <option value='Active'>Hoạt động</option>
+                                        <option value='Inactive'>Không hoạt động</option>
+                                    </select>
+                                </div>
+                                <button type='submit' className='mt-4 bg-green-600 px-4 py-2 rounded text-white'>
+                                    {editing ? "Cập nhật" : "Thêm"}
+                                </button>
+                            </form>
+                        )}
+                        <div className="text-right text-black mb-5">
+                            <input
+                                type="text"
+                                placeholder="Nhập sđt: "
+                                className="p-2 outline-none rounded-lg"
+                                value={searchPhone}
+                                onChange={(e) => setSearchPhone(e.target.value)} />
+                            <button className="p-3" onClick={handleSearch}>
+                                <FaSearch className="text-white" />
+                            </button>
+                        </div>
+                        <table className='w-full border-collapse border border-gray-700'>
                             <thead>
-                                <tr className="bg-gray-200">
-                                    <th className="border border-gray-300 p-2">Tên khách hàng</th>
-                                    <th className="border border-gray-300 p-2">Email</th>
-                                    <th className="border border-gray-300 p-2">Số điện thoại</th>
-                                    <th className="border border-gray-300 p-2">Hành động</th>
+                                <tr className='bg-gray-800 text-left'>
+                                    <th className='p-2 border border-gray-700'>Email</th>
+                                    <th className='p-2 border border-gray-700'>Tên</th>
+                                    <th className='p-2 border border-gray-700'>Số điện thoại</th>
+                                    <th className='p-2 border border-gray-700'>Tên tài khoản</th>
+                                    <th className='p-2 border border-gray-700'>Trạng thái</th>
+                                    <th className='p-2 border border-gray-700'>Hành động</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {customers.map((customer) => (
-                                    <tr key={customer.id} className="odd:bg-white even:bg-gray-100">
-                                        <td className="border border-gray-300 p-2">{customer.name}</td>
-                                        <td className="border border-gray-300 p-2">{customer.email}</td>
-                                        <td className="border border-gray-300 p-2">{customer.phone}</td>
-                                        <td className="border border-gray-300 p-2">
-                                            <button onClick={() => handleDelete(customer.id)} className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600">Xóa</button>
+                                    <tr key={customer.id} className='border border-gray-700'>
+                                        <td className='p-2 border border-gray-700'>{customer.email}</td>
+                                        <td className='p-2 border border-gray-700'>{customer.name}</td>
+                                        <td className='p-2 border border-gray-700'>{customer.phone_number}</td>
+                                        <td className='p-2 border border-gray-700'>{customer.account_user_name}</td>
+                                        <td className='p-2 border border-gray-700'>{customer.status}</td>
+                                        <td className='p-2 border border-gray-700'>
+                                            <button onClick={() => handleEdit(customer)} className='text-yellow-400 mx-2'>Sửa</button>
                                         </td>
                                     </tr>
                                 ))}

@@ -43,7 +43,8 @@ const Header = () => {
                                             <button onClick={() => navigate("/account")} className="w-full text-black px-5 py-2 rounded-lg hover:bg-yellow-600 hover:text-white">
                                                 Tài khoản
                                             </button>
-                                            <button onClick={() => { logout(); navigate("/"); }} className="w-full text-red-600 px-5 py-2 rounded-lg hover:bg-red-600 hover:text-white">
+                                            <button onClick={() => { logout(); navigate("/"); }}
+                                                className="w-full text-red-600 px-5 py-2 rounded-lg hover:bg-red-600 hover:text-white">
                                                 Đăng xuất
                                             </button>
                                         </div>
