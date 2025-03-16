@@ -68,5 +68,12 @@ Chọn ngày, rạp, chọn loại vé → chọn bắp nước → khung thanh 
 ![image](https://github.com/user-attachments/assets/b4913830-6da5-4809-bd1e-ccdaa0e25b28)
 ![image](https://github.com/user-attachments/assets/6ce26df8-21b4-4b90-929b-1e12df692e1d)
 
+- Cập nhật 16/3/2025
+![image](https://github.com/user-attachments/assets/7c66d17b-3efd-444e-b8d0-e43cfa606b0f)
+![image](https://github.com/user-attachments/assets/781cf05e-bccb-482f-976a-4da04d29ed4b)
+![image](https://github.com/user-attachments/assets/fd30827b-1449-4281-a870-d6a3df4f65b6)
+![image](https://github.com/user-attachments/assets/9c7be6a1-9233-42eb-b7f3-b27811711d84)
+![image](https://github.com/user-attachments/assets/cbd4bc6b-41ad-468d-91a5-3ef20754a2d7)
+![image](https://github.com/user-attachments/assets/146b85ef-1764-4e91-9fca-9b383aef483f)
 
 
