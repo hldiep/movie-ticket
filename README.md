@@ -76,4 +76,14 @@ Chọn ngày, rạp, chọn loại vé → chọn bắp nước → khung thanh 
 ![image](https://github.com/user-attachments/assets/cbd4bc6b-41ad-468d-91a5-3ef20754a2d7)
 ![image](https://github.com/user-attachments/assets/146b85ef-1764-4e91-9fca-9b383aef483f)
 
+- Cập nhật 23/3
+Chi tiết phim (xem, chỉnh)
+![image](https://github.com/user-attachments/assets/aa2460ce-966c-4ea9-aa26-0086de0c927a)
+Danh sách rạp
+![image](https://github.com/user-attachments/assets/7e999889-4b48-43cf-8001-8d8beacfdb90)
+Chi tiết rạp
+![image](https://github.com/user-attachments/assets/f138a16f-ac2c-462f-bb81-e7ba566f9175)
+Thêm rạp
+![image](https://github.com/user-attachments/assets/6040ed8c-fee2-42e3-957c-3951c5c7c0a3)
 
+Quản lý lịch chiếu đang làm theo rạp
