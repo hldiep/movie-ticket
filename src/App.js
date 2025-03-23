@@ -37,6 +37,11 @@ import Home from "./components/ManageFilm/Home";
 import TicketReportManage from "./components/ManageTicketReport/TicketReportManage";
 import RevenueByMovie from "./components/Revenue/RevenueByMovie";
 import AddMovie from "./components/ManageFilm/AddMovie";
+import ListMovie from "./components/ManageFilm/ListMovie";
+import MovieDetail from "./components/ManageFilm/MovieDetail";
+import AddTheater from "./components/ManageTheater/AddTheater";
+import RevenueByCinema from "./components/Revenue/RevenueByCinema";
+import TheaterDetail from "./components/ManageTheater/TheaterDetail";
 
 function App() {
   return (
@@ -78,9 +83,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/doanh-thu-theo-phim" element={<RevenueByMovie />} />
-        <Route path="/quan-ly-phim" element={<FilmManage />} />
+        <Route path="/doanh-thu-theo-rap" element={<RevenueByCinema />} />
+        <Route path="/quan-ly-phim" element={<ListMovie />} />
+        <Route path="/chi-tiet-phim" element={<MovieDetail />} />
         <Route path="/them-phim" element={<AddMovie />} />
         <Route path="/quan-ly-rap" element={<TheaterManage />} />
+        <Route path="/them-rap" element={<AddTheater />} />
+        <Route path="/chi-tiet-rap" element={<TheaterDetail />} />
         <Route path="/quan-ly-lich-chieu" element={<ShowtimesManage />} />
         <Route path="/quan-ly-nv" element={<EmployeesManage />} />
         <Route path="/quan-ly-kh" element={<CustomersManage />} />

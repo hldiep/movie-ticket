@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const initialCinemas = [
-    { id: 1, name: "CGV Vincom", location: "Vincom Center, Hà Nội", seats: 200, status: "Đang hoạt động" },
-    { id: 2, name: "Lotte Cinema", location: "Lotte Tower, Hà Nội", seats: 300, status: "Đang hoạt động" },
-    { id: 3, name: "BHD Star", location: "Phạm Ngọc Thạch, Hà Nội", seats: 400, status: "Đang hoạt động" },
-    { id: 4, name: "Galaxy Cinema", location: "Nguyễn Du, Hà Nội", seats: 350, status: "Đang hoạt động" }
+    { id: 1, name: "CGV Vincom", location: "Vincom Center, Hà Nội", seats: 200, createAt: "12/2/2024" },
+    { id: 2, name: "Lotte Cinema", location: "Lotte Tower, Hà Nội", seats: 300, createAt: "13/3/2024" },
+    { id: 3, name: "BHD Star", location: "Phạm Ngọc Thạch, Hà Nội", seats: 400, createAt: "14/4/2024" },
+    { id: 4, name: "Galaxy Cinema", location: "Nguyễn Du, Hà Nội", seats: 350, createAt: "15/5/2024" }
 ];
 const TheaterManage = () => {
+    const navigate = useNavigate();
     const [cinemas, setCinemas] = useState(initialCinemas);
     const [showForm, setShowForm] = useState(false)
     const [editingCinema, setEditingCinema] = useState(null);
@@ -32,14 +34,7 @@ const TheaterManage = () => {
 
         setTimeout(() => setMessage(""), 3000);
     };
-    const handleEdit = (cinema) => {
-        setCinemaData(cinema);
-        setEditingCinema(cinema.id);
-        setShowForm(true);
-    }
 
-    const [filterStatus, setFilterStatus] = useState("");
-    const filterTheater = filterStatus ? cinemas.filter(cinema => cinema.status === filterStatus) : cinemas;
     return (
         <div className='min-h-screen bg-main'>
             <div className='container'>
@@ -47,10 +42,12 @@ const TheaterManage = () => {
                     <div className="p-6 font-sans text-white">
                         <div className="flex justify-between items-center mb-4">
                             <h1 className="text-2xl font-bold">Quản lý rạp</h1>
-                            <button onClick={() => { setShowForm(!showForm); setEditingCinema(null); setCinemaData({ name: "", location: "", seats: "", status: "" }); }}
+                            <button onClick={() => navigate("/them-rap")}
+                                className="bg-blue-600 px-4 py-2 rounded text-white">Thêm rạp</button>
+                            {/* <button onClick={() => { setShowForm(!showForm); setEditingCinema(null); setCinemaData({ name: "", location: "", seats: "", status: "" }); }}
                                 className="bg-blue-600 px-4 py-2 rounded text-white">
                                 {showForm ? "Đóng" : "Thêm rạp"}
-                            </button>
+                            </button> */}
                         </div>
                         {message && (<div className="text-green-500 font-semibold mb-2">{message}</div>)}
                         {showForm && (
@@ -59,54 +56,30 @@ const TheaterManage = () => {
                                 <div className="grid grid-cols-2 gap-4">
                                     <input type="text" name="name" value={cinemaData.name} onChange={handleInputChange} placeholder="Tên rạp" className="p-2 border rounded border-blue-700 outline-none" required />
                                     <input type="text" name="location" value={cinemaData.location} onChange={handleInputChange} placeholder="Địa chỉ" className="p-2 border rounded border-blue-700 outline-none" required />
-                                    <input type="number" name="seats" value={cinemaData.seats} onChange={handleInputChange} placeholder="Số ghế" className="p-2 border rounded border-blue-700 outline-none" required />
-                                    <select name='status' value={cinemaData.status} onChange={handleInputChange} className='p-2 border rounded border-blue-700 outline-none' required>
-                                        <option value=''>Chọn trạng thái</option>
-                                        <option value='Đang hoạt động'>Đang hoạt động</option>
-                                        <option value='Không hoạt động'>Không hoạt động</option>
-                                    </select>
+                                    <input type="text" name="createAt" value={cinemaData.createAt} onChange={handleInputChange} placeholder="Ngày tạo" className="p-2 border rounded border-blue-700 outline-none" required />
                                 </div>
                                 <button type="submit" className="mt-4 bg-green-600 px-4 py-2 rounded text-white">
                                     {editingCinema ? "Cập nhật" : "Thêm"}
                                 </button>
                             </form>
                         )}
-                        <div className="mb-4 text-right">
-                            <select
-                                className="bg-gray-700 text-white px-4 py-2 rounded outline-none"
-                                value={filterStatus}
-                                onChange={(e) => setFilterStatus(e.target.value)}
-                            >
-                                <option value="">Lọc theo trạng thái</option>
-                                <option value="Đang hoạt động">Đang hoạt động</option>
-                                <option value="Không hoạt động">Không hoạt động</option>
-                            </select>
-                        </div>
+
                         <table className="w-full border-collapse border border-gray-700">
                             <thead>
                                 <tr className="bg-gray-800 text-left">
                                     <th className="p-2 border border-gray-700">Tên rạp</th>
                                     <th className="p-2 border border-gray-700">Địa chỉ</th>
-                                    <th className="p-2 border border-gray-700">Số ghế</th>
-                                    <th className="p-2 border border-gray-700">Trạng thái</th>
-                                    <th className="p-2 border border-gray-700">Hành động</th>
+                                    <th className="p-2 border border-gray-700">Ngày tạo</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {filterTheater.map((cinema) => (
+                                {cinemas.map((cinema) => (
                                     <tr key={cinema.id} className="border border-gray-700">
-                                        <td className="p-2 border border-gray-700">{cinema.name}</td>
+                                        <td onClick={() => navigate('/chi-tiet-rap')}
+                                            className="p-2 border border-gray-700">{cinema.name}</td>
                                         <td className="p-2 border border-gray-700">{cinema.location}</td>
-                                        <td className="p-2 border border-gray-700">{cinema.seats}</td>
-                                        <td className="p-2 border border-gray-700">
-                                            {cinema.status === "Active" ? "Đang hoạt động" : cinema.status === "Inactive" ? "Không hoạt động" : cinema.status}
-                                        </td>
-                                        <td className="p-2 border border-gray-700">
-                                            <div className="flex justify-center items-center gap-4">
-                                                <button className="text-yellow-400" onClick={() => handleEdit(cinema)}>Sửa</button>
+                                        <td className="p-2 border border-gray-700">{cinema.createAt}</td>
 
-                                            </div>
-                                        </td>
                                     </tr>
                                 ))}
                             </tbody>

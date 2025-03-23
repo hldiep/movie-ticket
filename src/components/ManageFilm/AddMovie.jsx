@@ -108,10 +108,8 @@ const AddMovie = () => {
                                 <input type="text" name="country" onChange={handleChange} className="w-full focus:outline-blue-500 text-black p-1 rounded-md" />
                             </div>
 
-                            <div className="col-span-2 flex justify-between">
-                                <button onClick={() => navigate("/quan-ly-phim")}
-                                    className="p-2 bg-gray-300 text-black hover:bg-gray-200 rounded-lg">Quay lại</button>
-                                <button type="submit" className=" bg-blue-500 p-2 hover:bg-blue-700 rounded-lg">+ Tạo phim</button>
+                            <div >
+                                <button type="submit" className=" bg-blue-500 p-2 hover:bg-blue-700 rounded-lg">Tạo phim</button>
                             </div>
                         </form>
                     </div>

@@ -7,7 +7,7 @@ const Dashboard = () => {
     return (
         <div className='container flex pt-16'>
             <div className={`bg-gray-900 fixed z-50 text-white p-4 flex flex-col h-screen transition-all duration-500 ease-in-out`}>
-                <div className='transition-opacity duration-500 ease-in-out '>
+                <div className='overflow-y-auto h-full transition-opacity duration-500 ease-in-out'>
                     <nav>
                         <div>
                             <NavLink to="/"
