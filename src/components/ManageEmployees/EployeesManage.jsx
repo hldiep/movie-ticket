@@ -58,29 +58,36 @@ const EmployeesManage = () => {
                             <h1 className="text-2xl font-bold">Quản lý nhân viên</h1>
                             <button onClick={() => { setShowForm(!showForm); setEditing(null); setEmployeesData({ name: "", position: "", cccd: "", account_user_name: "", email: "" }) }}
                                 className='bg-blue-600 px-4 py-2 rounded text-white mb-4'>
-                                {showForm ? "Đóng" : "Thêm nhân viên"}
+                                Thêm nhân viên
                             </button>
                         </div>
-                        {message && <div className="text-green-500 font-semibold mb-2">{message}</div>}
+                        {message && <div className="fixed bottom-5 right-5 bg-green-600 text-white px-4 py-2 rounded shadow-lg">{message}</div>}
                         {showForm && (
-                            <form onSubmit={handleSubmit} className='bg-gray-200 text-black p-4 rounded-md mb-4'>
-                                <h2 className='text-lg font-semibold mb-2'>{editing ? "Chỉnh sửa thông tin" : "Nhập thông tin nhân viên"}</h2>
-                                <div className='grid grid-cols-2 gap-4'>
-                                    <input type='text' name='name' value={employeesData.name} onChange={handleInputChange} placeholder='Họ tên' className='p-2 border rounded border-blue-700 outline-none' required />
-                                    <input type='text' name='position' value={employeesData.position} onChange={handleInputChange} placeholder='Chức vụ' className='p-2 border rounded border-blue-700 outline-none' required />
-                                    <input type="text" name="cccd" value={employeesData.cccd} onChange={handleInputChange} placeholder="CCCD" className='p-2 border rounded border-blue-700 outline-none' required />
-                                    <input type='text' name='account_user_name' value={employeesData.account_user_name} onChange={handleInputChange} placeholder='Tên tài khoản' className='p-2 border rounded border-blue-700 outline-none' required />
-                                    <input type='email' name='email' value={employeesData.email} onChange={handleInputChange} placeholder='Email' className='p-2 border rounded border-blue-700 outline-none' required />
-                                    <select name='status' value={employeesData.status} onChange={handleInputChange} className='p-2 border rounded border-blue-700 outline-none' required>
-                                        <option value=''>Chọn trạng thái</option>
-                                        <option value='Active'>Hoạt động</option>
-                                        <option value='Inactive'>Không hoạt động</option>
-                                    </select>
+                            <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+                                <div className="bg-gray-800 p-8 rounded-lg w-1/2 text-black">
+                                    <form onSubmit={handleSubmit} >
+                                        <h2 className='text-2xl font-bold mb-4 text-white'>{editing ? "Chỉnh sửa thông tin" : "Nhập thông tin nhân viên"}</h2>
+                                        <div className='grid grid-cols-2 gap-4'>
+                                            <input type='text' name='name' value={employeesData.name} onChange={handleInputChange} placeholder='Họ tên' className='block mb-3 p-2 w-full outline-none' required />
+                                            <input type='text' name='position' value={employeesData.position} onChange={handleInputChange} placeholder='Chức vụ' className='block mb-3 p-2 w-full outline-none' required />
+                                            <input type="text" name="cccd" value={employeesData.cccd} onChange={handleInputChange} placeholder="CCCD" className='block mb-3 p-2 w-full outline-none' required />
+                                            <input type='text' name='account_user_name' value={employeesData.account_user_name} onChange={handleInputChange} placeholder='Tên tài khoản' className='block mb-3 p-2 w-full outline-none' required />
+                                            <input type='email' name='email' value={employeesData.email} onChange={handleInputChange} placeholder='Email' className='block mb-3 p-2 w-full outline-none' required />
+                                            <select name='status' value={employeesData.status} onChange={handleInputChange} className='block mb-3 p-2 w-full outline-none' required>
+                                                <option value=''>Chọn trạng thái</option>
+                                                <option value='Active'>Hoạt động</option>
+                                                <option value='Inactive'>Không hoạt động</option>
+                                            </select>
+                                        </div>
+                                        <div className="flex space-x-4">
+                                            <button type='submit' className='bg-green-600 hover:bg-green-700 px-4 py-2 rounded text-white mt-2 w-full'>
+                                                {editing ? "Cập nhật" : "Thêm"}
+                                            </button>
+                                            <button type='button' onClick={() => setShowForm(false)} className='mt-2 bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-white w-full'>Hủy</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <button type='submit' className='mt-4 bg-green-600 px-4 py-2 rounded text-white'>
-                                    {editing ? "Cập nhật" : "Thêm"}
-                                </button>
-                            </form>
+                            </div>
                         )}
 
                         <table className='w-full border-collapse border border-gray-700'>

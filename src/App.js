@@ -42,6 +42,7 @@ import MovieDetail from "./components/ManageFilm/MovieDetail";
 import AddTheater from "./components/ManageTheater/AddTheater";
 import RevenueByCinema from "./components/Revenue/RevenueByCinema";
 import TheaterDetail from "./components/ManageTheater/TheaterDetail";
+import Showtime from "./components/ManageShowtimes/Showtime";
 
 function App() {
   return (
@@ -90,7 +91,7 @@ function App() {
         <Route path="/quan-ly-rap" element={<TheaterManage />} />
         <Route path="/them-rap" element={<AddTheater />} />
         <Route path="/chi-tiet-rap" element={<TheaterDetail />} />
-        <Route path="/quan-ly-lich-chieu" element={<ShowtimesManage />} />
+        <Route path="/quan-ly-lich-chieu" element={<Showtime />} />
         <Route path="/quan-ly-nv" element={<EmployeesManage />} />
         <Route path="/quan-ly-kh" element={<CustomersManage />} />
         <Route path="/bao-cao-so-luong-ve" element={<TicketReportManage />} />

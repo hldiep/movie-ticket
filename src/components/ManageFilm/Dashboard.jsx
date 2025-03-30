@@ -41,14 +41,14 @@ const Dashboard = () => {
                             <NavLink to="/quan-ly-rap"
                                 className={({ isActive }) => `flex items-center w-full p-3 mt-1 rounded-md transition-transform duration-300 transform hover:scale-105 cursor-pointer ${isActive ? 'bg-blue-600' : 'bg-gray-800'}`
                                 }>
-                                <FaTheaterMasks className='mr-3' />Quản lý rạp chiếu phim
+                                <FaTheaterMasks className='mr-3' />Quản lý rạp chiếu
                             </NavLink>
                         </div>
                         <div>
                             <NavLink to="/quan-ly-lich-chieu"
                                 className={({ isActive }) => `flex items-center w-full p-3 mt-1 rounded-md transition-transform duration-300 transform hover:scale-105 cursor-pointer ${isActive ? 'bg-blue-600' : 'bg-gray-800'}`
                                 }>
-                                <FaCalendarAlt className='mr-3' />Quản lý lịch chiếu phim
+                                <FaCalendarAlt className='mr-3' />Quản lý lịch chiếu
                             </NavLink>
                         </div>
                         <div>
