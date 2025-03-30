@@ -86,4 +86,9 @@ Chi tiết rạp
 Thêm rạp
 ![image](https://github.com/user-attachments/assets/6040ed8c-fee2-42e3-957c-3951c5c7c0a3)
 
-Quản lý lịch chiếu đang làm theo rạp
+- 30/3
+Trang chỉnh sửa/thêm lịch chiếu
+![image](https://github.com/user-attachments/assets/a3155ca0-12c4-4a32-9cf7-85b78bc416ba)
+Trang thêm/sửa nhân viên/khách hàng
+![image](https://github.com/user-attachments/assets/9d405e02-22ac-4c06-a503-586baa2998dc)
+
