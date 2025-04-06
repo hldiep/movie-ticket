@@ -118,7 +118,6 @@ const ShowtimesManage = () => {
                 </tbody>
               </table>
             </div>
-
           </div>
         </div>
       </div>

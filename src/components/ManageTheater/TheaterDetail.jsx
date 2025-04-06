@@ -18,6 +18,9 @@ const TheaterDetail = () => {
     const [rooms, setRooms] = useState(initialRooms);
     const [isEditing, setIsEditing] = useState(false);
     const [editingRoomId, setEditingRoomId] = useState(null);
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
+    const [pendingEditId, setPendingEditId] = useState(null);
 
     useEffect(() => {
         setFormData(mockTheater);
@@ -40,12 +43,46 @@ const TheaterDetail = () => {
         );
     };
 
-    const toggleEdit = () => setIsEditing(!isEditing);
-
-    const toggleRoomEdit = (id) => {
-        setEditingRoomId(editingRoomId === id ? null : id);
+    const toggleEdit = () => {
+        if (isEditing) {
+            // Lưu logic ở đây nếu cần
+            setShowSuccess(true);
+            setTimeout(() => setShowSuccess(false), 3000); // ẩn sau 3 giây
+        }
+        setIsEditing(!isEditing);
     };
 
+    const toggleRoomEdit = (id) => {
+        if (editingRoomId === id) {
+            // Lưu dòng đang chỉnh sửa
+            setShowSuccess(true);
+            setTimeout(() => setShowSuccess(false), 3000);
+            setEditingRoomId(null);
+        } else if (editingRoomId !== null && editingRoomId !== id) {
+            setPendingEditId(id);        // Lưu ID mới muốn chuyển tới
+            setShowConfirmModal(true);   // Hiện modal xác nhận
+        } else {
+            setEditingRoomId(id); // Bình thường, không có dòng nào đang sửa
+        }
+    };
+    const handleConfirmSave = () => {
+        setShowSuccess(true);
+        setTimeout(() => setShowSuccess(false), 3000);
+        setEditingRoomId(pendingEditId);
+        setPendingEditId(null);
+        setShowConfirmModal(false);
+    };
+
+    const handleDiscardChanges = () => {
+        setEditingRoomId(pendingEditId); // Bỏ qua dòng đang sửa và chuyển luôn
+        setPendingEditId(null);
+        setShowConfirmModal(false);
+    };
+
+    const handleCancelModal = () => {
+        setPendingEditId(null);
+        setShowConfirmModal(false);
+    };
     return (
         <div className='min-h-screen bg-main text-white'>
             <div className='container'>
@@ -119,7 +156,10 @@ const TheaterDetail = () => {
                                     </thead>
                                     <tbody>
                                         {rooms.map((room) => (
-                                            <tr key={room.id} className="border border-gray-700">
+                                            <tr
+                                                key={room.id}
+                                                className={`border border-gray-700 transition-colors duration-300 ${editingRoomId === room.id ? "bg-gray-700/50" : "bg-transparent hover:bg-gray-700/20"}`}
+                                            >
                                                 <td className="p-2 border border-gray-700">
                                                     <input
                                                         type="text"
@@ -176,6 +216,39 @@ const TheaterDetail = () => {
                     </div>
                 </div>
             </div>
+            {showSuccess && (
+                <div className="fixed bottom-5 right-5 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50 transition-all duration-500">
+                    Lưu thành công!
+                </div>
+            )}
+            {showConfirmModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white text-black p-6 rounded-lg shadow-lg max-w-md w-full">
+                        <h2 className="text-lg font-semibold mb-4">Bạn có muốn lưu thay đổi?</h2>
+                        <p className="mb-4">Bạn đang chỉnh sửa một phòng khác. Bạn có muốn lưu trước khi chuyển?</p>
+                        <div className="flex justify-end gap-2">
+                            <button
+                                onClick={handleConfirmSave}
+                                className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
+                            >
+                                Lưu
+                            </button>
+                            <button
+                                onClick={handleDiscardChanges}
+                                className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded"
+                            >
+                                Không lưu
+                            </button>
+                            <button
+                                onClick={handleCancelModal}
+                                className="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded"
+                            >
+                                Hủy
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

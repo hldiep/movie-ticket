@@ -23,6 +23,7 @@ const MovieDetail = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState(mockMovie);
     const [isEditing, setIsEditing] = useState(false);
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
     useEffect(() => {
         setFormData(mockMovie);
@@ -36,10 +37,17 @@ const MovieDetail = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     console.log("Dữ liệu đã lưu: ", formData);
+    //     setIsEditing(false);
+    // };
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Dữ liệu đã lưu: ", formData);
         setIsEditing(false);
+        setShowSuccessMessage(true);
+        setTimeout(() => setShowSuccessMessage(false), 3000); // Ẩn sau 3s
     };
     return (
         <div className='min-h-screen bg-main text-white'>
@@ -134,6 +142,11 @@ const MovieDetail = () => {
                             <button onClick={handleEditClick} className="bg-blue-500 p-2 text-white rounded-lg hover:bg-blue-700">
                                 Chỉnh sửa
                             </button>
+                        )}
+                        {showSuccessMessage && (
+                            <div className="mt-3 text-green-400 font-semibold">
+                                Lưu thành công!
+                            </div>
                         )}
                     </div>
                 </div>

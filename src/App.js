@@ -43,12 +43,12 @@ import AddTheater from "./components/ManageTheater/AddTheater";
 import RevenueByCinema from "./components/Revenue/RevenueByCinema";
 import TheaterDetail from "./components/ManageTheater/TheaterDetail";
 import Showtime from "./components/ManageShowtimes/Showtime";
+import GlobalLoader from "./components/Load/GlobalLoader";
 
 function App() {
   return (
     <div>
       <ScrollToTop />
-
       {/* User */}
       {/* <AuthProvider>
         <Header />
