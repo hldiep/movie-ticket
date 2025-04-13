@@ -8,7 +8,7 @@ const PurchaseHistory = () => {
                 <NavAccount />
                 <div className='container'>
                     <div className=' ml-[220px] p-10 text-white justify-center items-center'>
-                        <h2 className='text-2xl font-bold'>LỊCH SỬ MUA HÀNG</h2>
+                        <h2 className='text-2xl font-bold'>LỊCH SỬ MUA VÉ</h2>
                         <div>
                             <table className="w-full mt-6 border-collapse border border-gray-300">
                                 <thead>

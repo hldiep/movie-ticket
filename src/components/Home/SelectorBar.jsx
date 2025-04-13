@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SelectorBar = () => {
-
+    const navigate = useNavigate();
     const [selectedCinema, setSelectedCinema] = useState("");
     const [selectedMovie, setSelectedMovie] = useState("");
     const [selectedDate, setSelectedDate] = useState("");
@@ -79,7 +80,7 @@ const SelectorBar = () => {
 
                     {/* Nút Đặt vé */}
                     <div className={'w-full flex items-center justify-center col-span-2 lg:col-span-1'}>
-                        <button
+                        <button onClick={() => navigate("/dat-ve")}
                             className={`
                             px-6 
                             py-2 

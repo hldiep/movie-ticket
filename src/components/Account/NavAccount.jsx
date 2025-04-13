@@ -64,7 +64,7 @@ const NavAccount = () => {
                         <div>
                             <NavLink to="/lich-su-mua-hang"
                                 className='flex items-center w-full p-3 mt-1 bg-yellow-600 rounded-md transition-transform duration-300 transform hover:scale-105'>
-                                <FaHistory className="mr-3" />Lịch sử mua hàng
+                                <FaHistory className="mr-3" />Lịch sử mua vé
                             </NavLink>
                         </div>
                         <div>

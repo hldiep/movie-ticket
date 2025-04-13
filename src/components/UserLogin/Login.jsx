@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from '../../context/AuthContext';
 import { loginAccount, parseJwt } from '../../util/Helper';
+import { FaFacebook, FaGoogle } from 'react-icons/fa';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -99,6 +100,17 @@ const Login = () => {
                                 <p className='italic'>Bạn chưa có tài khoản? Đăng ký</p>
                                 <Link to="/register" className='ml-1 italic text-yellow-600'>tại đây</Link>
                             </div>
+                            <div className='flex space-x-4 items-center justify-center'>
+                                <div className='p-4 flex mt-6 text-center justify-center border border-yellow-600 font-bold py-2 rounded-lg hover:bg-yellow-600'>
+                                    <FaFacebook className='text-xl text-white'></FaFacebook>
+                                    <button className='ml-2'>Login with Facebook</button>
+                                </div>
+                                <div className='p-4 flex mt-6 text-center justify-center border border-yellow-600 font-bold py-2 rounded-lg hover:bg-yellow-600'>
+                                    <FaGoogle className='text-xl text-white'></FaGoogle>
+                                    <button className='ml-2'>Login with Google</button>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
                 </main>
