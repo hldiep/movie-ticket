@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react';
 import SectionFood from './SectionFood';
 import { useNavigate } from 'react-router-dom';
 const seats = [
@@ -9,22 +9,89 @@ const seats = [
     ["E01", "E02", "", "E03", "E04", "E05", ""],
     ["F01", "F02", "", "", "", "", ""]
 ];
-
-
 const Booking = () => {
     const navigate = useNavigate();
+    const [dates, setDates] = useState([]);
+    const [selectedDate, setSelectedDate] = useState('');
+    const [isDateSelected, setIsDateSelected] = useState(false);
 
-    const [selectedDate, setSelectedDate] = useState(null);
+    useEffect(() => {
+        const today = new Date();
+        const formatDate = (date) => {
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            return `${day}/${month}`;
+        };
+
+        const tempDates = [];
+        for (let i = 0; i < 3; i++) {
+            const date = new Date();
+            date.setDate(today.getDate() + i);
+            tempDates.push(formatDate(date));
+        }
+
+        setDates(tempDates);
+    }, []);
+
     const [selectedTheater, setSelectedTheater] = useState(null);
     const [selectedShowtime, setSelectedShowtime] = useState(null);
     const [adultTickets, setAdultTickets] = useState(0);
     const [studentSeniorTickets, setStudentSeniorTickets] = useState(0);
     const [selectedSeats, setSelectedSeats] = useState([]);
+    const [seatWarning, setSeatWarning] = useState("");
+    const [showTimeoutToast, setShowTimeoutToast] = useState(false);
+    const [timerStarted, setTimerStarted] = useState(false);
+    const [timeLeft, setTimeLeft] = useState(300);
+    const [isTimeExpired, setIsTimeExpired] = useState(false);
+    const timerRef = useRef(null);
+
+    useEffect(() => {
+        if (selectedSeats.length === 1 && selectedShowtime && !timerStarted) {
+            setTimeLeft(300);
+            setIsTimeExpired(false);
+            setTimerStarted(true);
+
+            timerRef.current = setInterval(() => {
+                setTimeLeft(prev => {
+                    if (prev <= 1) {
+                        clearInterval(timerRef.current);
+                        setIsTimeExpired(true);
+                        setTimerStarted(false);
+                        return 0;
+                    }
+                    return prev - 1;
+                });
+            }, 1000);
+        }
+
+        return () => clearInterval(timerRef.current);
+    }, [selectedSeats, selectedShowtime, timerStarted]);
+
+    useEffect(() => {
+        if (isTimeExpired && selectedSeats.length > 0) {
+            setSelectedSeats([]);
+            setSeatWarning("Đã hết thời gian giữ vé. Vui lòng chọn lại ghế.");
+            setShowTimeoutToast(true);
+
+            const timeout = setTimeout(() => {
+                setShowTimeoutToast(false);
+            }, 5000);
+
+            return () => clearTimeout(timeout);
+        }
+    }, [isTimeExpired]);
+
+    const formatTime = (seconds) => {
+        const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+        const s = (seconds % 60).toString().padStart(2, '0');
+        return `${m}:${s}`;
+    };
 
     const totalTickets = adultTickets + studentSeniorTickets;
     const totalPrice = adultTickets * 100000 + studentSeniorTickets * 55000;
 
-    const dates = ["14/2", "15/2", "16/2"];
+
+
     const theaters = [
         {
             name: "Cinestar Quốc Thanh",
@@ -57,241 +124,168 @@ const Booking = () => {
     };
 
     return (
-        <div className=" bg-main justify-center ">
-            <div className='min-h-screen pt-36 flex justify-center'>
-                <div className="text-white text-center p-5">
-
-                    <h1 className="text-3xl font-bold uppercase">Lịch Chiếu</h1>
-                    <div className='flex justify-center mt-4 space-x-4'>
-                        {dates.map((date, index) => (
-                            <button
-                                key={index}
-                                className={`border px-3 py-1 rounded-md ${selectedDate === date ? 'bg-yellow-600' : 'bg-gray-500'}`}
-                                onClick={() => setSelectedDate(date)}>
-                                {date}
-                            </button>
-                        ))}
-                    </div>
-
-                    {selectedDate && (
-                        <div className='mt-10'>
-                            <h1 className='text-3xl font-bold uppercase'>Danh Sách Rạp</h1>
-                            {theaters.map((theater, index) => (
-                                <div
-                                    key={index}
-                                    className={`p-6 rounded-lg mt-6 cursor-pointer ${selectedTheater === theater.name ? 'bg-yellow-600' : 'bg-gray-700'}`}
-                                    onClick={() => setSelectedTheater(theater.name)}>
-                                    <h2 className='text-xl font-bold'>{theater.name}</h2>
-                                    <p className='text-gray-200'>{theater.address}</p>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-
-                    {selectedTheater && (
-                        <div className='mt-10'>
-                            <h1 className='text-3xl font-bold uppercase'>Chọn Suất Chiếu</h1>
-                            <div className='flex flex-wrap justify-center mt-4 space-x-2'>
-                                {theaters.find(t => t.name === selectedTheater).showtimes.map((time, idx) => (
-                                    <button
-                                        key={idx}
-                                        className={`border px-3 py-1 rounded-md ${selectedShowtime === time ? 'bg-yellow-600' : 'bg-gray-500'}`}
-                                        onClick={() => setSelectedShowtime(time)}>
-                                        {time}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    )}
-
-                    {selectedShowtime && (
-                        <div className="mt-10">
-                            <h1 className="text-3xl font-bold uppercase">Chọn Loại Vé</h1>
-                            <div className="flex justify-center mt-6 space-x-10">
-                                <div className="border p-6 rounded-md w-1/4">
-                                    <h2 className="text-lg font-semibold">Người Lớn</h2>
-                                    <p className="text-yellow-400 font-bold">100,000 VNĐ</p>
-                                    <div className="flex items-center justify-center mt-4">
-                                        <button onClick={() => handleDecrease('adult')} className="bg-gray-500 px-4 py-2 rounded-l">-</button>
-                                        <span className="px-4 text-lg">{adultTickets}</span>
-                                        <button onClick={() => handleIncrease('adult')} className="bg-gray-500 px-4 py-2 rounded-r">+</button>
-                                    </div>
-                                </div>
-                                <div className="border p-6 rounded-md w-1/4">
-                                    <h2 className="text-lg font-semibold">HSSV - Người Cao Tuổi</h2>
-                                    <p className="text-yellow-400 font-bold">55,000 VNĐ</p>
-                                    <div className="flex items-center justify-center mt-4">
-                                        <button onClick={() => handleDecrease('studentSenior')} className="bg-gray-500 px-4 py-2 rounded-l">-</button>
-                                        <span className="px-4 text-lg">{studentSeniorTickets}</span>
-                                        <button onClick={() => handleIncrease('studentSenior')} className="bg-gray-500 px-4 py-2 rounded-r">+</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-
-                    {selectedShowtime && (
-                        <div className="mt-10">
-                            <h1 className="text-3xl font-bold uppercase">Chọn Ghế</h1>
-                            <div className="p-4 rounded-md">
-                                <div className="flex justify-center mb-3">
-                                    <div className="text-black w-1/2 h-8 bg-gray-300 rounded text-center pt-1 mb-4">Màn hình</div>
-                                </div>
-                                {seats.map((row, rowIndex) => (
-                                    <div key={rowIndex} className="flex justify-center gap-9 mb-4">
-                                        {row.map((seat, colIndex) => (
-                                            <button
-                                                key={colIndex}
-                                                className={`w-12 h-12 text-sm text-black flex items-center justify-center rounded-md ${selectedSeats.includes(seat) ? 'bg-yellow-600' : 'bg-gray-400 hover:bg-gray-100'}`}
-                                                onClick={() => toggleSeat(seat)}
-                                            >
-                                                {seat}
-                                            </button>
-                                        ))}
-                                    </div>
-                                ))}
-                            </div>
-                            <div className="mt-5">
-                                <h2 className="text-xl">Ghế đã chọn:</h2>
-                                <p>{selectedSeats.length > 0 ? selectedSeats.join(", ") : "Chưa chọn ghế nào"}</p>
-                            </div>
-                            <SectionFood />
-                            <hr className="border-white mt-5" />
-
-                        </div>
-                    )}
-                    {selectedSeats.length > 0 && (
-                        <div className="sticky bottom-0 left-0 w-full bg-gray-900 p-4 shadow-lg z-50">
-                            <div className="flex items-center justify-between text-white max-w-4xl mx-auto">
-                                <div>
-                                    <h2 className='text-xl font-bold uppercase'>Nụ hôn bạc tỷ</h2>
-                                    <p className='font-bold'>{selectedTheater} | {totalTickets} vé</p>
-                                    <p className='font-bold'>Ghế: {selectedSeats.join(", ")}</p>
-                                    <p className='font-bold'>Suất chiếu: {selectedShowtime}, {selectedDate}</p>
-                                </div>
-                                <div className='flex items-center space-x-4'>
-                                    <div>
-                                        <p className='text-gray-400 text-sm'>Tổng tiền</p>
-                                        <p className='text-xl font-bold'>{totalPrice.toLocaleString()} VNĐ</p>
-                                    </div>
-                                    <button
-                                        onClick={() => navigate("/payment")}
-                                        className="border border-yellow-600 bg-yellow-600 text-white rounded-xl px-5 py-2 w-[120px] hover:bg-transparent hover:text-yellow-600 transition-all duration-300">
-                                        Đặt vé
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            </div>
-
-            {/* <div className='text-white text-center mt-10'>
-                <h1 className='text-3xl font-bold uppercase'>Danh Sách Rạp</h1>
-                {theaters.map((theater, index) => (
-                    <div key={index} className=' p-6 rounded-lg mt-6'>
-                        <h2 className='text-xl font-bold text-yellow-300'>{theater.name}</h2>
-                        <p className='text-gray-200'>{theater.address}</p>
-                        <div className='flex flex-wrap justify-center mt-4 space-x-2'>
-                            {theater.showtimes.map((time, idx) => (
-                                <a href='' key={idx} className='border border-white px-3 py-1 rounded-md text-white'>{time}</a>
-                            ))}
-                        </div>
-                    </div>
+        <div className="text-white text-center p-5">
+            <h1 className="text-3xl font-bold uppercase">Lịch Chiếu</h1>
+            <div className='flex justify-center mt-4 space-x-4'>
+                {dates.map((date, index) => (
+                    <button
+                        key={index}
+                        className={`border px-3 py-1 rounded-md ${selectedDate === date ? 'bg-yellow-600' : 'bg-gray-500'}`}
+                        onClick={() => {
+                            setSelectedDate(date);
+                            setSelectedTheater(null);
+                            setSelectedShowtime(null);
+                            setIsDateSelected(true);
+                        }}
+                    >
+                        {date}
+                    </button>
                 ))}
             </div>
 
-            <div className="text-white text-center mt-10">
-                <h1 className="text-3xl font-bold uppercase">Chọn Loại Vé</h1>
-                <div className="flex justify-center mt-6 space-x-10">
-                    <div className="border p-6 rounded-md  w-1/4">
-                        <h2 className="text-lg font-semibold">Người Lớn</h2>
-                        <p className="text-yellow-400 font-bold">100,000 VNĐ</p>
-                        <div className="flex items-center justify-center mt-4">
-                            <button onClick={() => handleDecrease('adult')} className="bg-gray-500 px-4 py-2 rounded-l">-</button>
-                            <span className="px-4 text-lg">{adultTickets}</span>
-                            <button onClick={() => handleIncrease('adult')} className="bg-gray-500 px-4 py-2 rounded-r">+</button>
-                        </div>
-                    </div>
-                    <div className="border p-6 rounded-md w-1/4">
-                        <h2 className="text-lg font-semibold">HSSV - Người Cao Tuổi</h2>
-                        <p className="text-yellow-400 font-bold">55,000 VNĐ</p>
-                        <div className="flex items-center justify-center mt-4">
-                            <button onClick={() => handleDecrease('studentSenior')} className="bg-gray-500 px-4 py-2 rounded-l">-</button>
-                            <span className="px-4 text-lg">{studentSeniorTickets}</span>
-                            <button onClick={() => handleIncrease('studentSenior')} className="bg-gray-500 px-4 py-2 rounded-r">+</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="mt-10 flex flex-col items-center p-5 text-white min-h-screen">
-                <h1 className="text-3xl font-bold uppercase">Chọn Ghế</h1>
-                <div className=" p-4 rounded-md">
-                    <div className="flex justify-center mb-3">
-                        <div className="w-full text-black h-8 bg-gray-300 rounded text-center pt-1 mb-4">Màn hình</div>
-                    </div>
-                    {seats.map((row, rowIndex) => (
-                        <div key={rowIndex} className="flex justify-center gap-9 mb-4">
-                            {row.map((seat, colIndex) => (
-                                <button
-                                    key={colIndex}
-                                    className={`w-12 h-12 text-sm text-black flex items-center justify-center rounded-md ${seat
-                                        ? bookedSeats.includes(seat)
-                                            ? "bg-gray-600 cursor-not-allowed"
-                                            : selectedSeats.includes(seat)
-                                                ? "bg-yellow-400"
-                                                : "bg-gray-400 hover:bg-gray-100"
-                                        : "invisible"
-                                        }`}
-                                    onClick={() => toggleSeat(seat)}
-                                    disabled={bookedSeats.includes(seat)}
-                                >
-                                    {seat}
-                                </button>
-                            ))}
+            {isDateSelected && (
+                <div className='mt-10'>
+                    <h1 className='text-3xl font-bold uppercase'>Danh Sách Rạp</h1>
+                    {theaters.map((theater, index) => (
+                        <div
+                            key={index}
+                            className={`p-6 rounded-lg mt-6 cursor-pointer ${selectedTheater === theater.name ? 'bg-yellow-600' : 'bg-gray-700'}`}
+                            onClick={() => setSelectedTheater(theater.name)}>
+                            <h2 className='text-xl font-bold'>{theater.name}</h2>
+                            <p className='text-gray-200'>{theater.address}</p>
                         </div>
                     ))}
                 </div>
-                <div className="mt-5">
-                    <h2 className="text-xl">Ghế đã chọn:</h2>
-                    <p>{selectedSeats.length > 0 ? selectedSeats.join(", ") : "Chưa chọn ghế nào"}</p>
-                </div>
-                <div className="mt-5 flex gap-5">
-                    <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 bg-yellow-400 rounded"></div>
-                        <span>Ghế chọn</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 bg-gray-500 rounded"></div>
-                        <span>Ghế đã đặt</span>
-                    </div>
-                </div>
-            </div>
-            <SectionFood />
-            <hr className="border-white mt-5" />
-            <div className='p-4 text-white flex items-center justify-between'>
-                <div>
-                    <h2 className='text-xl font-bold uppercase'>Nụ hôn bạc tỷ</h2>
-                    <p className='font-bold'>Cinestar Hai Bà Trưng (TP.HCM) | 1 người lớn</p>
-                </div>
-                <div className='flex items-center space-x-4'>
-                    <div className='border p-2 rounded-md text-white text-left'>
-                        <p className='text-sm'>Phòng chiếu: 02</p>
-                        <p className='text-sm'>Thời gian: 7:00 PM</p>
-                        <p className='text-sm'>Ghế: A04</p>
-                    </div>
-                    <div>
-                        <p className='text-gray-400 text-sm'>Tạm tính</p>
-                        <p className='text-xl font-bold'>40,000 VNĐ</p>
-                    </div>
-                    <button
-                        className="border border-yellow-600 bg-yellow-600 text-white rounded-xl px-5 py-2 w-[120px] hover:bg-transparent hover:text-yellow-600 transition-all duration-300">
-                        Đặt vé
-                    </button>
-                </div>
-            </div> */}
-        </div>
-    )
-}
+            )}
 
-export default Booking
+            {selectedTheater && (
+                <div className='mt-10'>
+                    <h1 className='text-3xl font-bold uppercase'>Chọn Suất Chiếu</h1>
+                    <div className='flex flex-wrap justify-center mt-4 space-x-2'>
+                        {theaters.find(t => t.name === selectedTheater).showtimes.map((time, idx) => (
+                            <button
+                                key={idx}
+                                className={`border px-3 py-1 rounded-md ${selectedShowtime === time ? 'bg-yellow-600' : 'bg-gray-500'}`}
+                                onClick={() => {
+                                    setSelectedShowtime(time);
+                                    setIsTimeExpired(false);
+                                    setSelectedSeats([]);
+                                    setSeatWarning("");
+                                    setShowTimeoutToast(false);
+                                    setTimerStarted(false);
+                                    if (timerRef.current) clearInterval(timerRef.current);
+                                }}>
+                                {time}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {selectedShowtime && (
+                <>
+                    {/* Chọn loại vé */}
+                    <div className="mt-10">
+                        <h1 className="text-3xl font-bold uppercase">Chọn Loại Vé</h1>
+                        <div className="flex justify-center mt-6 space-x-10">
+                            <div className="border p-6 rounded-md w-1/4">
+                                <h2 className="text-lg font-semibold">Người Lớn</h2>
+                                <p className="text-yellow-400 font-bold">100,000 VNĐ</p>
+                                <div className="flex items-center justify-center mt-4">
+                                    <button onClick={() => handleDecrease('adult')} className="bg-gray-500 px-4 py-2 rounded-l">-</button>
+                                    <span className="px-4 text-lg">{adultTickets}</span>
+                                    <button onClick={() => handleIncrease('adult')} className="bg-gray-500 px-4 py-2 rounded-r">+</button>
+                                </div>
+                            </div>
+                            <div className="border p-6 rounded-md w-1/4">
+                                <h2 className="text-lg font-semibold">HSSV - Người Cao Tuổi</h2>
+                                <p className="text-yellow-400 font-bold">55,000 VNĐ</p>
+                                <div className="flex items-center justify-center mt-4">
+                                    <button onClick={() => handleDecrease('studentSenior')} className="bg-gray-500 px-4 py-2 rounded-l">-</button>
+                                    <span className="px-4 text-lg">{studentSeniorTickets}</span>
+                                    <button onClick={() => handleIncrease('studentSenior')} className="bg-gray-500 px-4 py-2 rounded-r">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Chọn ghế */}
+                    <div className="mt-10">
+                        <h1 className="text-3xl font-bold uppercase">Chọn Ghế</h1>
+                        <div className="p-4 rounded-md">
+                            <div className="flex justify-center mb-3">
+                                <div className="text-black w-1/2 h-8 bg-gray-300 rounded text-center pt-1 mb-4">Màn hình</div>
+                            </div>
+                            {seats.map((row, rowIndex) => (
+                                <div key={rowIndex} className="flex justify-center gap-9 mb-4">
+                                    {row.map((seat, colIndex) => (
+                                        <button
+                                            key={colIndex}
+                                            className={`w-12 h-12 text-sm text-black flex items-center justify-center rounded-md ${selectedSeats.includes(seat) ? 'bg-yellow-600' : 'bg-gray-400 hover:bg-gray-100'}`}
+                                            onClick={() => toggleSeat(seat)}
+                                        >
+                                            {seat}
+                                        </button>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                        <div className="mt-5">
+                            <h2 className="text-xl">Ghế đã chọn:</h2>
+                            <p>{selectedSeats.length > 0 ? selectedSeats.join(", ") : "Chưa chọn ghế nào"}</p>
+                        </div>
+                        <SectionFood />
+                        <hr className="border-white mt-5" />
+                    </div>
+                </>
+            )}
+
+            {/* Sticky đặt vé */}
+            {selectedSeats.length > 0 && (
+                <div className="sticky bottom-0 left-0 w-full bg-gray-900 p-4 shadow-lg z-50">
+                    <div className="flex items-center justify-between text-white max-w-4xl mx-auto">
+                        <div>
+                            <h2 className='text-xl font-bold uppercase'>Nụ hôn bạc tỷ</h2>
+                            <p className='font-bold'>{selectedTheater} | {totalTickets} vé</p>
+                            <p className='font-bold'>Ghế: {selectedSeats.join(", ")}</p>
+                            <p className='font-bold'>Suất chiếu: {selectedShowtime}, {selectedDate}</p>
+                        </div>
+                        {!isTimeExpired && (
+                            <p className="text-sm text-yellow-400 mt-1">Thời gian giữ vé: {formatTime(timeLeft)}</p>
+                        )}
+                        <div className='flex items-center space-x-4'>
+                            <div>
+                                <p className='text-gray-400 text-sm'>Tổng tiền</p>
+                                <p className='text-xl font-bold'>{totalPrice.toLocaleString()} VNĐ</p>
+                            </div>
+                            <button
+                                onClick={() => {
+                                    if (isTimeExpired) {
+                                        setSeatWarning("Đã hết thời gian giữ vé. Vui lòng chọn lại.");
+                                    } else if (selectedSeats.length !== totalTickets) {
+                                        setSeatWarning("Bạn chưa chọn đủ số ghế!");
+                                    } else {
+                                        setSeatWarning("");
+                                        navigate("/payment");
+                                    }
+                                }}
+                                className={`border ${selectedSeats.length === totalTickets ? 'border-yellow-600 bg-yellow-600 text-white hover:bg-transparent hover:text-yellow-600' : 'border-gray-500 bg-gray-500 text-white cursor-not-allowed'} rounded-xl px-5 py-2 w-[120px] transition-all duration-300`}
+                                disabled={selectedSeats.length !== totalTickets || isTimeExpired}
+                            >
+                                Đặt vé
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {showTimeoutToast && (
+                <div className="fixed bottom-5 right-5 bg-red-600 text-white px-4 py-3 rounded shadow-lg z-50 animate-fade-in-out">
+                    Đã hết thời gian giữ vé. Vui lòng chọn lại.
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default Booking;

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import SeatMatrix from './SeatMatrix';
 
 const mockTheater = {
     name: "CGV Vincom",
@@ -7,13 +9,14 @@ const mockTheater = {
 };
 
 const initialRooms = [
-    { id: 1, name: "Phòng A", seats: 100, rows: 10, columns: 10, createdAt: "2025-03-23" },
-    { id: 2, name: "Phòng B", seats: 80, rows: 8, columns: 10, createdAt: "2025-03-23" },
-    { id: 3, name: "Phòng C", seats: 120, rows: 12, columns: 10, createdAt: "2025-03-23" },
-    { id: 4, name: "Phòng D", seats: 90, rows: 9, columns: 10, createdAt: "2025-03-23" }
+    { id: 1, name: "Phòng A", createdAt: "2025-03-23" },
+    { id: 2, name: "Phòng B", createdAt: "2025-03-23" },
+    { id: 3, name: "Phòng C", createdAt: "2025-03-23" },
+    { id: 4, name: "Phòng D", createdAt: "2025-03-23" }
 ];
 
 const TheaterDetail = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState(mockTheater);
     const [rooms, setRooms] = useState(initialRooms);
     const [isEditing, setIsEditing] = useState(false);
@@ -22,6 +25,7 @@ const TheaterDetail = () => {
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [pendingEditId, setPendingEditId] = useState(null);
 
+    const [showSeatMatrix, setShowSeatMatrix] = useState(false);
     useEffect(() => {
         setFormData(mockTheater);
     }, []);
@@ -87,6 +91,9 @@ const TheaterDetail = () => {
         <div className='min-h-screen bg-main text-white'>
             <div className='container'>
                 <div className='ml-[220px] flex-1 p-10'>
+                    <div className='ml-6 mb-4'>
+                        <button onClick={() => navigate("/quan-ly-rap")} className='border border-blue-700 p-1 px-2 text-white rounded-lg hover:bg-blue-700'>Quay lại</button>
+                    </div>
                     <div className="p-6 font-sans text-white">
                         <div className="flex justify-between items-center mb-4">
                             <h1 className="text-2xl font-bold">Chi tiết rạp</h1>
@@ -147,68 +154,39 @@ const TheaterDetail = () => {
                                     <thead>
                                         <tr className="bg-gray-800 text-left">
                                             <th className="p-2 border border-gray-700">Tên phòng</th>
-                                            <th className="p-2 border border-gray-700">Số ghế</th>
-                                            <th className="p-2 border border-gray-700">Số hàng</th>
-                                            <th className="p-2 border border-gray-700">Số cột</th>
                                             <th className="p-2 border border-gray-700">Ngày tạo</th>
                                             <th className='p-2 border border-gray-700'>Hành động</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {rooms.map((room) => (
-                                            <tr
-                                                key={room.id}
-                                                className={`border border-gray-700 transition-colors duration-300 ${editingRoomId === room.id ? "bg-gray-700/50" : "bg-transparent hover:bg-gray-700/20"}`}
-                                            >
-                                                <td className="p-2 border border-gray-700">
-                                                    <input
-                                                        type="text"
-                                                        name="name"
-                                                        value={room.name}
-                                                        onChange={(e) => handleRoomChange(e, room.id)}
-                                                        disabled={editingRoomId !== room.id}
-                                                        className={`w-full bg-transparent text-white p-1 rounded-md outline-none ${editingRoomId !== room.id ? "cursor-not-allowed" : ""}`}
-                                                    />
-                                                </td>
-                                                <td className="p-2 border border-gray-700">
-                                                    <input
-                                                        type="number"
-                                                        name="seats"
-                                                        value={room.seats}
-                                                        onChange={(e) => handleRoomChange(e, room.id)}
-                                                        disabled={editingRoomId !== room.id}
-                                                        className={`w-full bg-transparent text-white p-1 rounded-md outline-none ${editingRoomId !== room.id ? "cursor-not-allowed" : ""}`}
-                                                    />
-                                                </td>
-                                                <td className="p-2 border border-gray-700">
-                                                    <input
-                                                        type="number"
-                                                        name="rows"
-                                                        value={room.rows}
-                                                        onChange={(e) => handleRoomChange(e, room.id)}
-                                                        disabled={editingRoomId !== room.id}
-                                                        className={`w-full bg-transparent text-white p-1 rounded-md outline-none ${editingRoomId !== room.id ? "cursor-not-allowed" : ""}`}
-                                                    />
-                                                </td>
-                                                <td className="p-2 border border-gray-700">
-                                                    <input
-                                                        type="number"
-                                                        name="columns"
-                                                        value={room.columns}
-                                                        onChange={(e) => handleRoomChange(e, room.id)}
-                                                        disabled={editingRoomId !== room.id}
-                                                        className={`w-full bg-transparent text-white p-1 rounded-md outline-none ${editingRoomId !== room.id ? "cursor-not-allowed" : ""}`}
-                                                    />
-                                                </td>
-                                                <td className="p-2 border border-gray-700">{room.createdAt}</td>
-                                                <td className="p-2 border border-gray-700">
-                                                    <button onClick={() => toggleRoomEdit(room.id)} className="px-4 py-2 underline text-white hover:text-blue-500">
-                                                        {editingRoomId === room.id ? "Lưu" : "Sửa"}
-                                                    </button>
-                                                </td>
-                                            </tr>
+                                            <React.Fragment key={room.id}>
+                                                <tr
+                                                    className={`border border-gray-700 transition-colors duration-300 ${editingRoomId === room.id ? "bg-gray-700/50" : "bg-transparent hover:bg-gray-700/20"
+                                                        }`}
+                                                >
+                                                    <td className="p-2 border border-gray-700">
+                                                        <input
+                                                            type="text"
+                                                            name="name"
+                                                            value={room.name}
+                                                            onChange={(e) => handleRoomChange(e, room.id)}
+                                                            disabled={editingRoomId !== room.id}
+                                                            className={`w-[150px] bg-transparent text-white p-1 rounded-md outline-none ${editingRoomId !== room.id ? "cursor-not-allowed" : ""
+                                                                }`}
+                                                        />
+                                                    </td>
+                                                    <td className="p-2 border border-gray-700">{room.createdAt}</td>
+                                                    <td className="p-2 border border-gray-700">
+                                                        <button onClick={() => setShowSeatMatrix(true)}>
+                                                            Chỉnh sơ đồ ghế
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </React.Fragment>
                                         ))}
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>
@@ -221,7 +199,7 @@ const TheaterDetail = () => {
                     Lưu thành công!
                 </div>
             )}
-            {showConfirmModal && (
+            {/* {showConfirmModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-white text-black p-6 rounded-lg shadow-lg max-w-md w-full">
                         <h2 className="text-lg font-semibold mb-4">Bạn có muốn lưu thay đổi?</h2>
@@ -248,6 +226,9 @@ const TheaterDetail = () => {
                         </div>
                     </div>
                 </div>
+            )} */}
+            {showSeatMatrix && (
+                <SeatMatrix onClose={() => setShowSeatMatrix(false)} />
             )}
         </div>
     );

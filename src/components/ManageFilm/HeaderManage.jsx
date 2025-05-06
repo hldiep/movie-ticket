@@ -12,9 +12,9 @@ const HeaderManage = () => {
                     </NavLink>
                     <div className="flex space-x-4">
                         <button
-                            onClick={() => navigate("/")}
+                            onClick={() => navigate("/manager-account")}
                             className="w-32 border border-blue-600 text-blue-600 px-5 py-2 rounded-lg hover:bg-blue-600 hover:text-white transition-all">
-                            Quản lý
+                            Tài khoản
                         </button>
                         <button
                             onClick={() => navigate("/")}

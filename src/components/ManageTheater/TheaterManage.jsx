@@ -42,7 +42,7 @@ const TheaterManage = () => {
                     <div className="p-6 font-sans text-white">
                         <div className="flex justify-between items-center mb-4">
                             <h1 className="text-2xl font-bold">Quản lý rạp</h1>
-                            <button onClick={() => navigate("/them-rap")}
+                            <button onClick={() => navigate("/quan-ly-rap/them-rap")}
                                 className="bg-blue-600 px-4 py-2 rounded text-white">Thêm rạp</button>
                             {/* <button onClick={() => { setShowForm(!showForm); setEditingCinema(null); setCinemaData({ name: "", location: "", seats: "", status: "" }); }}
                                 className="bg-blue-600 px-4 py-2 rounded text-white">
@@ -75,11 +75,10 @@ const TheaterManage = () => {
                             <tbody>
                                 {cinemas.map((cinema) => (
                                     <tr key={cinema.id} className="border border-gray-700">
-                                        <td onClick={() => navigate('/chi-tiet-rap')}
+                                        <td onClick={() => navigate('/quan-ly-rap/chi-tiet-rap')}
                                             className="p-2 border border-gray-700">{cinema.name}</td>
                                         <td className="p-2 border border-gray-700">{cinema.location}</td>
                                         <td className="p-2 border border-gray-700">{cinema.createAt}</td>
-
                                     </tr>
                                 ))}
                             </tbody>

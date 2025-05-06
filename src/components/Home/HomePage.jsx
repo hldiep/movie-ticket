@@ -5,6 +5,7 @@ import Slider from "./Slider.";
 import SelectorBar from "./SelectorBar";
 import SectionFilming from "./SectionFilming";
 import Contact from './Contact';
+import SectionFilming2 from './SectionFilming2';
 
 const HomePage = () => {
 
@@ -16,6 +17,7 @@ const HomePage = () => {
                 <SelectorBar />
                 <main className="p-8 text-center">
                     <SectionFilming />
+                    <SectionFilming2 />
                     <br />
                     {/*<div>*/}
                     {/*    <h1 className="text-4xl font-bold mb-4 text-white">PHIM SẮP CHIẾU</h1>*/}

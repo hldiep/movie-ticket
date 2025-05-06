@@ -8,8 +8,7 @@ const mockMovie = {
     trailer: "https://www.youtube.com/watch?v=vPwSfR_O9Jo",
     description: "Một câu chuyện hậu tận thế về Furiosa trong thế giới Max Điên.",
     genres: "Hành động, Khoa học viễn tưởng",
-    directors: "George Miller",
-    actors: "Anya Taylor-Joy, Chris Hemsworth",
+    directors: "Đạo diễn: George Miller, Diễn viên: Anya Taylor-Joy, Chris Hemsworth",
     graphics: "3D",
     subtitles: "Lồng tiếng",
     ageRating: "C16",
@@ -53,11 +52,14 @@ const MovieDetail = () => {
         <div className='min-h-screen bg-main text-white'>
             <div className='container'>
                 <div className='ml-[220px] flex-1 p-10'>
+                    <div className='mb-4'>
+                        <button onClick={() => navigate("/quan-ly-phim")} className='border border-blue-700 p-1 px-2 text-white rounded-lg hover:bg-blue-700'>Quay lại</button>
+                    </div>
                     <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6 text-sm">
                         {/* Cột 1 */}
                         <div>
-                            <label className="block font-semibold mb-1">Tên phim</label>
-                            <input type="text" name="name" value={formData.name} onChange={handleChange} disabled={!isEditing} className="w-full p-2 text-black rounded-md" />
+                            <label className="block text-sm font-semibold mb-2">Tên phim</label>
+                            <input type="text" name="name" value={formData.name} onChange={handleChange} disabled={!isEditing} className="w-full focus:outline-blue-500 text-black p-1 rounded-md" />
 
                             <label className="block text-sm font-semibold mt-3 mb-2">Tên phim (tiếng Anh)</label>
                             <input type="text" name="englishName" value={formData.englishName} onChange={handleChange} disabled={!isEditing} className="w-full focus:outline-blue-500 text-black p-1 rounded-md" />
@@ -74,11 +76,9 @@ const MovieDetail = () => {
                             <label className="block text-sm font-semibold mt-3 mb-2">Thể loại</label>
                             <input type="text" name="genres" value={formData.genres} onChange={handleChange} disabled={!isEditing} className="w-full focus:outline-blue-500 text-black p-1 rounded-md" />
 
-                            <label className="block text-sm font-semibold mt-3 mb-2">Đạo diễn</label>
+                            <label className="block text-sm font-semibold mt-3 mb-2">Đạo diễn, diễn viên</label>
                             <input type="text" name="directors" value={formData.directors} onChange={handleChange} disabled={!isEditing} className="w-full focus:outline-blue-500 text-black p-1 rounded-md" />
 
-                            <label className="block text-sm font-semibold mt-3 mb-2">Diễn viên</label>
-                            <input type="text" name="actors" value={formData.actors} onChange={handleChange} disabled={!isEditing} className="w-full focus:outline-blue-500 text-black p-1 rounded-md" />
                         </div>
 
                         {/* Cột 2 */}

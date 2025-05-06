@@ -43,7 +43,12 @@ const Contact = () => {
             <div className='flex justify-center p-6 space-x-5 mt-9'>
                 <div
                     className="text-3xl flex flex-col items-center justify-center w-full md:w-1/2 space-y-6 mb-6 md:mb-0">
-                    <h2 className="mt-5 text-white font-bold uppercase text-center">Liên Hệ Với Chúng Tôi</h2>
+                    <h2
+                        style={{ fontFamily: '"Noto Sans", sans-serif' }}
+                        className="mt-5 text-white font-bold uppercase text-center"
+                    >
+                        Liên Hệ Với Chúng Tôi
+                    </h2>
                     <button
                         className="font-bold border border-yellow-600 px-5 py-2 rounded-xl text-yellow-600 w-[220px] hover:bg-yellow-600 hover:text-white transition-all duration-300">
                         FACEBOOK

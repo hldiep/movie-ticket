@@ -4,6 +4,16 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 const InfoAccount = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [isChangingPassword, setIsChangingPassword] = useState(false);
+    const [passwords, setPasswords] = useState({
+        oldPassword: "",
+        newPassword: "",
+        confirmPassword: ""
+    });
+    const [showPassword, setShowPassword] = useState({
+        oldPassword: false,
+        newPassword: false,
+        confirmPassword: false
+    });
     const [formData, setFormData] = useState({
         name: "Nguyễn Văn A",
         dob: "2001-03-08",
@@ -13,18 +23,28 @@ const InfoAccount = () => {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setPasswords({ ...passwords, [name]: value });
+    };
     const handleSubmit = (e) => {
         e.preventDefault();
         alert("Thông tin đã được lưu!");
+        setIsEditing(false);
     };
-
-    const [showPassword, setShowPassword] = useState({
-        oldPassword: false,
-        newPassword: false,
-        confirmPassword: false
-    });
-
+    const handleSubmitPassword = (e) => {
+        e.preventDefault();
+        if (passwords.newPassword === passwords.oldPassword) {
+            alert("Mật khẩu mới không được trùng với mật khẩu cũ");
+            return;
+        }
+        if (passwords.newPassword !== passwords.confirmPassword) {
+            alert("Xác thực mật khẩu không trùng khớp.");
+            return;
+        }
+        alert("Đổi mật khẩu thành công!");
+        setIsChangingPassword(false);
+    }
     const togglePasswordVisibility = (field) => {
         setShowPassword(prevState => ({
             ...prevState,
@@ -50,7 +70,14 @@ const InfoAccount = () => {
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={() => setIsChangingPassword(true)}
+                                    onClick={() => {
+                                        setIsChangingPassword(true);
+                                        setPasswords({
+                                            oldPassword: "",
+                                            newPassword: "",
+                                            confirmPassword: ""
+                                        });
+                                    }}
                                     className="px-4 py-2 border border-yellow-600 text-yellow-600 rounded-xl hover:bg-yellow-600 hover:text-white transition-all duration-300"
                                 >
                                     Đổi mật khẩu
@@ -174,11 +201,14 @@ const InfoAccount = () => {
                                     &times;
                                 </button>
                                 <h3 className="text-xl font-bold mb-4 text-yellow-600">Đổi mật khẩu</h3>
-                                <form className="space-y-5">
+                                <form className="space-y-5" onSubmit={handleSubmitPassword}>
                                     <div className="relative">
                                         <label className="block font-semibold mb-1">Mật khẩu cũ</label>
                                         <input
                                             type={showPassword.oldPassword ? "text" : "password"}
+                                            name="oldPassword"
+                                            value={passwords.oldPassword}
+                                            onChange={handleInputChange}
                                             className="p-2 border w-full rounded outline-none text-black pr-10"
                                         />
                                         <span
@@ -192,6 +222,9 @@ const InfoAccount = () => {
                                         <label className="block font-semibold mb-1">Mật khẩu mới</label>
                                         <input
                                             type={showPassword.newPassword ? "text" : "password"}
+                                            name="newPassword"
+                                            value={passwords.newPassword}
+                                            onChange={handleInputChange}
                                             className="p-2 border w-full rounded outline-none text-black pr-10"
                                         />
                                         <span
@@ -205,6 +238,9 @@ const InfoAccount = () => {
                                         <label className="block font-semibold mb-1">Xác thực mật khẩu</label>
                                         <input
                                             type={showPassword.confirmPassword ? "text" : "password"}
+                                            name="confirmPassword"
+                                            value={passwords.confirmPassword}
+                                            onChange={handleInputChange}
                                             className="p-2 border w-full rounded outline-none text-black pr-10"
                                         />
                                         <span

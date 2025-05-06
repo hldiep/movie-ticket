@@ -44,17 +44,23 @@ import RevenueByCinema from "./components/Revenue/RevenueByCinema";
 import TheaterDetail from "./components/ManageTheater/TheaterDetail";
 import Showtime from "./components/ManageShowtimes/Showtime";
 import GlobalLoader from "./components/Load/GlobalLoader";
+import PhimDangChieu from "./components/Home/PhimDangChieu";
+import PhimSapChieu from "./components/Home/PhimSapChieu";
+import SliderManager from "./components/ManageFilm/SliderManager";
+import InfoAccountManage from "./components/ManageAccount/InfoAccountManage";
 
 function App() {
   return (
     <div>
       <ScrollToTop />
       {/* User */}
-      <AuthProvider>
+      {/* <AuthProvider>
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/see-more" element={<SeeMore />} />
+          <Route path="/phim-dang-chieu" element={<PhimDangChieu />} />
+          <Route path="/phim-sap-chieu" element={<PhimSapChieu />} />
           <Route path="/movie/:id" element={<MovieDetailPage />} />
           <Route path="/dat-ve" element={<Booking />} />
           <Route path="/login" element={<Login />} />
@@ -76,26 +82,28 @@ function App() {
           <Route path="/lich-su-mua-hang" element={<PurchaseHistory />} />
         </Routes>
         <Footer />
-      </AuthProvider>
+      </AuthProvider> */}
 
       {/* Manager */}
-      {/* <HeaderManage />
+      <HeaderManage />
       <Dashboard />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/doanh-thu-theo-phim" element={<RevenueByMovie />} />
         <Route path="/doanh-thu-theo-rap" element={<RevenueByCinema />} />
         <Route path="/quan-ly-phim" element={<ListMovie />} />
-        <Route path="/chi-tiet-phim" element={<MovieDetail />} />
-        <Route path="/them-phim" element={<AddMovie />} />
+        <Route path="/quan-ly-phim/chi-tiet-phim" element={<MovieDetail />} />
+        <Route path="/quan-ly-phim/them-phim" element={<AddMovie />} />
+        <Route path="/quan-ly-phim/quan-ly-slider" element={<SliderManager />} />
         <Route path="/quan-ly-rap" element={<TheaterManage />} />
-        <Route path="/them-rap" element={<AddTheater />} />
-        <Route path="/chi-tiet-rap" element={<TheaterDetail />} />
-        <Route path="/quan-ly-lich-chieu" element={<Showtime />} />
+        <Route path="/quan-ly-rap/them-rap" element={<AddTheater />} />
+        <Route path="/quan-ly-rap/chi-tiet-rap" element={<TheaterDetail />} />
+        <Route path="/quan-ly-suat-chieu" element={<Showtime />} />
         <Route path="/quan-ly-nv" element={<EmployeesManage />} />
         <Route path="/quan-ly-kh" element={<CustomersManage />} />
         <Route path="/bao-cao-so-luong-ve" element={<TicketReportManage />} />
-      </Routes> */}
+        <Route path="/manager-account" element={<InfoAccountManage />} />
+      </Routes>
 
     </div>
   );

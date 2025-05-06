@@ -10,7 +10,6 @@ const AddMovie = () => {
         description: "",
         genres: "",
         directors: "",
-        actors: "",
         graphics: "",
         subtitles: "",
         ageRating: "",
@@ -32,6 +31,9 @@ const AddMovie = () => {
         <div className='min-h-screen bg-main'>
             <div className='container'>
                 <div className='ml-[220px] flex-1 p-10'>
+                    <div className='ml-6 mb-4'>
+                        <button onClick={() => navigate("/quan-ly-phim")} className='border border-blue-700 p-1 px-2 text-white rounded-lg hover:bg-blue-700'>Quay lại</button>
+                    </div>
                     <div className="p-6 font-sans text-white">
                         <div className="flex justify-between items-center mb-4">
                             <h1 className="text-2xl font-bold">Thêm phim</h1>
@@ -56,11 +58,9 @@ const AddMovie = () => {
                                 <label className="block text-sm font-semibold mt-3 mb-2">Thể loại</label>
                                 <input type="text" name="genres" onChange={handleChange} className="w-full focus:outline-blue-500 text-black p-1 rounded-md" />
 
-                                <label className="block text-sm font-semibold mt-3 mb-2">Đạo diễn</label>
+                                <label className="block text-sm font-semibold mt-3 mb-2">Đạo diễn, diễn viên</label>
                                 <input type="text" name="directors" onChange={handleChange} className="w-full focus:outline-blue-500 text-black p-1 rounded-md" />
 
-                                <label className="block text-sm font-semibold mt-3 mb-2">Diễn viên</label>
-                                <input type="text" name="actors" onChange={handleChange} className="w-full focus:outline-blue-500 text-black p-1 rounded-md" />
                             </div>
 
                             {/* Cột 2 */}

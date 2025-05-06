@@ -3,7 +3,7 @@ import { FaHistory, FaUser, FaUserCircle } from 'react-icons/fa'
 import { FiLogOut } from 'react-icons/fi';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext';
-const NavAccount = () => {
+const Nav = () => {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
     const [image, setImage] = useState(null);
@@ -83,4 +83,4 @@ const NavAccount = () => {
     )
 }
 
-export default NavAccount
+export default Nav

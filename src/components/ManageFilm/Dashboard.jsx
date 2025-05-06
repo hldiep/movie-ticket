@@ -45,10 +45,10 @@ const Dashboard = () => {
                             </NavLink>
                         </div>
                         <div>
-                            <NavLink to="/quan-ly-lich-chieu"
+                            <NavLink to="/quan-ly-suat-chieu"
                                 className={({ isActive }) => `flex items-center w-full p-3 mt-1 rounded-md transition-transform duration-300 transform hover:scale-105 cursor-pointer ${isActive ? 'bg-blue-600' : 'bg-gray-800'}`
                                 }>
-                                <FaCalendarAlt className='mr-3' />Quản lý lịch chiếu
+                                <FaCalendarAlt className='mr-3' />Quản lý suất chiếu
                             </NavLink>
                         </div>
                         <div>

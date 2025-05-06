@@ -69,13 +69,6 @@ const Footer = () => {
                         </NavLink>
                         <div className="mb-2.5 w-0 h-[2px] bg-yellow-300 group-hover:w-full transition-all duration-300"></div>
                     </div>
-                    <div className="text-white hover:text-yellow-500 group inline-block">
-                        <NavLink to={"/suat-chieu-dac-biet"}
-                            className="mb-1 group-hover:text-yellow-300 transition-all duration-100 inline-block">
-                            Xuất chiếu đặc biệt
-                        </NavLink>
-                        <div className="w-0 h-[2px] bg-yellow-300 group-hover:w-full transition-all duration-300"></div>
-                    </div>
                 </div>
                 <div>
                     <h2 className="font-bold text-lg uppercase mb-2.5">THÔNG TIN</h2>

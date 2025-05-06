@@ -4,7 +4,7 @@ import { Navigation } from "swiper/modules";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SectionFilming = () => {
+const SectionFilming2 = () => {
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [videoUrl, setVideoUrl] = useState("");
@@ -26,8 +26,8 @@ const SectionFilming = () => {
     return (
         <div>
             <div className="text-4xl font-bold mt-10 flex items-start justify-center">
-                <span className="text-white">PHIM ĐA</span>
-                <span className="text-yellow-600 relative top-2">NG CHIẾU</span>
+                <span className="text-white">PHIM S</span>
+                <span className="text-yellow-600 relative top-2">ẮP CHIẾU</span>
             </div>
 
             <Swiper
@@ -97,7 +97,7 @@ const SectionFilming = () => {
 
             </Swiper>
             <button
-                onClick={() => navigate("/phim-dang-chieu")}
+                onClick={() => navigate("/phim-sap-chieu")}
                 className="font-bold uppercase border border-yellow-600 px-5 py-2 rounded-xl text-yellow-600 w-[130px] hover:bg-yellow-600 hover:text-white transition-all duration-300"
             >
                 Xem thêm
@@ -125,7 +125,7 @@ const SectionFilming = () => {
             )}
 
         </div>
-    );
+    )
 }
 
-export default SectionFilming;
+export default SectionFilming2
