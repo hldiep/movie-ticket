@@ -54,7 +54,7 @@ function App() {
     <div>
       <ScrollToTop />
       {/* User */}
-      {/* <AuthProvider>
+      <AuthProvider>
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -82,10 +82,10 @@ function App() {
           <Route path="/lich-su-mua-hang" element={<PurchaseHistory />} />
         </Routes>
         <Footer />
-      </AuthProvider> */}
+      </AuthProvider>
 
       {/* Manager */}
-      <HeaderManage />
+      {/* <HeaderManage />
       <Dashboard />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -103,7 +103,7 @@ function App() {
         <Route path="/quan-ly-kh" element={<CustomersManage />} />
         <Route path="/bao-cao-so-luong-ve" element={<TicketReportManage />} />
         <Route path="/manager-account" element={<InfoAccountManage />} />
-      </Routes>
+      </Routes> */}
 
     </div>
   );
