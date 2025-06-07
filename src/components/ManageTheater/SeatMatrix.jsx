@@ -83,7 +83,7 @@ const SeatMatrix = ({ onClose, onSaveRoom }) => {
     }
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
+        <div className="absolute top-20 left-0 right-0 bottom-0 bg-black bg-opacity-60 flex justify-center items-start z-50 p-4 overflow-auto">
             <div className="bg-white text-black rounded-lg p-6 w-[90vw] max-w-6xl max-h-[90vh] overflow-auto shadow-lg">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="text-2xl font-bold">Chọn sơ đồ ghế</h2>

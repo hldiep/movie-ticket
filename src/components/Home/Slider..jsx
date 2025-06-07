@@ -1,6 +1,5 @@
-import {Swiper, SwiperSlide} from "swiper/react";
-import {Autoplay, Navigation} from "swiper/modules";
-import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
 
 
 const Slider = () => {
@@ -19,7 +18,7 @@ const Slider = () => {
                     spaceBetween={20}
                     slidesPerView={1}
                     navigation
-                    autoplay={{delay: 3000, disableOnInteraction: false}} // Thêm autoplay với delay 5 giây
+                    autoplay={{ delay: 3000, disableOnInteraction: false }} // Thêm autoplay với delay 5 giây
                     modules={[Navigation, Autoplay]} // Import module Autoplay
                     className="my-8 max-h-[150px] md:max-h-[200px] lg:max-h-[400px]"
                 >

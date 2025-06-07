@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SeatMatrix from './SeatMatrix';
+import ClippedDrawer from '../Dashboard/DashboardLayoutBasic';
 
 const mockTheater = {
     name: "CGV Vincom",
@@ -88,15 +89,32 @@ const TheaterDetail = () => {
         setShowConfirmModal(false);
     };
     return (
-        <div className='min-h-screen bg-main text-white'>
-            <div className='container'>
-                <div className='ml-[220px] flex-1 p-10'>
-                    <div className='ml-6 mb-4'>
-                        <button onClick={() => navigate("/quan-ly-rap")} className='border border-blue-700 p-1 px-2 text-white rounded-lg hover:bg-blue-700'>Quay lại</button>
-                    </div>
-                    <div className="p-6 font-sans text-white">
+        <ClippedDrawer>
+            <div className="sticky top-16 z-10 bg-white border-b shadow-sm">
+                <div className="flex items-center text-sm text-gray-600 space-x-2 px-4 pt-2">
+                    <button
+                        onClick={() => navigate('/admin')}
+                        className="hover:underline text-blue-600"
+                    >
+                        Dashboard
+                    </button>
+                    <span>/</span>
+                    <button
+                        onClick={() => navigate('/quan-ly-rap')}
+                        className="hover:underline text-blue-600"
+                    >
+                        Quản lý rạp
+                    </button>
+                    <span>/</span>
+                    <span className="text-gray-700 font-medium">Chi tiết rạp</span>
+                </div>
+                <h2 className="text-xl font-semibold p-4">Chi tiết rạp</h2>
+            </div>
+            <div className='min-h-screen bg-gray-50'>
+                <div className='container'>
+
+                    <div className="p-6 font-sans text-black">
                         <div className="flex justify-between items-center mb-4">
-                            <h1 className="text-2xl font-bold">Chi tiết rạp</h1>
                             <button
                                 onClick={toggleEdit}
                                 className={`px-4 py-2 rounded-md ${isEditing ? "bg-green-500 hover:bg-green-700" : "bg-blue-500 hover:bg-blue-700"} text-white`}
@@ -113,7 +131,7 @@ const TheaterDetail = () => {
                                     value={formData.name}
                                     onChange={handleChange}
                                     disabled={!isEditing}
-                                    className={`w-full text-black p-1 rounded-md ${!isEditing ? "bg-gray-300 cursor-not-allowed" : "focus:outline-blue-500"}`}
+                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none"
                                 />
 
                                 <label className="block text-sm font-semibold mt-3 mb-2">Địa chỉ rạp</label>
@@ -123,7 +141,7 @@ const TheaterDetail = () => {
                                     value={formData.address}
                                     onChange={handleChange}
                                     disabled={!isEditing}
-                                    className={`w-full text-black p-1 rounded-md ${!isEditing ? "bg-gray-300 cursor-not-allowed" : "focus:outline-blue-500"}`}
+                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none"
                                 />
 
                                 <label className="block text-sm font-semibold mt-3 mb-2">Địa chỉ map</label>
@@ -132,7 +150,7 @@ const TheaterDetail = () => {
                                     value={formData.map}
                                     onChange={handleChange}
                                     disabled={!isEditing}
-                                    className={`w-full h-24 text-black p-1 rounded-md ${!isEditing ? "bg-gray-300 cursor-not-allowed" : "focus:outline-blue-500"}`}
+                                    className="text-sm h-24 outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none"
                                 ></textarea>
                             </div>
 
@@ -148,11 +166,11 @@ const TheaterDetail = () => {
                         </form>
 
                         <div className='p-2'>
-                            <h2 className="text-xl font-semibold mb-4 text-white">Danh sách phòng chiếu</h2>
+                            <h2 className="text-xl font-semibold mb-4 mt-4 text-black">Danh sách phòng chiếu</h2>
                             <div className="overflow-x-auto">
-                                <table className="text-white w-full border-collapse border border-gray-700">
+                                <table className="w-full border-collapse border border-gray-700">
                                     <thead>
-                                        <tr className="bg-gray-800 text-left">
+                                        <tr className="bg-gray-800 text-left text-white">
                                             <th className="p-2 border border-gray-700">Tên phòng</th>
                                             <th className="p-2 border border-gray-700">Ngày tạo</th>
                                             <th className='p-2 border border-gray-700'>Hành động</th>
@@ -172,13 +190,13 @@ const TheaterDetail = () => {
                                                             value={room.name}
                                                             onChange={(e) => handleRoomChange(e, room.id)}
                                                             disabled={editingRoomId !== room.id}
-                                                            className={`w-[150px] bg-transparent text-white p-1 rounded-md outline-none ${editingRoomId !== room.id ? "cursor-not-allowed" : ""
+                                                            className={`w-[150px] bg-transparent p-1 rounded-md outline-none ${editingRoomId !== room.id ? "cursor-not-allowed" : ""
                                                                 }`}
                                                         />
                                                     </td>
                                                     <td className="p-2 border border-gray-700">{room.createdAt}</td>
                                                     <td className="p-2 border border-gray-700">
-                                                        <button onClick={() => setShowSeatMatrix(true)}>
+                                                        <button onClick={() => navigate('/quan-ly-rap/chi-tiet-rap/phong')}>
                                                             Chỉnh sơ đồ ghế
                                                         </button>
                                                     </td>
@@ -186,20 +204,18 @@ const TheaterDetail = () => {
                                             </React.Fragment>
                                         ))}
                                     </tbody>
-
                                 </table>
                             </div>
                         </div>
 
                     </div>
                 </div>
-            </div>
-            {showSuccess && (
-                <div className="fixed bottom-5 right-5 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50 transition-all duration-500">
-                    Lưu thành công!
-                </div>
-            )}
-            {/* {showConfirmModal && (
+                {showSuccess && (
+                    <div className="fixed bottom-5 right-5 bg-green-500 text-white px-4 py-2 rounded shadow-lg z-50 transition-all duration-500">
+                        Lưu thành công!
+                    </div>
+                )}
+                {/* {showConfirmModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-white text-black p-6 rounded-lg shadow-lg max-w-md w-full">
                         <h2 className="text-lg font-semibold mb-4">Bạn có muốn lưu thay đổi?</h2>
@@ -227,10 +243,12 @@ const TheaterDetail = () => {
                     </div>
                 </div>
             )} */}
-            {showSeatMatrix && (
-                <SeatMatrix onClose={() => setShowSeatMatrix(false)} />
-            )}
-        </div>
+                {showSeatMatrix && (
+                    <SeatMatrix onClose={() => setShowSeatMatrix(false)} />
+                )}
+            </div>
+        </ClippedDrawer >
+
     );
 };
 

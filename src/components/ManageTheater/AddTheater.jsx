@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import SeatMatrix from './SeatMatrix';
 import { useNavigate } from 'react-router-dom';
+import ClippedDrawer from '../Dashboard/DashboardLayoutBasic';
 
 const AddTheater = () => {
     const navigate = useNavigate();
@@ -49,24 +50,42 @@ const AddTheater = () => {
     }
 
     return (
-        <div className='min-h-screen bg-main'>
-            <div className='container'>
-                <div className='ml-[220px] flex-1 p-10'>
-                    <div className='ml-6 mb-4'>
-                        <button onClick={() => navigate("/quan-ly-rap")} className='border border-blue-700 p-1 px-2 text-white rounded-lg hover:bg-blue-700'>Quay lại</button>
-                    </div>
-                    <div className="p-6 font-sans text-white">
-                        <div className="flex justify-between items-center mb-4">
-                            <h1 className="text-2xl font-bold">Thêm rạp chiếu</h1>
-                        </div>
+        <ClippedDrawer>
+            <div className="sticky top-16 z-10 bg-white border-b shadow-sm">
+                <div className="flex items-center text-sm text-gray-600 space-x-2 px-4 pt-2">
+                    <button
+                        onClick={() => navigate('/admin')}
+                        className="hover:underline text-blue-600"
+                    >
+                        Dashboard
+                    </button>
+                    <span>/</span>
+                    <button
+                        onClick={() => navigate('/quan-ly-rap')}
+                        className="hover:underline text-blue-600"
+                    >
+                        Quản lý rạp
+                    </button>
+                    <span>/</span>
+                    <span className="text-gray-700 font-medium">Thêm rạp</span>
+                </div>
+                <h2 className="text-xl font-semibold p-4">Thêm rạp</h2>
+            </div>
+            <div className='min-h-screen bg-gray-50'>
+                <div className='container'>
+                    <div className="p-6 font-sans text-black">
+
                         <form className="grid grid-cols-2 gap-6 text-sm">
                             <div>
                                 <label className="block text-sm font-semibold mb-2">* Tên rạp chiếu</label>
-                                <input type="text" name="name" value={theater.name} onChange={handleChange} className="w-full focus:outline-blue-500 text-black p-1 rounded-md" />
+                                <input type="text" name="name" value={theater.name} onChange={handleChange}
+                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
                                 <label className="block text-sm font-semibold mt-3 mb-2">* Địa chỉ rạp</label>
-                                <input type="text" name="address" value={theater.address} onChange={handleChange} className="w-full focus:outline-blue-500 text-black p-1 rounded-md" />
+                                <input type="text" name="address" value={theater.address} onChange={handleChange}
+                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
                                 <label className="block text-sm font-semibold mt-3 mb-2">* Địa chỉ map</label>
-                                <textarea name="description" value={theater.description} onChange={handleChange} className="w-full h-24 focus:outline-blue-500 text-black p-1 rounded-md"></textarea>
+                                <textarea name="description" value={theater.description} onChange={handleChange}
+                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none"></textarea>
                             </div>
                             <div className="mt-4">
                                 <iframe
@@ -80,32 +99,31 @@ const AddTheater = () => {
                         </form>
                     </div>
 
-                    {/* Phòng chiếu */}
-                    <div className='p-2'>
+                    <div className='p-4'>
                         <div className='flex justify-between items-center text-center mb-4'>
-                            <h2 className="text-xl font-semibold mb-4 text-white">Danh sách phòng chiếu</h2>
+                            <h2 className="text-xl font-semibold mb-4">Danh sách phòng chiếu</h2>
                             <button
-                                onClick={() => setShowSeatMatrix(true)}
-                                className="py-2 border border-blue-700 px-2 rounded-md text-white hover:text-blue-500">
+                                onClick={() => navigate('/quan-ly-rap/them-rap/them-phong')}
+                                className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-white">
                                 Thêm phòng chiếu
                             </button>
                         </div>
 
                         <div className="overflow-x-auto">
-                            <table className="text-white w-full border-collapse border border-gray-700">
+                            <table className="w-full bg-white shadow-md rounded text-black">
                                 <thead>
-                                    <tr className="bg-gray-800 text-left">
-                                        <th className="p-2 border border-gray-700">Tên phòng</th>
-                                        <th className="p-2 border border-gray-700">Ngày tạo</th>
-                                        <th className='p-2 border border-gray-700'>Hành động</th>
+                                    <tr className="bg-gray-100 text-gray-700 text-left">
+                                        <th className="p-2 border">Tên phòng</th>
+                                        <th className="p-2 border">Ngày tạo</th>
+                                        <th className='p-2 border'>Hành động</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {rooms.map((room, index) => (
-                                        <tr key={index} className="border border-gray-700">
-                                            <td className="p-2 border border-gray-700">{room.name}</td>
-                                            <td className="p-2 border border-gray-700">{room.createdAt}</td>
-                                            <td className="p-2 border border-gray-700">
+                                        <tr key={index} className="border-t hover:bg-gray-50">
+                                            <td className="p-2 border ">{room.name}</td>
+                                            <td className="p-2 border ">{room.createdAt}</td>
+                                            <td className="p-2 border ">
                                                 <button
                                                     onClick={() => alert(`Sơ đồ ghế: ${JSON.stringify(room.seats)}`)}
                                                     className="py-2 underline text-white hover:text-blue-500">
@@ -115,32 +133,20 @@ const AddTheater = () => {
                                         </tr>
                                     ))}
                                 </tbody>
-
                             </table>
                         </div>
                     </div>
-
-                    {/* Nút lưu toàn bộ rạp */}
                     <div className='flex justify-center mt-6'>
                         <button
                             onClick={handleSaveTheater}
                             className='bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md'>
-                            Lưu rạp chiếu
+                            Thêm rạp
                         </button>
                     </div>
                 </div>
 
-                {/* Popup thêm phòng chiếu */}
-                {showSeatMatrix && (
-                    <SeatMatrix
-                        onClose={() => setShowSeatMatrix(false)}
-                        onSaveRoom={(newRoom) => {
-                            setRooms([...rooms, newRoom]);
-                        }}
-                    />
-                )}
-            </div>
-        </div>
+            </div >
+        </ClippedDrawer >
     )
 }
 
