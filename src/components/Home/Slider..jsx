@@ -1,15 +1,18 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
+import { useEffect, useState } from "react";
+import { getSlider } from "../../util/sliderApi";
 
 
 const Slider = () => {
-
-    const promotions = [
-        { id: 1, image: "/images/pro1.jpg", link: "/promo1" },
-        { id: 2, image: "https://ddcinema.vn/Areas/Admin/Content/Fileuploads/images/slider/980wx448h_23_-min.jpg", link: "/promo2" },
-        { id: 3, image: "https://ddcinema.vn/Areas/Admin/Content/Fileuploads/images/slider/b_n_sao_c_a_980wx448h_3_.jpg", link: "/promo3" },
-        { id: 4, image: "https://images.careerviet.vn/content/images/phim-tet-chieu-rap-careerbuilder-1(2).jpg", link: "/promo4" },
-    ];
+    const [sliders, setSliders] = useState([]);
+    useEffect(() => {
+        const fetchSlider = async () => {
+            const sliderData = await getSlider();
+            setSliders(sliderData);
+        };
+        fetchSlider();
+    }, []);
 
     return (
         <>
@@ -18,15 +21,15 @@ const Slider = () => {
                     spaceBetween={20}
                     slidesPerView={1}
                     navigation
-                    autoplay={{ delay: 3000, disableOnInteraction: false }} // Thêm autoplay với delay 5 giây
-                    modules={[Navigation, Autoplay]} // Import module Autoplay
+                    autoplay={{ delay: 3000, disableOnInteraction: false }}
+                    modules={[Navigation, Autoplay]}
                     className="my-8 max-h-[150px] md:max-h-[200px] lg:max-h-[400px]"
                 >
-                    {promotions.map((promo) => (
-                        <SwiperSlide key={promo.id}>
+                    {sliders?.map((slider) => (
+                        <SwiperSlide key={slider.id}>
                             <img
-                                src={promo.image}
-                                alt={`Promotion ${promo.id}`}
+                                src={slider.image}
+                                alt={`Slider ${slider.name}`}
                                 className="w-full rounded-sm h-auto object-cover md:max-h-[200px] lg:max-h-[400px] sm:max-h-[150px]"
                             />
                         </SwiperSlide>

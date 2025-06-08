@@ -69,14 +69,20 @@ const MovieDetailPage = () => {
                                     <span>🌍 {movie?.nation}</span>
                                     <span>⏳ {movie?.duration}</span>
                                 </div>
-
-                                <p className="mt-3 bg-yellow-400 text-black px-3 py-1 rounded inline-block">
-                                    {movie?.ageRating}
-                                </p>
+                                <div className="flex space-x-4">
+                                    <p className="mt-3 bg-yellow-400 text-black px-3 py-1 rounded inline-block">
+                                        {movie?.age}+
+                                    </p>
+                                    {movie?.sub?.length > 0 && (
+                                        <p className="mt-3 bg-red-400 text-black px-3 py-1 rounded inline-block">
+                                            {movie.sub.map(item => item.name).join(", ")}
+                                        </p>
+                                    )}
+                                </div>
 
                                 <div className="mt-5 space-y-2">
                                     <h2 className="text-xl font-semibold">MÔ TẢ</h2>
-                                    <p>🎬 Đạo diễn: {movie?.director}</p>
+                                    <p>🎬 {movie?.content}</p>
                                     <p>🎞️ Thể loại: {movie?.typeFilms?.map(t => t?.name).join(', ')}</p>
                                 </div>
 

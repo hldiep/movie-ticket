@@ -1,40 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ClippedDrawer from "../Dashboard/DashboardLayoutBasic";
-const initialCinemas = [
-    { id: 1, name: "CGV Vincom", location: "Vincom Center, Hà Nội", seats: 200, createAt: "12/2/2024" },
-    { id: 2, name: "Lotte Cinema", location: "Lotte Tower, Hà Nội", seats: 300, createAt: "13/3/2024" },
-    { id: 3, name: "BHD Star", location: "Phạm Ngọc Thạch, Hà Nội", seats: 400, createAt: "14/4/2024" },
-    { id: 4, name: "Galaxy Cinema", location: "Nguyễn Du, Hà Nội", seats: 350, createAt: "15/5/2024" }
-];
+import { getBranch } from "../../util/branchApi";
+
 const TheaterManage = () => {
     const navigate = useNavigate();
-    const [cinemas, setCinemas] = useState(initialCinemas);
-    const [showForm, setShowForm] = useState(false)
-    const [editingCinema, setEditingCinema] = useState(null);
-    const [message, setMessage] = useState("");
-    const [cinemaData, setCinemaData] = useState({
-        name: "", location: "", seats: "", status: ""
-    });
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setCinemaData({ ...cinemaData, [name]: value });
-    };
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (editingCinema) {
-            setCinemas(cinemas.map((cinema) => cinema.id === editingCinema ? { ...cinemaData, id: editingCinema } : cinema));
-            setMessage("Cập nhật thông tin thành công!");
-        } else {
-            setCinemas([...cinemas, { ...cinemaData, id: cinemas.length + 1 }]);
-            setMessage("Thêm thành công!");
-        }
-        setCinemaData({ name: "", location: "", seats: "", status: "" });
-        setEditingCinema(null);
-        setShowForm(false);
+    const [loading, setLoading] = useState(true);
+    const [branch, setBranch] = useState([]);
 
-        setTimeout(() => setMessage(""), 3000);
-    };
+    useEffect(() => {
+        const fetchBranch = async () => {
+            try {
+                const branchData = await getBranch();
+                setBranch(branchData);
+            } catch (error) {
+                console.error("Error fetching branch:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchBranch();
+    }, []);
 
     return (
         <ClippedDrawer>
@@ -63,18 +49,31 @@ const TheaterManage = () => {
                             <tr className="bg-gray-100 text-gray-700 text-left">
                                 <th className="p-2 border ">Tên rạp</th>
                                 <th className="p-2 border ">Địa chỉ</th>
-                                <th className="p-2 border ">Ngày tạo</th>
+                                <th className="p-2 border ">Trạng thái</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {cinemas.map((cinema) => (
-                                <tr key={cinema.id} className="border-t hover:bg-gray-50">
-                                    <td onClick={() => navigate('/quan-ly-rap/chi-tiet-rap')}
-                                        className="p-2 border ">{cinema.name}</td>
-                                    <td className="p-2 border ">{cinema.location}</td>
-                                    <td className="p-2 border ">{cinema.createAt}</td>
-                                </tr>
-                            ))}
+                            {loading ? (
+                                <div className="flex justify-center items-center py-10">
+                                    <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-r-transparent"></div>
+                                    <div className="ml-4 text-blue-600 font-medium text-lg">Đang tải dữ liệu...</div>
+                                </div>
+                            ) : (
+                                <>
+                                    {
+                                        branch.map((item) => (
+                                            <tr key={item.id} className="border-t hover:bg-gray-50">
+                                                <td onClick={() => navigate(`/quan-ly-rap/chi-tiet-rap/${item.id}`)}
+                                                    className="p-2 border ">{item.nameBranch}</td>
+                                                <td className="p-2 border ">{item.address}</td>
+                                                <td className="p-2 border ">{item.status}</td>
+                                            </tr>
+                                        ))
+                                    }
+
+                                </>
+
+                            )}
                         </tbody>
                     </table>
                 </div>

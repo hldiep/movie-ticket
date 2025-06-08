@@ -2,43 +2,25 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from "react-router-dom";
 import ClippedDrawer from '../Dashboard/DashboardLayoutBasic';
+import { fetchMovies, getMovieByStatus } from '../../util/movieApi';
 
 const ListMovie = () => {
     const navigate = useNavigate();
     const [movies, setMovies] = useState([]);
-    const [filterStatus, setFilterStatus] = useState('Công khai');
-    const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
-    const [currentPage, setCurrentPage] = useState(1);
-    const moviesPerPage = 10;
+    const [filterStatus, setFilterStatus] = useState('');
 
     useEffect(() => {
-        fetchMoviesByStatus(filterStatus);
-    });
-    const fetchMoviesByStatus = async (status) => {
-        try {
-            const response = await axios.get(`http://localhost:8080/film/all`);
-            setMovies(response.data.data || []);
-        } catch (error) {
-            console.error('Lỗi tải danh sách film: ', error);
-        }
-    }
-    const sortMovies = (key) => {
-        let direction = 'asc';
-        if (sortConfig.key === key && sortConfig.direction === 'asc') {
-            direction = 'desc';
-        }
-        const sortedMovies = [...movies].sort((a, b) => {
-            if (key === "schedule") {
-                const dateA = new Date(a.schedule.split("-").reverse().join("-"));
-                const dateB = new Date(b.schedule.split("-").reverse().join("-"));
-                return direction === 'asc' ? dateA - dateB : dateB - dateA;
+        const fetchData = async () => {
+            if (!filterStatus) {
+                const allMovies = await fetchMovies();
+                setMovies(allMovies);
             } else {
-                return direction === 'asc' ? a[key] - b[key] : b[key] - a[key];
+                const filteredMovies = await getMovieByStatus(filterStatus);
+                setMovies(filteredMovies);
             }
-        });
-        setMovies(sortedMovies);
-        setSortConfig({ key, direction });
-    }
+        };
+        fetchData();
+    }, [filterStatus]);
 
     return (
         <ClippedDrawer>
@@ -64,50 +46,51 @@ const ListMovie = () => {
                 <div className='container'>
 
                     <div className="mb-4 text-right">
-                        <select className="border text-black px-4 py-2 rounded outline-none"
+                        <select
+                            className="border text-black px-4 py-2 rounded outline-none"
                             value={filterStatus}
                             onChange={(e) => {
                                 setFilterStatus(e.target.value);
-                                setCurrentPage(1); // reset về trang 1 khi lọc
-                            }}>
-                            <option value="Công khai">Đang chiếu</option>
-                            <option value="Sắp chiếu">Sắp chiếu</option>
-                            <option value="Ngừng chiếu">Ngừng chiếu</option>
+                            }}
+                        >
+                            <option value="">Lọc theo</option>
+                            <option value="ACTIVE">Đang chiếu</option>
+                            <option value="COMMING_SOON">Sắp chiếu</option>
+                            <option value="DELETE">Ngừng chiếu</option>
                         </select>
                     </div>
-                    {/* <div className="mb-4 text-right">
-                            <select className="bg-gray-700 text-white px-4 py-2 rounded outline-none justify-end items-end" value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
-                                <option value="">Lọc theo trạng thái</option>
-                                <option value="Đang chiếu">Đang chiếu</option>
-                                <option value="Sắp chiếu">Sắp chiếu</option>
-                                <option value="Ngừng chiếu">Ngừng chiếu</option>
-                            </select>
-                        </div> */}
                     <table className="w-full bg-white shadow-md rounded text-black">
                         <thead>
                             <tr className="bg-gray-100 text-gray-700 text-left">
+                                <th className="p-2">Poster</th>
                                 <th className="p-2">Tên phim</th>
-                                <th className="p-2" onClick={() => sortMovies('year')}>
-                                    Năm phát hành {sortConfig.key === 'year' ? (sortConfig.direction === 'asc' ? '↑' : '↓') : ''}
-                                </th>
+                                <th className="p-2">Quốc gia</th>
                                 <th className="p-2">Thể loại</th>
-                                <th className="p-2" onClick={() => sortMovies('schedule')}>
-                                    Lịch chiếu {sortConfig.key === 'schedule' ? (sortConfig.direction === 'asc' ? '↑' : '↓') : ''}
-                                </th>
+                                <th className="p-2">Thời lượng</th>
                                 <th className="p-2">Trạng thái</th>
-                                <th className="p-2 ">Ngày tạo</th>
                             </tr>
                         </thead>
                         <tbody>
                             {movies.map((movie) => (
-                                <tr key={movie.id} className="border-t hover:bg-gray-50">
-                                    <td onClick={() => navigate('/quan-ly-phim/chi-tiet-phim')}
-                                        className="p-2">{movie.name}</td>
-                                    <td className="p-2 ">{movie.year}</td>
-                                    <td className="p-2">{movie.genres}</td>
-                                    <td className="text-red-600 p-20">{movie.schedule}</td>
-                                    <td className="text-green-600 p-2 ">{movie.status}</td>
-                                    <td>{movie.createdAt}</td>
+                                <tr
+                                    key={movie.id}
+                                    onClick={() => navigate(`/quan-ly-phim/chi-tiet-phim/${movie.id}`)}
+                                    className="border-t hover:bg-gray-50 cursor-pointer"
+                                >
+                                    <td className="p-2">
+                                        <img src={movie.image} alt={movie.name} className="w-20 h-auto rounded" />
+                                    </td>
+                                    <td className="p-2">{movie.name}</td>
+                                    <td className="p-2">{movie.nation}</td>
+                                    <td className="p-2">
+                                        {movie.typeFilms && movie.typeFilms.map(type => type.name).join(', ')}
+                                    </td>
+                                    <td className="p-2">{movie.duration}</td>
+                                    <td className="p-2 text-blue-600 font-medium">
+                                        {movie.status === "COMMING_SOON" ? "Sắp chiếu" :
+                                            movie.status === "ACTIVE" ? "Đang chiếu" :
+                                                movie.status === "DELETED" ? "Ngừng chiếu" : movie.status}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

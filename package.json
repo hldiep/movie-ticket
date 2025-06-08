@@ -2,6 +2,7 @@
   "name": "hello-react",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://192.168.1.121:8888",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",

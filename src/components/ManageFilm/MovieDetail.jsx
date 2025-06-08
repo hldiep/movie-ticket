@@ -1,53 +1,45 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import ClippedDrawer from '../Dashboard/DashboardLayoutBasic';
-const mockMovie = {
-    id: 1,
-    name: "Furiosa: Câu Chuyện Từ Max Điên",
-    englishName: "Furiosa: A Mad Max Saga",
-    poster: "https://upload.wikimedia.org/wikipedia/vi/thumb/6/6e/FURIOSA.jpg/330px-FURIOSA.jpg",
-    trailer: "https://www.youtube.com/watch?v=vPwSfR_O9Jo",
-    description: "Một câu chuyện hậu tận thế về Furiosa trong thế giới Max Điên.",
-    genres: "Hành động, Khoa học viễn tưởng",
-    directors: "Đạo diễn: George Miller, Diễn viên: Anya Taylor-Joy, Chris Hemsworth",
-    graphics: "3D",
-    subtitles: "Lồng tiếng",
-    ageRating: "C16",
-    releaseDate: "2024-05-17",
-    releaseYear: "2024",
-    duration: "120",
-    status: "Sắp chiếu",
-    country: "Mỹ",
-};
+import { getMovieById, updateMovieById } from '../../util/movieApi';
+
 const MovieDetail = () => {
     const navigate = useNavigate();
-    const [formData, setFormData] = useState(mockMovie);
-    const [isEditing, setIsEditing] = useState(false);
+    const { id } = useParams();
+    const [movie, setMovie] = useState(null);
     const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
-        setFormData(mockMovie);
-    }, []);
-
-    const handleEditClick = () => {
-        setIsEditing(true);
-    };
+        const fetchMovie = async () => {
+            try {
+                const data = await getMovieById(id);
+                setMovie(data);
+                setError(null);
+            } catch (err) {
+                console.error("Lỗi khi lấy dữ liệu phim:", err);
+                setError("Không thể tải dữ liệu phim. Vui lòng thử lại sau.");
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchMovie();
+    }, [id]);
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setMovie({ ...setMovie, [e.target.name]: e.target.value });
     };
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     console.log("Dữ liệu đã lưu: ", formData);
-    //     setIsEditing(false);
-    // };
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Dữ liệu đã lưu: ", formData);
-        setIsEditing(false);
-        setShowSuccessMessage(true);
-        setTimeout(() => setShowSuccessMessage(false), 3000); // Ẩn sau 3s
+        try {
+            await updateMovieById(id, movie);
+            setShowSuccessMessage(true);
+            setTimeout(() => setShowSuccessMessage(false), 3000);
+        } catch (err) {
+            console.error("Lỗi khi cập nhật phim:", err);
+            setError("Không thể lưu thay đổi. Vui lòng thử lại sau.");
+        }
     };
     return (
         <ClippedDrawer>
@@ -73,116 +65,83 @@ const MovieDetail = () => {
             </div>
             <div className='min-h-screen bg-gray-50'>
                 <div className='container'>
-
-                    <div className="p-6 font-sans text-black">
-                        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6 text-sm">
-                            {/* Cột 1 */}
-                            <div>
-                                <label className="block text-sm font-semibold mb-2">Tên phim</label>
-                                <input type="text" name="name" value={formData.name} onChange={handleChange} disabled={!isEditing}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
-
-                                <label className="block text-sm font-semibold mt-3 mb-2">Tên phim (tiếng Anh)</label>
-                                <input type="text" name="englishName" value={formData.englishName} onChange={handleChange} disabled={!isEditing}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
-
-                                <label className="block text-sm font-semibold mt-3 mb-2">Link poster</label>
-                                <input type="text" name="poster" value={formData.poster} onChange={handleChange} disabled={!isEditing}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
-
-                                <label className="block text-sm font-semibold mt-3 mb-2">Trailer</label>
-                                <input type="text" name="trailer" value={formData.trailer} onChange={handleChange} disabled={!isEditing}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
-
-                                <label className="block text-sm font-semibold mt-3 mb-2">Mô tả</label>
-                                <textarea name="description" value={formData.description} onChange={handleChange} disabled={!isEditing}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none"></textarea>
-
-                                <label className="block text-sm font-semibold mt-3 mb-2">Thể loại</label>
-                                <input type="text" name="genres" value={formData.genres} onChange={handleChange} disabled={!isEditing}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
-
-                                <label className="block text-sm font-semibold mt-3 mb-2">Đạo diễn, diễn viên</label>
-                                <input type="text" name="directors" value={formData.directors} onChange={handleChange} disabled={!isEditing}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
-
-                            </div>
-
-                            {/* Cột 2 */}
-                            <div>
-                                <label className="block text-sm font-semibold mb-2">Hình thức chiếu</label>
-                                <select
-                                    name="graphics"
-                                    value={formData.graphics}
-                                    onChange={handleChange}
-                                    disabled={!isEditing}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none"
-                                >
-                                    <option value="">Chọn hình thức chiếu</option>
-                                    <option value="2D">2D</option>
-                                    <option value="3D">3D</option>
-                                </select>
-                                <label className="block text-sm font-semibold mt-3 mb-2">Hình thức dịch</label>
-                                <select
-                                    name="subtitles"
-                                    value={formData.subtitles}
-                                    onChange={handleChange}
-                                    disabled={!isEditing}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none"
-                                >
-                                    <option value="">Chọn hình thức dịch</option>
-                                    <option value="Phụ đề">Phụ đề</option>
-                                    <option value="Lồng tiếng">Lồng tiếng</option>
-                                </select>
-
-                                <label className="block text-sm font-semibold mt-3 mb-2">Độ tuổi xem phim</label>
-                                <input type="text" name="ageRating" value={formData.ageRating} onChange={handleChange} disabled={!isEditing}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
-
-                                <label className="block text-sm font-semibold mt-3 mb-2">Ngày chiếu</label>
-                                <input type="date" name="releaseDate" value={formData.releaseDate} onChange={handleChange} disabled={!isEditing}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
-
-                                <label className="block text-sm font-semibold mt-3 mb-2">Năm phát hành</label>
-                                <input type="number" name="releaseYear" value={formData.releaseYear} onChange={handleChange} disabled={!isEditing}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
-
-                                <label className="block text-sm font-semibold mt-3 mb-2">Thời lượng phim (phút)</label>
-                                <input type="number" name="duration" value={formData.duration} onChange={handleChange} disabled={!isEditing}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
-
-                                <label className="block text-sm font-semibold mt-3 mb-2">Trạng thái</label>
-                                <select name="status" value={formData.status} onChange={handleChange} disabled={!isEditing}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none">
-                                    <option value="Nhập">Nhập</option>
-                                    <option value="Đang chiếu">Đang chiếu</option>
-                                    <option value="Sắp chiếu">Sắp chiếu</option>
-                                </select>
-
-                                <label className="block text-sm font-semibold mt-3 mb-2">Quốc gia</label>
-                                <input type="text" name="country" value={formData.country} onChange={handleChange} disabled={!isEditing}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
-                            </div>
-
-
-                        </form>
-                        <div className="mt-5 ">
-                            {isEditing ? (
-                                <button type="submit" onClick={handleSubmit} className="bg-green-500 p-2 text-white rounded-lg hover:bg-green-700">
-                                    Lưu
-                                </button>
-                            ) : (
-                                <button onClick={handleEditClick} className="bg-blue-500 p-2 text-white rounded-lg hover:bg-blue-700">
-                                    Chỉnh sửa
-                                </button>
-                            )}
-                            {showSuccessMessage && (
-                                <div className="mt-3 text-green-400 font-semibold">
-                                    Lưu thành công!
-                                </div>
-                            )}
+                    {error && <div className="text-red-500 text-sm">{error}</div>}
+                    {loading ? (
+                        <div className="flex justify-center items-center py-10">
+                            <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-r-transparent"></div>
+                            <div className="ml-4 text-blue-600 font-medium text-lg">Đang tải dữ liệu...</div>
                         </div>
-                    </div>
+                    ) : (
+                        <div className="p-6 font-sans text-black">
+                            <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6 text-sm">
+                                {/* Cột 1 */}
+                                <div>
+                                    <label className="block text-sm font-semibold mb-2">Tên phim</label>
+                                    <input type="text" name="name" value={movie.name} onChange={handleChange}
+                                        className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
+
+                                    <label className="block text-sm font-semibold mt-3 mb-2">Link poster</label>
+                                    <input type="text" name="image" value={movie.image} onChange={handleChange}
+                                        className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
+
+                                    <label className="block text-sm font-semibold mt-3 mb-2">Trailer</label>
+                                    <input type="text" name="trailer" value={movie.trailer} onChange={handleChange}
+                                        className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
+
+                                    <label className="block text-sm font-semibold mt-3 mb-2">Mô tả</label>
+                                    <textarea name="description" value={movie.description} onChange={handleChange}
+                                        className="h-24 text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none"></textarea>
+
+                                    <label className="block text-sm font-semibold mt-3 mb-2">Thể loại</label>
+                                    <input type="text" name="typeFilm" value={movie.typeFilms?.map(g => g.name).join(", ") || ""} onChange={handleChange}
+                                        className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
+
+                                    <label className="block text-sm font-semibold mt-3 mb-2">Đạo diễn, diễn viên</label>
+                                    <input type="text" name="content" value={movie.content} onChange={handleChange}
+                                        className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
+
+                                </div>
+
+                                {/* Cột 2 */}
+                                <div>
+                                    <label className="block text-sm font-semibold mb-2">Hình thức chiếu</label>
+                                    <input
+                                        type="text"
+                                        name="subtitles"
+                                        value={movie.sub?.map((item) => item.name).join(", ") || ""}
+                                        onChange={handleChange}
+                                        className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none"
+                                    />
+
+                                    <label className="block text-sm font-semibold mt-3 mb-2">Độ tuổi xem phim</label>
+                                    <input type="text" name="age" value={movie.age} onChange={handleChange}
+                                        className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
+
+                                    <label className="block text-sm font-semibold mt-3 mb-2">Thời lượng phim (phút)</label>
+                                    <input type="text" name="duration" value={movie.duration} onChange={handleChange}
+                                        className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
+
+                                    <label className="block text-sm font-semibold mt-3 mb-2">Quốc gia</label>
+                                    <input type="text" name="nation" value={movie.nation} onChange={handleChange}
+                                        className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
+
+                                    <label className="block text-sm font-semibold mt-3 mb-2">Trạng thái</label>
+                                    <select
+                                        name="status"
+                                        value={movie.status}
+                                        onChange={handleChange}
+                                        className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none"
+                                    >
+                                        <option value="ACTIVE">Đang chiếu</option>
+                                        <option value="COMMING_SOON">Sắp chiếu</option>
+                                        <option value="DELETE">Đã xóa</option>
+                                    </select>
+                                </div>
+
+
+                            </form>
+
+                        </div>)}
                 </div>
             </div>
         </ClippedDrawer>

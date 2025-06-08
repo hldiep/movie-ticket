@@ -6,19 +6,16 @@ const AddMovie = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: "",
-        englishName: "",
-        trailer: "",
-        description: "",
-        genres: "",
-        directors: "",
-        graphics: "",
-        subtitles: "",
-        ageRating: "",
-        releaseDate: "",
-        releaseYear: "",
+        age: "",
+        sub: "",
+        image: "",
+        nation: "",
         duration: "",
-        status: "Nhập",
-        country: "",
+        description: "",
+        content: "",
+        trailer: "",
+        typeFilm: "",
+        status: "ACTIVE",
     });
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -61,12 +58,8 @@ const AddMovie = () => {
                                 <label className="block text-sm font-semibold mb-2">* Tên phim</label>
                                 <input type="text" name="name" onChange={handleChange}
                                     className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
-
-                                <label className="block text-sm font-semibold mt-3 mb-2">* Tên phim (tiếng Anh)</label>
-                                <input type="text" name="englishName" onChange={handleChange}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
                                 <label className="block text-sm font-semibold mt-3 mb-2">* Link poster</label>
-                                <input type="text" name="poster" onChange={handleChange}
+                                <input type="text" name="image" onChange={handleChange}
                                     className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
 
                                 <label className="block text-sm font-semibold mt-3 mb-2">* Trailer</label>
@@ -75,52 +68,27 @@ const AddMovie = () => {
 
                                 <label className="block text-sm font-semibold mt-3 mb-2">* Mô tả</label>
                                 <textarea name="description" onChange={handleChange}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none"></textarea>
+                                    className="h-24 text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none"></textarea>
 
                                 <label className="block text-sm font-semibold mt-3 mb-2">Thể loại</label>
-                                <input type="text" name="genres" onChange={handleChange}
+                                <input type="text" name="typeFilm" onChange={handleChange}
                                     className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
 
                                 <label className="block text-sm font-semibold mt-3 mb-2">Đạo diễn, diễn viên</label>
-                                <input type="text" name="directors" onChange={handleChange}
+                                <input type="text" name="content" onChange={handleChange}
                                     className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
 
                             </div>
 
                             {/* Cột 2 */}
                             <div>
+
                                 <label className="block text-sm font-semibold mb-2">* Hình thức chiếu</label>
-                                <select name="graphics" onChange={handleChange}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none">
-                                    <option value="">Chọn hình thức</option>
-                                    <option value="2D">2D</option>
-                                    <option value="3D">3D</option>
-                                </select>
-
-                                <label className="block text-sm font-semibold mt-3 mb-2">* Hình thức dịch</label>
-                                <select name="subtitles" onChange={handleChange}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none">
-                                    <option value="">Chọn hình thức</option>
-                                    <option value="Sub">Phụ đề</option>
-                                    <option value="Dub">Lồng tiếng</option>
-                                </select>
-
-                                <label className="block text-sm font-semibold mt-3 mb-2">* Độ tuổi xem phim</label>
-                                <select name="ageRating" onChange={handleChange}
-                                    className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none">
-                                    <option value="">Chọn độ tuổi</option>
-                                    <option value="P">P - Mọi lứa tuổi</option>
-                                    <option value="C13">C13 - Trên 13 tuổi</option>
-                                    <option value="C16">C16 - Trên 16 tuổi</option>
-                                    <option value="C18">C18 - Trên 18 tuổi</option>
-                                </select>
-
-                                <label className="block text-sm font-semibold mt-3 mb-2">Ngày chiếu</label>
-                                <input type="date" name="releaseDate" onChange={handleChange}
+                                <input type="text" name="sub" onChange={handleChange}
                                     className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
 
-                                <label className="block text-sm font-semibold mt-3 mb-2">* Năm phát hành</label>
-                                <input type="number" name="releaseYear" onChange={handleChange}
+                                <label className="block text-sm font-semibold mt-3 mb-2">* Độ tuổi xem phim</label>
+                                <input type="text" name="age" onChange={handleChange}
                                     className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
 
                                 <label className="block text-sm font-semibold mt-3 mb-2">Thời lượng phim (phút)</label>
@@ -131,12 +99,12 @@ const AddMovie = () => {
                                 <select name="status" onChange={handleChange}
                                     className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none">
                                     <option value="Nhập">Nhập</option>
-                                    <option value="Đang chiếu">Đang chiếu</option>
-                                    <option value="Sắp chiếu">Sắp chiếu</option>
+                                    <option value="ACTIVE">Đang chiếu</option>
+                                    <option value="COMMING_SOON">Sắp chiếu</option>
                                 </select>
 
                                 <label className="block text-sm font-semibold mt-3 mb-2">Quốc gia</label>
-                                <input type="text" name="country" onChange={handleChange}
+                                <input type="text" name="nation" onChange={handleChange}
                                     className="text-sm outline-none mt-1 block w-full rounded border border-gray-300 px-3 py-2 shadow-sm focus:outline-none" />
                             </div>
 

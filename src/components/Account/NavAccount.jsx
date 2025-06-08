@@ -2,12 +2,9 @@ import React, { useState } from 'react'
 import { FaHistory, FaUser, FaUserCircle } from 'react-icons/fa'
 import { FiLogOut } from 'react-icons/fi';
 import { NavLink, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../context/AuthContext';
 const NavAccount = () => {
-    const { user, logout } = useAuth();
     const navigate = useNavigate();
     const [image, setImage] = useState(null);
-    const username = "Nguyen Van A";
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -43,7 +40,7 @@ const NavAccount = () => {
                             <input type="file" className='hidden' accept='image/*' onChange={handleImageChange} />
                         </label>
                         <div className='flex flex-col'>
-                            <p className='font-semibold'>{username}</p>
+
                             <label className='text-xs text-white cursor-pointer hover:underline'>
                                 <input
                                     type="file"
@@ -70,7 +67,7 @@ const NavAccount = () => {
                             </NavLink>
                         </div>
                         <div>
-                            <NavLink to="/" onClick={() => { logout() }}
+                            <NavLink to="/"
                                 className={({ isActive }) => `flex items-center w-full p-3 mt-1 rounded-md transition-transform duration-300 transform hover:scale-105 cursor-pointer ${isActive ? 'bg-yellow-400' : 'bg-yellow-600'}`
                                 }>
                                 <FiLogOut className="mr-3" />Đăng xuất

@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { Menu, X } from "lucide-react";
 import { FaSearch, FaUser } from 'react-icons/fa';
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from '../../util/AuthContext';
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const { user, logout } = useAuth();
+    const auth = useAuth();
+    const user = auth?.user;
+    const logout = auth?.logout;
     const navigate = useNavigate();
 
     return (
@@ -38,13 +40,18 @@ const Header = () => {
                                     <button className="flex items-center gap-2 border border-yellow-600 text-yellow-600 p-3 rounded-full hover:bg-yellow-600 hover:text-white mr-10">
                                         <FaUser /> <p>{user?.username || "Người dùng"}</p>
                                     </button>
-                                    <div className="hidden transition-all duration-500 group-hover:inline-block absolute left-0 w-32 bg-white border border-gray-200 rounded-lg shadow-lg">
+                                    <div className="hidden group-hover:inline-block absolute left-0 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
                                         <div className="text-left">
                                             <button onClick={() => navigate("/account")} className="w-full text-black px-5 py-2 rounded-lg hover:bg-yellow-600 hover:text-white">
                                                 Tài khoản
                                             </button>
-                                            <button onClick={() => { logout(); navigate("/"); }}
-                                                className="w-full text-red-600 px-5 py-2 rounded-lg hover:bg-red-600 hover:text-white">
+                                            <button
+                                                onClick={() => {
+                                                    logout?.();
+                                                    navigate("/");
+                                                }}
+                                                className="w-full text-red-600 px-5 py-2 rounded-lg hover:bg-red-600 hover:text-white"
+                                            >
                                                 Đăng xuất
                                             </button>
                                         </div>
@@ -75,39 +82,37 @@ const Header = () => {
                             {isOpen ? <X size={28} /> : <Menu size={28} />}
                         </button>
                     </div>
+
+                    {/* NavLink menu */}
                     <nav className="bg-gray-900 py-2 px-8">
                         <div className="hidden md:flex justify-start space-x-6">
-                            <div className="text-white hover:text-yellow-500 group">
-                                <NavLink to={"/khuyen-mai"}
-                                    className={"mb-3 group-hover:text-yellow-300 transition-all duration-100"}>Khuyến
-                                    mãi</NavLink>
-                                <div
-                                    className={"w-0 h-[2px] bg-yellow-300 group-hover:w-full transition-all duration-300"}></div>
-                            </div>
-                            <div className="text-white hover:text-yellow-500 group">
-                                <NavLink to={"/gioi-thieu"}
-                                    className={"mb-3 group-hover:text-yellow-300 transition-all duration-100"}>Giới
-                                    thiệu</NavLink>
-                                <div
-                                    className={"w-0 h-[2px] bg-yellow-300 group-hover:w-full transition-all duration-300"}></div>
-                            </div>
+                            {["/khuyen-mai", "/gioi-thieu"].map((path, index) => (
+                                <div className="text-white hover:text-yellow-500 group" key={index}>
+                                    <NavLink
+                                        to={path}
+                                        className="mb-3 group-hover:text-yellow-300 transition-all duration-100"
+                                    >
+                                        {path === "/khuyen-mai" ? "Khuyến mãi" : "Giới thiệu"}
+                                    </NavLink>
+                                    <div className="w-0 h-[2px] bg-yellow-300 group-hover:w-full transition-all duration-300"></div>
+                                </div>
+                            ))}
                         </div>
 
                         {/* Menu Mobile */}
                         {isOpen && (
                             <div className="md:hidden flex flex-col mt-3 space-y-3 bg-gray-800 p-4 rounded-lg">
-                                <div className="text-white hover:text-yellow-500 group">
-                                    <NavLink to={"/khuyen-mai"}
-                                        className={"mb-3 group-hover:text-yellow-300 transition-all duration-100"}>Khuyến mãi</NavLink>
-                                    <div
-                                        className={"w-0 h-[2px] bg-yellow-300 group-hover:w-full transition-all duration-300"}></div>
-                                </div>
-                                <div className="text-white hover:text-yellow-500 group">
-                                    <NavLink to={"/gioi-thieu"}
-                                        className={"mb-3 group-hover:text-yellow-300 transition-all duration-100"}>Giới thiệu</NavLink>
-                                    <div
-                                        className={"w-0 h-[2px] bg-yellow-300 group-hover:w-full transition-all duration-300"}></div>
-                                </div>
+                                {["/khuyen-mai", "/gioi-thieu"].map((path, index) => (
+                                    <div className="text-white hover:text-yellow-500 group" key={index}>
+                                        <NavLink
+                                            to={path}
+                                            className="mb-3 group-hover:text-yellow-300 transition-all duration-100"
+                                        >
+                                            {path === "/khuyen-mai" ? "Khuyến mãi" : "Giới thiệu"}
+                                        </NavLink>
+                                        <div className="w-0 h-[2px] bg-yellow-300 group-hover:w-full transition-all duration-300"></div>
+                                    </div>
+                                ))}
                             </div>
                         )}
                     </nav>

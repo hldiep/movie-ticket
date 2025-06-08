@@ -1,116 +1,91 @@
 import { Eye, EyeOff } from 'lucide-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from '../../context/AuthContext';
-import { loginAccount, parseJwt } from '../../util/Helper';
 import { FaFacebook, FaGoogle } from 'react-icons/fa';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const [credentials, setCredentials] = useState({ username: "", password: "" });
     const [error, setError] = useState("");
-    const [success, setSuccess] = useState(""); // Thêm state cho thông báo thành công
-    const navigate = useNavigate();
-    const { login } = useAuth();
+    const [success, setSuccess] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    const handleChange = (e) => {
-        setCredentials({ ...credentials, [e.target.name]: e.target.value });
-    };
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError("");
         setSuccess("");
-
-        if (credentials.username === "admin" && credentials.password === "123") {
-            // Lưu thông tin đăng nhập vào localStorage
-            const userData = { username: "admin" };
-            localStorage.setItem("user", JSON.stringify(userData));
-
-            // Cập nhật AuthContext
-            login(userData);
-
-            setSuccess("Đăng nhập thành công! Đang chuyển hướng...");
-            setTimeout(() => {
-                navigate("/");
-            }, 1500);
-        } else {
-            setError("Tài khoản hoặc mật khẩu không đúng!");
-        }
+        setLoading(true);
     };
 
     return (
-        <div className="min-h-screen pt-20 bg-main flex justify-center">
+        <div className="min-h-screen pt-20 bg-main flex justify-center text-white">
             <div className="container max-w-xl w-full">
                 <main className="p-8 text-center">
-                    <div className='mt-20 text-white'>
-                        <span className='uppercase font-bold text-3xl'>Đăng Nhập</span>
+                    <div className="mt-20">
+                        <h1 className="uppercase font-bold text-3xl">Đăng Nhập</h1>
 
-                        {/* Hiển thị thông báo lỗi hoặc thành công */}
                         {error && <p className="text-red-500 mt-4">{error}</p>}
                         {success && <p className="text-green-500 mt-4">{success}</p>}
 
                         <form
-                            className='border border-yellow-600 mt-8 p-6 rounded-lg shadow-lg'
+                            className="border border-yellow-600 mt-8 p-6 rounded-lg shadow-lg"
                             onSubmit={handleSubmit}
                         >
-                            <label className="block text-left text-sm">
-                                Tài khoản, email hoặc số điện thoại
+                            <div className="text-left text-sm mb-4">
+                                <label className="block mb-2">Tài khoản, email hoặc số điện thoại</label>
                                 <input
                                     type="text"
                                     name="username"
-                                    value={credentials.username}
-                                    onChange={handleChange}
-                                    className="mt-2 w-full p-2 border rounded-md text-gray-900 outline-none"
+                                    className="w-full p-2 border rounded-md text-gray-900 outline-none"
                                     required
                                 />
-                            </label>
+                            </div>
 
-                            <label className="block text-left text-sm mt-4">
-                                Mật khẩu
-                                <div className='relative'>
+                            <div className="text-left text-sm mt-4">
+                                <label className="block mb-2">Mật khẩu</label>
+                                <div className="relative">
                                     <input
                                         type={showPassword ? "text" : "password"}
                                         name="password"
-                                        value={credentials.password}
-                                        onChange={handleChange}
-                                        className="mt-2 w-full p-2 border rounded-md text-gray-900 outline-none"
+                                        className="w-full p-2 border rounded-md text-gray-900 outline-none"
                                         required
                                     />
                                     <button
                                         type="button"
-                                        className="text-black absolute inset-y-0 right-3 mt-2 flex items-center"
                                         onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute inset-y-0 right-3 flex items-center mt-2 text-black"
                                     >
                                         {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                                     </button>
                                 </div>
-                            </label>
-
-                            <div className='text-right mt-4 italic'>
-                                <Link to="/forgetPwd" className="text-yellow-600 text-sm">Quên mật khẩu?</Link>
                             </div>
+
+                            <div className="text-right mt-4 italic text-sm">
+                                <Link to="/forgetPwd" className="text-yellow-600 hover:underline">Quên mật khẩu?</Link>
+                            </div>
+
                             <button
                                 type="submit"
-                                className='mt-6 w-full border border-yellow-600 font-bold py-2 rounded-lg hover:bg-yellow-600'
+                                disabled={loading}
+                                className={`mt-6 w-full border border-yellow-600 font-bold py-2 rounded-lg transition-all ${loading
+                                    ? 'bg-yellow-600 opacity-70 cursor-not-allowed'
+                                    : 'hover:bg-yellow-600 hover:text-white'
+                                    }`}
                             >
-                                ĐĂNG NHẬP
+                                {loading ? 'Đang đăng nhập...' : 'ĐĂNG NHẬP'}
                             </button>
-                            <div className='flex justify-center mt-4 text-sm'>
-                                <p className='italic'>Bạn chưa có tài khoản? Đăng ký</p>
-                                <Link to="/register" className='ml-1 italic text-yellow-600'>tại đây</Link>
-                            </div>
-                            <div className='flex space-x-4 items-center justify-center'>
-                                <div className='p-4 flex mt-6 text-center justify-center border border-yellow-600 font-bold py-2 rounded-lg hover:bg-yellow-600'>
-                                    <FaFacebook className='text-xl text-white'></FaFacebook>
-                                    <button className='ml-2'>Login with Facebook</button>
-                                </div>
-                                <div className='p-4 flex mt-6 text-center justify-center border border-yellow-600 font-bold py-2 rounded-lg hover:bg-yellow-600'>
-                                    <FaGoogle className='text-xl text-white'></FaGoogle>
-                                    <button className='ml-2'>Login with Google</button>
-                                </div>
+
+                            <div className="mt-4 flex justify-center text-sm italic">
+                                <p>Bạn chưa có tài khoản?</p>
+                                <Link to="/register" className="ml-1 text-yellow-600 hover:underline">Đăng ký tại đây</Link>
                             </div>
 
+                            {/* Social login */}
+                            <div className="flex justify-center space-x-4 mt-6">
+                                <SocialButton icon={<FaFacebook className="text-xl" />} label="Facebook" />
+                                <SocialButton icon={<FaGoogle className="text-xl" />} label="Google" />
+                            </div>
                         </form>
                     </div>
                 </main>
@@ -118,5 +93,15 @@ const Login = () => {
         </div>
     );
 };
+
+const SocialButton = ({ icon, label }) => (
+    <button
+        type="button"
+        className="flex items-center border border-yellow-600 py-2 px-4 rounded-lg hover:bg-yellow-600 transition-colors"
+    >
+        <span className="text-white">{icon}</span>
+        <span className="ml-2 text-white font-bold">Đăng nhập bằng {label}</span>
+    </button>
+);
 
 export default Login;

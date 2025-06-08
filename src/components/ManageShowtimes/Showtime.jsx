@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ClippedDrawer from "../Dashboard/DashboardLayoutBasic";
 import { useNavigate } from "react-router-dom";
+import { getBranch } from "../../util/branchApi";
 
-const initialCinemas = [
-    { id: 1, name: "CGV Vincom" },
-    { id: 2, name: "Lotte Mart" }
-];
 
 const initialShowTimes = {
     1: [
@@ -18,8 +15,9 @@ const initialShowTimes = {
 };
 
 const Showtime = () => {
+    const [cinemas, setCinemas] = useState([]);
     const navigate = useNavigate();
-    const [cinemas] = useState(initialCinemas);
+
     const [selectedCinema, setSelectedCinema] = useState(null);
     const [showTimes, setShowTimes] = useState(initialShowTimes);
     const [showForm, setShowForm] = useState(false);
@@ -27,6 +25,22 @@ const Showtime = () => {
     const [message, setMessage] = useState("");
     const [filterStatus, setFilterStatus] = useState("");
 
+    useEffect(() => {
+        const fetchBranches = async () => {
+            try {
+                const branches = await getBranch();
+                if (branches) {
+                    setCinemas(branches.map(branch => ({
+                        id: branch.id,
+                        name: branch.nameBranch
+                    })));
+                }
+            } catch (err) {
+                console.log('Lỗi:', err);
+            }
+        };
+        fetchBranches();
+    }, []);
     const [showTimeData, setShowTimeData] = useState({
         movie: "", room: "", timeStart: "", timeEnd: "", date: "", status: ""
     });
@@ -43,7 +57,6 @@ const Showtime = () => {
         const { name, value } = e.target;
         setShowTimeData({ ...showTimeData, [name]: value });
     };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!selectedCinema) return;
@@ -108,7 +121,7 @@ const Showtime = () => {
                             <div className="grid grid-cols-2 gap-6">
                                 {cinemas.map(cinema => (
                                     <button key={cinema.id} onClick={() => handleCinemaSelect(cinema)}
-                                        className="bg-gray-200 hover:bg-gray-300 p-6 rounded text-xl font-semibold">
+                                        className="text-black bg-gray-200 hover:bg-gray-300 p-6 rounded text-xl font-semibold">
                                         {cinema.name}
                                     </button>
                                 ))}

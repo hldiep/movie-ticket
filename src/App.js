@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./components/Home/HomePage";
 import SeeMore from "./components/Home/SeeMore";
 import MovieDetailPage from "./components/Detail/MovieDetailPage";
-import Header from "./components/Home/Header";
-import Footer from "./components/Home/Footer";
 import NavPromotion from "./components/Home/NavPromotion";
 import Login from "./components/UserLogin/Login";
 import Register from "./components/UserLogin/Register";
@@ -22,15 +20,9 @@ import VerifyCode from "./components/UserLogin/VerifyCode";
 import ResetPassword from "./components/UserLogin/ResetPassword";
 import Verification from "./components/UserLogin/Verification";
 import Booking from "./components/Detail/Booking";
-import Dashboard from "./components/ManageFilm/Dashboard";
-import HeaderManage from "./components/ManageFilm/HeaderManage";
-import MovieList from "./components/ManageFilm/MovieList";
-import FilmManage from "./components/ManageFilm/FilmManage";
 import TheaterManage from "./components/ManageTheater/TheaterManage";
-import ShowtimesManage from "./components/ManageShowtimes/ShowtimesManage";
 import EmployeesManage from "./components/ManageEmployees/EployeesManage";
 import CustomersManage from "./components/ManageCustomers/CustomersManage";
-import { AuthProvider } from "./context/AuthContext";
 import InfoAccount from "./components/Account/InfoAccount";
 import PurchaseHistory from "./components/Account/PurchaseHistory";
 import Home from "./components/ManageFilm/Home";
@@ -43,10 +35,8 @@ import AddTheater from "./components/ManageTheater/AddTheater";
 import RevenueByCinema from "./components/Revenue/RevenueByCinema";
 import TheaterDetail from "./components/ManageTheater/TheaterDetail";
 import Showtime from "./components/ManageShowtimes/Showtime";
-import GlobalLoader from "./components/Load/GlobalLoader";
 import PhimDangChieu from "./components/Home/PhimDangChieu";
 import PhimSapChieu from "./components/Home/PhimSapChieu";
-import SliderManager from "./components/ManageFilm/SliderManager";
 import InfoAccountManage from "./components/ManageAccount/InfoAccountManage";
 import UserLayout from "./layout/UserLayout";
 import AddRoom from "./components/ManageTheater/AddRoom";
@@ -57,60 +47,56 @@ function App() {
     <div>
       <ScrollToTop />
       {/* User */}
-      <AuthProvider>
+      <Routes>
+        <Route path="/" element={<UserLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="see-more" element={<SeeMore />} />
+          <Route path="phim-dang-chieu" element={<PhimDangChieu />} />
+          <Route path="phim-sap-chieu" element={<PhimSapChieu />} />
+          <Route path="movie/:id" element={<MovieDetailPage />} />
+          <Route path="dat-ve" element={<Booking />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="xac-minh" element={<Verification />} />
+          <Route path="forgetPwd" element={<ForgetPwd />} />
+          <Route path="ma-xac-minh" element={<VerifyCode />} />
+          <Route path="doi-mat-khau" element={<ResetPassword />} />
+          <Route path="payment" element={<Payment />} />
+          <Route path="continue-payment" element={<PaymentMethod />} />
+          <Route path="payment-success" element={<PaymentSuccess />} />
+          <Route path="payment-success-viewticket" element={<InfoTicketSuccess />} />
+          <Route path="khuyen-mai" element={<NavPromotion />} />
+          <Route path="gioi-thieu" element={<NavIntro />} />
+          <Route path="lien-he" element={<Contact />} />
+          <Route path="chinh-sach-bao-mat" element={<PrivacyPolicy />} />
+          <Route path="cau-hoi" element={<AQs />} />
+          <Route path="account" element={<InfoAccount />} />
+          <Route path="lich-su-mua-hang" element={<PurchaseHistory />} />
+        </Route>
+        <Route path="/admin" element={<Home />} />
+        <Route path="/doanh-thu-theo-phim" element={<RevenueByMovie />} />
 
-        <Routes>
-          <Route path="/" element={<UserLayout />}>
-            <Route index element={<HomePage />} />
-            <Route path="see-more" element={<SeeMore />} />
-            <Route path="phim-dang-chieu" element={<PhimDangChieu />} />
-            <Route path="phim-sap-chieu" element={<PhimSapChieu />} />
-            <Route path="movie/:id" element={<MovieDetailPage />} />
-            <Route path="dat-ve" element={<Booking />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="xac-minh" element={<Verification />} />
-            <Route path="forgetPwd" element={<ForgetPwd />} />
-            <Route path="ma-xac-minh" element={<VerifyCode />} />
-            <Route path="doi-mat-khau" element={<ResetPassword />} />
-            <Route path="payment" element={<Payment />} />
-            <Route path="continue-payment" element={<PaymentMethod />} />
-            <Route path="payment-success" element={<PaymentSuccess />} />
-            <Route path="payment-success-viewticket" element={<InfoTicketSuccess />} />
-            <Route path="khuyen-mai" element={<NavPromotion />} />
-            <Route path="gioi-thieu" element={<NavIntro />} />
-            <Route path="lien-he" element={<Contact />} />
-            <Route path="chinh-sach-bao-mat" element={<PrivacyPolicy />} />
-            <Route path="cau-hoi" element={<AQs />} />
-            <Route path="account" element={<InfoAccount />} />
-            <Route path="lich-su-mua-hang" element={<PurchaseHistory />} />
-          </Route>
-          <Route path="/admin" element={<Home />} />
-          <Route path="/doanh-thu-theo-phim" element={<RevenueByMovie />} />
+        <Route path="/quan-ly-phim" element={<ListMovie />} />
+        <Route path="/quan-ly-phim/them-phim" element={<AddMovie />} />
+        <Route path="/quan-ly-phim/chi-tiet-phim/:id" element={<MovieDetail />} />
 
-          <Route path="/quan-ly-phim" element={<ListMovie />} />
-          <Route path="/quan-ly-phim/them-phim" element={<AddMovie />} />
-          <Route path="/quan-ly-phim/chi-tiet-phim" element={<MovieDetail />} />
+        <Route path="/quan-ly-rap" element={<TheaterManage />} />
+        <Route path="/quan-ly-rap/them-rap" element={<AddTheater />} />
+        <Route path="/quan-ly-rap/them-rap/them-phong" element={<AddRoom />} />
+        <Route path="quan-ly-rap/chi-tiet-rap/:id" element={<TheaterDetail />} />
+        <Route path="quan-ly-rap/chi-tiet-rap/phong" element={<EditRoom />} />
+        <Route path="quan-ly-suat-chieu" element={<Showtime />} />
 
-          <Route path="/quan-ly-rap" element={<TheaterManage />} />
-          <Route path="/quan-ly-rap/them-rap" element={<AddTheater />} />
-          <Route path="/quan-ly-rap/them-rap/them-phong" element={<AddRoom />} />
-          <Route path="quan-ly-rap/chi-tiet-rap" element={<TheaterDetail />} />
-          <Route path="quan-ly-rap/chi-tiet-rap/phong" element={<EditRoom />} />
-          <Route path="quan-ly-suat-chieu" element={<Showtime />} />
+        <Route path="bao-cao-so-luong-ve" element={<TicketReportManage />} />
+        <Route path="doanh-thu-theo-phim" element={<RevenueByMovie />} />
+        <Route path="doanh-thu-theo-rap" element={<RevenueByCinema />} />
 
-          <Route path="bao-cao-so-luong-ve" element={<TicketReportManage />} />
-          <Route path="doanh-thu-theo-phim" element={<RevenueByMovie />} />
-          <Route path="doanh-thu-theo-rap" element={<RevenueByCinema />} />
+        <Route path="quan-ly-nv" element={<EmployeesManage />} />
+        <Route path="quan-ly-kh" element={<CustomersManage />} />
 
-          <Route path="quan-ly-nv" element={<EmployeesManage />} />
-          <Route path="quan-ly-kh" element={<CustomersManage />} />
+        <Route path="manager-account" element={<InfoAccountManage />} />
 
-          <Route path="manager-account" element={<InfoAccountManage />} />
-
-        </Routes>
-
-      </AuthProvider>
+      </Routes>
     </div>
   );
 }
